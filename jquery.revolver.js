@@ -22,7 +22,7 @@
             lastSlide     = $images.length;
 
         // Don't run if there's only one slide
-        if ($images.length <= 1) {
+        if (lastSlide <= 1) {
             return;
         };
 
