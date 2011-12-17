@@ -19,10 +19,11 @@
             self          = this,
             previousSlide = 0,
             currentSlide  = 1,
-            lastSlide     = $images.length;
+            numSlides     = $images.length,
+            lastSlide     = numSlides - 1;
 
         // Don't run if there's only one slide
-        if (lastSlide <= 1) {
+        if (numSlides <= 1) {
             return;
         };
 
@@ -44,19 +45,13 @@
         {
             $images
             .eq(previousSlide)
-            .fadeOut(self.options.fade, function ()
-            {
-                $(this).hide();
-            })
+            .fadeOut(self.options.fade)
             .end()
             .eq(currentSlide)
-            .fadeIn(self.options.fade, function ()
-            {
-                $(this).show();
-            });
+            .fadeIn(self.options.fade);
 
             previousSlide = currentSlide;
-            currentSlide = currentSlide == (lastSlide-1) ? 0 : currentSlide+1;
+            currentSlide = currentSlide == lastSlide ? 0 : currentSlide+1;
         },
         parseFloat(this.options.speed));
 
