@@ -44,23 +44,21 @@
         setInterval(function ()
         {
             // fadeout previous, fadein current
-            $images.eq(previousSlide).fadeOut(self.options.fade);
-            $images.eq(currentSlide).fadeIn(self.options.fade);
+            $images.eq(previousSlide).fadeOut(self.options.fadeSpeed);
+            $images.eq(currentSlide).fadeIn(self.options.fadeSpeed);
 
             // update vars
             previousSlide = currentSlide;
             currentSlide = currentSlide == lastSlide ? 0 : currentSlide+1;
         },
-        parseFloat(this.options.speed));
+        parseFloat(this.options.rotationSpeed));
 
     }
 
     // default settings
     revolver.prototype.options = {
-        'speed' : 4000,
-        'fade' : 1500,
-        'auto' : true,
-        'maxwidth' : 'none'
+        'rotationSpeed' : 4000,
+        'fadeSpeed' : 1500
     };
 
 })(jQuery);
