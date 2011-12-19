@@ -55,11 +55,12 @@
         $.extend(this.options, options);
         
         // setup revolver
-        this.container  = $(container);
-        this.images     = this.container.find('img');
-        this.numSlides  = this.images.length;
-        this.lastSlide  = this.numSlides == 0 ? null : this.numSlides - 1;
-        this.reset();
+        this.container      = $(container);
+        this.images         = this.container.find('img');
+        this.numSlides      = this.images.length;
+        this.previousSlide  = 0;
+        this.currentSlide   = this.numSlides > 1 ? 1 : 0;
+        this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
 
         // Don't run if there's only one slide
         if (this.numSlides <= 1) {
