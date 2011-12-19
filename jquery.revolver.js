@@ -21,7 +21,7 @@
         });
     };
 
-    // set constructor
+    // setup constructor
     var revolver = function(container, options)
     {
         return this.init(container, options);
@@ -29,22 +29,24 @@
 
     // default settings
     revolver.prototype.options = {
-        'rotationSpeed' : 4000,
-        'fadeSpeed' : 1500
+        rotationSpeed: 4000,
+        transitionSpeed: 1500,
+        autoPlay: true
     };
 
     // revolver state
-    revolver.prototype.previousSlide = null;
-    revolver.prototype.currentSlide = null;
-    revolver.prototype.numSlides = 0;
-    revolver.prototype.lastSlide = null;
+    revolver.prototype.previousSlide = null;    // key for previous slide
+    revolver.prototype.currentSlide = null;     // key for current slide
+    revolver.prototype.numSlides = 0;           // total number of slides
+    revolver.prototype.lastSlide = null;        // key for last slide
 
     // dom elements
-    revolver.prototype.container = null;
-    revolver.prototype.images = null;
+    revolver.prototype.container = null;        // the wrapper element for all images
+    revolver.prototype.images = null;           // array of images
 
-    // 
-    revolver.prototype.intId = null;
+    // misc
+    revolver.prototype.status = null;           // will either be equal to "stopped" or "playing"
+    revolver.prototype.intervalId = null;       // id set by setInterval(), used for pause() method
 
     // constructor
     revolver.prototype.init = function(container, options)
@@ -53,10 +55,10 @@
         $.extend(this.options, options);
         
         // setup revolver
-        this.container     = $(container);
-        this.images        = this.container.find('img');
-        this.numSlides      = this.images.length;
-        this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
+        this.container  = $(container);
+        this.images     = this.container.find('img');
+        this.numSlides  = this.images.length;
+        this.lastSlide  = this.numSlides == 0 ? null : this.numSlides - 1;
         this.reset();
 
         // Don't run if there's only one slide
@@ -78,8 +80,15 @@
         // hide all images except the first
         this.images.not(':first').hide();
 
-        // play
-        this.play();
+        // begin auto play, if enabled
+        if (this.options.autoPlay)
+        {
+            this.play();
+        }
+        else
+        {
+            this.status = 'stopped';
+        }
 
         return this;
     }
@@ -87,8 +96,8 @@
     revolver.prototype.transition = function()
     {
         // fadeout previous, fadein current
-        this.images.eq(this.previousSlide).fadeOut(this.options.fadeSpeed);
-        this.images.eq(this.currentSlide).fadeIn(this.options.fadeSpeed);
+        this.images.eq(this.previousSlide).fadeOut(this.options.transitionSpeed);
+        this.images.eq(this.currentSlide).fadeIn(this.options.transitionSpeed);
 
         // update vars
         this.previousSlide = this.currentSlide;
@@ -97,14 +106,22 @@
 
     revolver.prototype.play = function()
     {
-        this.transition();
-        this.intId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
+        // transition immediately only if revolver has been stopped or paused
+        if (this.status == 'stopped')
+        {
+            this.transition();
+        };
+        
+        this.status = 'playing';
+        this.intervalId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
+
         return this;
     };
 
     revolver.prototype.pause = function()
     {
-        clearInterval(this.intId);
+        this.status = 'stopped';
+        clearInterval(this.intervalId);
         return this;
     };
 
