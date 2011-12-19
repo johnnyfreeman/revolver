@@ -43,13 +43,11 @@
 
         setInterval(function ()
         {
-            $images
-            .eq(previousSlide)
-            .fadeOut(self.options.fade)
-            .end()
-            .eq(currentSlide)
-            .fadeIn(self.options.fade);
+            // fadeout previous, fadein current
+            $images.eq(previousSlide).fadeOut(self.options.fade);
+            $images.eq(currentSlide).fadeIn(self.options.fade);
 
+            // update vars
             previousSlide = currentSlide;
             currentSlide = currentSlide == lastSlide ? 0 : currentSlide+1;
         },
@@ -59,9 +57,10 @@
 
     // default settings
     revolver.prototype.options = {
-        'speed' : 3000,
-        'fade' : 1000,
+        'speed' : 4000,
+        'fade' : 1500,
         'auto' : true,
         'maxwidth' : 'none'
     };
+
 })(jQuery);
