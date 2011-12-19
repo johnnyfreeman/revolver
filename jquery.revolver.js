@@ -1,5 +1,13 @@
-/* revolver.js v1.03. (c) 2011 Johnny Freeman. MIT License. http://johnnyfreeman.github.com/revolver/ */
-(function ($) {
+/**
+ * jQuery Revolver Plugin 1.0
+ * 
+ * http://johnnyfreeman.github.com/revolver/
+ * Copyright 2011, Johnny Freeman
+ * Free to use under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+ 
+;(function ($) {
     
     // plugin
     $.fn.revolver = function(options) {
