@@ -51,137 +51,137 @@
 
         // misc
         status:     null,  // will either be equal to "stopped" or "playing" after init() is called
-        intervalId: null   // id set by setInterval(), used for pause() method
-    }
+        intervalId: null,   // id set by setInterval(), used for pause() method
 
-    // constructor
-    revolver.prototype.init = function(container, options)
-    {
-        // merge options with defaults
-        $.extend(this.options, options);
-        
-        // setup revolver
-        this.container      = $(container);
-        this.slides         = this.container.find('.' + this.options.slideClass);
-        this.numSlides      = this.slides.length;
-        this.currentSlide   = 0;
-        this.nextSlide      = this.numSlides > 1 ? 1 : 0;
-        this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
-
-        // Don't run if there's only one slide
-        if (this.numSlides <= 1) {
-            return;
-        };
-
-        // apply basic styling to container and images
-        this.container.css({
-            'position': 'relative'
-        });
-
-        this.slides.css({
-            'top': 0,
-            'left': 0,
-            'position': 'absolute'
-        });
-
-        // hide all slides except the first
-        this.slides.not(':first').hide();
-
-        // begin auto play, if enabled
-        if (this.options.autoPlay)
+        // constructor
+        init: function(container, options)
         {
-            this.play();
-        }
-        else
+            // merge options with defaults
+            $.extend(this.options, options);
+            
+            // setup revolver
+            this.container      = $(container);
+            this.slides         = this.container.find('.' + this.options.slideClass);
+            this.numSlides      = this.slides.length;
+            this.currentSlide   = 0;
+            this.nextSlide      = this.numSlides > 1 ? 1 : 0;
+            this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
+
+            // Don't run if there's only one slide
+            if (this.numSlides <= 1) {
+                return;
+            };
+
+            // apply basic styling to container and images
+            this.container.css({
+                'position': 'relative'
+            });
+
+            this.slides.css({
+                'top': 0,
+                'left': 0,
+                'position': 'absolute'
+            });
+
+            // hide all slides except the first
+            this.slides.not(':first').hide();
+
+            // begin auto play, if enabled
+            if (this.options.autoPlay)
+            {
+                this.play();
+            }
+            else
+            {
+                this.status = 'stopped';
+            }
+
+            return this;
+        },
+
+        transition: function()
+        {
+            // fadeout previous, fadein current
+            this.slides.eq(this.currentSlide).fadeOut(this.options.transitionSpeed);
+            this.slides.eq(this.nextSlide).fadeIn(this.options.transitionSpeed);
+
+            // update slider position
+            this.currentSlide   = this.nextSlide;
+            this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
+        },
+
+        play: function()
+        {
+            // transition immediately only if revolver has been stopped or paused
+            if (this.status == 'stopped')
+            {
+                this.transition();
+            };
+            
+            this.status     = 'playing';
+            this.intervalId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
+
+            return this;
+        },
+
+        pause: function()
         {
             this.status = 'stopped';
-        }
+            clearInterval(this.intervalId);
+            return this;
+        },
 
-        return this;
+        stop: function()
+        {
+            this.pause();
+
+            // reset only if not already on the first slide
+            if (this.currentSlide != 0)
+            {
+                this.reset();
+            }
+
+            return this;
+        },
+
+        reset: function()
+        {
+            this.nextSlide = 0;
+            return this;
+        },
+
+        restart: function()
+        {
+            // restart only if not already on the first slide
+            if (this.currentSlide != 0)
+            {
+                this.stop().play();
+            }
+            
+            return this;
+        },
+
+        next: function()
+        {
+            if (this.status == "stopped")
+            {
+                this.transition();
+            }
+            else
+            {
+                this.pause().play();
+            }
+
+            return this;
+        },
+
+        previous: function()
+        {
+            this.nextSlide = this.currentSlide == 0 ? this.lastSlide : this.currentSlide - 1;
+            this.next();
+
+            return this;
+        }
     }
-
-    revolver.prototype.transition = function()
-    {
-        // fadeout previous, fadein current
-        this.slides.eq(this.currentSlide).fadeOut(this.options.transitionSpeed);
-        this.slides.eq(this.nextSlide).fadeIn(this.options.transitionSpeed);
-
-        // update slider position
-        this.currentSlide   = this.nextSlide;
-        this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
-    };
-
-    revolver.prototype.play = function()
-    {
-        // transition immediately only if revolver has been stopped or paused
-        if (this.status == 'stopped')
-        {
-            this.transition();
-        };
-        
-        this.status     = 'playing';
-        this.intervalId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
-
-        return this;
-    };
-
-    revolver.prototype.pause = function()
-    {
-        this.status = 'stopped';
-        clearInterval(this.intervalId);
-        return this;
-    };
-
-    revolver.prototype.stop = function()
-    {
-        this.pause();
-
-        // reset only if not already on the first slide
-        if (this.currentSlide != 0)
-        {
-            this.reset();
-        }
-
-        return this;
-    };
-
-    revolver.prototype.reset = function()
-    {
-        this.nextSlide = 0;
-        return this;
-    };
-
-    revolver.prototype.restart = function()
-    {
-        // restart only if not already on the first slide
-        if (this.currentSlide != 0)
-        {
-            this.stop().play();
-        }
-        
-        return this;
-    };
-
-    revolver.prototype.next = function()
-    {
-        if (this.status == "stopped")
-        {
-            this.transition();
-        }
-        else
-        {
-            this.pause().play();
-        }
-
-        return this;
-    };
-
-    revolver.prototype.previous = function()
-    {
-        this.nextSlide = this.currentSlide == 0 ? this.lastSlide : this.currentSlide - 1;
-        this.next();
-
-        return this;
-    };
 
 })(jQuery);
