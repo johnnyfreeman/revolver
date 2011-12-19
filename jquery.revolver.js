@@ -14,6 +14,7 @@
     {
         return this.each(function()
         {
+            // store the revolver object using jquery's data method
             if (!$.data(this, 'revolver'))
             {
                 $.data(this, 'revolver', new revolver(this, options));
@@ -29,24 +30,25 @@
 
     // default settings
     revolver.prototype.options = {
-        rotationSpeed:      4000,               // how long (in milliseconds) to stay on each slide before going to the next
-        transitionSpeed:    1500,               // how long (in milliseconds) the transition should last
-        autoPlay:           true                // whether or not to automatically begin playing the slides
+        rotationSpeed:      4000,       // how long (in milliseconds) to stay on each slide before going to the next
+        transitionSpeed:    1500,       // how long (in milliseconds) the transition should last
+        autoPlay:           true,       // whether or not to automatically begin playing the slides
+        slideClass:         'slide'     // this is what revolver will look for to determin what is a slide 
     };
 
     // revolver state
-    revolver.prototype.previousSlide = null;    // key for previous slide
-    revolver.prototype.currentSlide = null;     // key for current slide
-    revolver.prototype.numSlides = 0;           // total number of slides
-    revolver.prototype.lastSlide = null;        // key for last slide
+    revolver.prototype.previousSlide    = null;    // key for previous slide
+    revolver.prototype.currentSlide     = null;    // key for current slide
+    revolver.prototype.numSlides        = 0;       // total number of slides
+    revolver.prototype.lastSlide        = null;    // key for last slide
 
     // dom elements
-    revolver.prototype.container = null;        // the wrapper element for all images
-    revolver.prototype.slides = null;           // array of slides
+    revolver.prototype.container    = null;    // the wrapper element for all images
+    revolver.prototype.slideClass   = null;    // array of slides
 
     // misc
-    revolver.prototype.status = null;           // will either be equal to "stopped" or "playing"
-    revolver.prototype.intervalId = null;       // id set by setInterval(), used for pause() method
+    revolver.prototype.status       = null;    // will either be equal to "stopped" or "playing"
+    revolver.prototype.intervalId   = null;    // id set by setInterval(), used for pause() method
 
     // constructor
     revolver.prototype.init = function(container, options)
@@ -56,7 +58,7 @@
         
         // setup revolver
         this.container      = $(container);
-        this.slides         = this.container.children('img');
+        this.slides         = this.container.find('.' + this.options.slideClass);
         this.numSlides      = this.slides.length;
         this.previousSlide  = 0;
         this.currentSlide   = this.numSlides > 1 ? 1 : 0;
@@ -101,8 +103,8 @@
         this.slides.eq(this.currentSlide).fadeIn(this.options.transitionSpeed);
 
         // update vars
-        this.previousSlide = this.currentSlide;
-        this.currentSlide = this.currentSlide == this.lastSlide ? 0 : this.currentSlide+1;
+        this.previousSlide  = this.currentSlide;
+        this.currentSlide   = this.currentSlide == this.lastSlide ? 0 : this.currentSlide+1;
     };
 
     revolver.prototype.play = function()
@@ -113,7 +115,7 @@
             this.transition();
         };
         
-        this.status = 'playing';
+        this.status     = 'playing';
         this.intervalId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
 
         return this;
