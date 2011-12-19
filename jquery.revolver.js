@@ -42,7 +42,7 @@
 
     // dom elements
     revolver.prototype.container = null;        // the wrapper element for all images
-    revolver.prototype.images = null;           // array of images
+    revolver.prototype.slides = null;           // array of slides
 
     // misc
     revolver.prototype.status = null;           // will either be equal to "stopped" or "playing"
@@ -56,8 +56,8 @@
         
         // setup revolver
         this.container      = $(container);
-        this.images         = this.container.find('img');
-        this.numSlides      = this.images.length;
+        this.slides         = this.container.children('img');
+        this.numSlides      = this.slides.length;
         this.previousSlide  = 0;
         this.currentSlide   = this.numSlides > 1 ? 1 : 0;
         this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
@@ -72,14 +72,14 @@
             'position': 'relative'
         });
 
-        this.images.css({
+        this.slides.css({
             'top': 0,
             'left': 0,
             'position': 'absolute'
         });
 
-        // hide all images except the first
-        this.images.not(':first').hide();
+        // hide all slides except the first
+        this.slides.not(':first').hide();
 
         // begin auto play, if enabled
         if (this.options.autoPlay)
@@ -97,8 +97,8 @@
     revolver.prototype.transition = function()
     {
         // fadeout previous, fadein current
-        this.images.eq(this.previousSlide).fadeOut(this.options.transitionSpeed);
-        this.images.eq(this.currentSlide).fadeIn(this.options.transitionSpeed);
+        this.slides.eq(this.previousSlide).fadeOut(this.options.transitionSpeed);
+        this.slides.eq(this.currentSlide).fadeIn(this.options.transitionSpeed);
 
         // update vars
         this.previousSlide = this.currentSlide;
@@ -130,6 +130,7 @@
     {
         this.pause();
 
+        // reset only if not already on the first slide
         if (this.previousSlide != 0)
         {
             this.reset();
@@ -146,6 +147,7 @@
 
     revolver.prototype.restart = function()
     {
+        // restart only if not already on the first slide
         if (this.previousSlide != 0)
         {
             this.stop().play();
