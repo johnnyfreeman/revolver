@@ -50,8 +50,8 @@
         slides:     [],   // array of slides
 
         // misc
-        status:     'stopped',  // will either be equal to "stopped" or "playing"
-        intervalId: null        // id set by setInterval(), used for pause() method
+        status:     null,  // will either be equal to "stopped" or "playing" after init() is called
+        intervalId: null   // id set by setInterval(), used for pause() method
     }
 
     // constructor
@@ -91,6 +91,10 @@
         if (this.options.autoPlay)
         {
             this.play();
+        }
+        else
+        {
+            this.status = 'stopped';
         }
 
         return this;
