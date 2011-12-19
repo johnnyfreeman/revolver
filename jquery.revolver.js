@@ -110,14 +110,19 @@
 
     revolver.prototype.stop = function()
     {
-        clearInterval(this.intId);
-        this.reset();
+        this.pause().reset();
         return this;
     };
 
     revolver.prototype.reset = function()
     {
         this.currentSlide = 0;
+        return this;
+    };
+
+    revolver.prototype.restart = function()
+    {
+        this.stop().play();
         return this;
     };
 
