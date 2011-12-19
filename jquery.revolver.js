@@ -128,7 +128,13 @@
 
     revolver.prototype.stop = function()
     {
-        this.pause().reset();
+        this.pause();
+
+        if (this.previousSlide != 0)
+        {
+            this.reset();
+        }
+
         return this;
     };
 
@@ -140,7 +146,33 @@
 
     revolver.prototype.restart = function()
     {
-        this.stop().play();
+        if (this.previousSlide != 0)
+        {
+            this.stop().play();
+        }
+        
+        return this;
+    };
+
+    revolver.prototype.next = function()
+    {
+        if (this.status == "stopped")
+        {
+            this.transition();
+        }
+        else
+        {
+            this.pause().play();
+        }
+
+        return this;
+    };
+
+    revolver.prototype.previous = function()
+    {
+        this.currentSlide = this.previousSlide == 0 ? this.lastSlide : this.previousSlide - 1;
+        this.next();
+
         return this;
     };
 
