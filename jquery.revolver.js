@@ -29,9 +29,9 @@
 
     // default settings
     revolver.prototype.options = {
-        rotationSpeed: 4000,
-        transitionSpeed: 1500,
-        autoPlay: true
+        rotationSpeed:      4000,               // how long (in milliseconds) to stay on each slide before going to the next
+        transitionSpeed:    1500,               // how long (in milliseconds) the transition should last
+        autoPlay:           true                // whether or not to automatically begin playing the slides
     };
 
     // revolver state
