@@ -1,6 +1,6 @@
 /**
  * jQuery Revolver Plugin 1.0
- * 
+ *
  * http://johnnyfreeman.github.com/revolver/
  * Copyright 2011, Johnny Freeman
  * Free to use under the MIT license.
@@ -10,63 +10,115 @@
 ;(function ($) {
     
     // plugin
-    $.fn.revolver = function(options) {
-        return this.each(function() {
-            return new revolver(this, options);
+    $.fn.revolver = function(options)
+    {
+        return this.each(function()
+        {
+            if (!$.data(this, 'revolver'))
+            {
+                $.data(this, 'revolver', new revolver(this, options));
+            }
         });
     };
 
-    // constructor
+    // set constructor
     var revolver = function(container, options)
     {
-        // merge options with defaults
-        $.extend(this.options, options);
-
-        var $container    = $(container),
-            $images       = $container.find('img'),
-            self          = this,
-            previousSlide = 0,
-            currentSlide  = 1,
-            numSlides     = $images.length,
-            lastSlide     = numSlides - 1;
-
-        // Don't run if there's only one slide
-        if (numSlides <= 1) {
-            return;
-        };
-
-        // apply basic styling to container and images
-        $container.css({
-            'position': 'relative'
-        });
-
-        $images.css({
-            'top': 0,
-            'left': 0,
-            'position': 'absolute'
-        });
-
-        // hide all images except the first
-        $images.not(':first').hide();
-
-        setInterval(function ()
-        {
-            // fadeout previous, fadein current
-            $images.eq(previousSlide).fadeOut(self.options.fadeSpeed);
-            $images.eq(currentSlide).fadeIn(self.options.fadeSpeed);
-
-            // update vars
-            previousSlide = currentSlide;
-            currentSlide = currentSlide == lastSlide ? 0 : currentSlide+1;
-        },
-        parseFloat(this.options.rotationSpeed));
-
+        return this.init(container, options);
     }
 
     // default settings
     revolver.prototype.options = {
         'rotationSpeed' : 4000,
         'fadeSpeed' : 1500
+    };
+
+    // revolver state
+    revolver.prototype.previousSlide = null;
+    revolver.prototype.currentSlide = null;
+    revolver.prototype.numSlides = 0;
+    revolver.prototype.lastSlide = null;
+
+    // dom elements
+    revolver.prototype.container = null;
+    revolver.prototype.images = null;
+
+    // 
+    revolver.prototype.intId = null;
+
+    // constructor
+    revolver.prototype.init = function(container, options)
+    {
+        // merge options with defaults
+        $.extend(this.options, options);
+        
+        // setup revolver
+        this.container     = $(container);
+        this.images        = this.container.find('img');
+        this.numSlides      = this.images.length;
+        this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
+        this.reset();
+
+        // Don't run if there's only one slide
+        if (this.numSlides <= 1) {
+            return;
+        };
+
+        // apply basic styling to container and images
+        this.container.css({
+            'position': 'relative'
+        });
+
+        this.images.css({
+            'top': 0,
+            'left': 0,
+            'position': 'absolute'
+        });
+
+        // hide all images except the first
+        this.images.not(':first').hide();
+
+        // play
+        this.play();
+
+        return this;
+    }
+
+    revolver.prototype.transition = function()
+    {
+        // fadeout previous, fadein current
+        this.images.eq(this.previousSlide).fadeOut(this.options.fadeSpeed);
+        this.images.eq(this.currentSlide).fadeIn(this.options.fadeSpeed);
+
+        // update vars
+        this.previousSlide = this.currentSlide;
+        this.currentSlide = this.currentSlide == this.lastSlide ? 0 : this.currentSlide+1;
+    };
+
+    revolver.prototype.play = function()
+    {
+        this.transition();
+        this.intId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
+        return this;
+    };
+
+    revolver.prototype.pause = function()
+    {
+        clearInterval(this.intId);
+        return this;
+    };
+
+    revolver.prototype.stop = function()
+    {
+        clearInterval(this.intId);
+        this.reset();
+        return this;
+    };
+
+    revolver.prototype.reset = function()
+    {
+        this.currentSlide = 0;
+        return this;
     };
 
 })(jQuery);
