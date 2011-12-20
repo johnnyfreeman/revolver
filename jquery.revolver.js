@@ -154,6 +154,13 @@
 
         goTo: function(i)
         {
+            // bail out if already 
+            // on the intended slide
+            if (i == this.currentSlide)
+            {
+                return;
+            }
+
             this.nextSlide = i;
 
             if (this.status == "stopped")
