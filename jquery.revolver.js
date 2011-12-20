@@ -133,36 +133,29 @@
 
         stop: function()
         {
-            this.pause();
-
-            // reset only if not already on the first slide
-            if (this.currentSlide != 0)
-            {
-                this.reset();
-            }
-
-            return this;
+            return this.pause().reset();
         },
 
         reset: function()
         {
-            this.nextSlide = 0;
+            // reset only if not already on the first slide
+            if (this.currentSlide != 0)
+            {
+                this.nextSlide = 0;
+            }
+
             return this;
         },
 
         restart: function()
         {
-            // restart only if not already on the first slide
-            if (this.currentSlide != 0)
-            {
-                this.stop().play();
-            }
-            
-            return this;
+            return this.stop().play();
         },
 
-        next: function()
+        goTo: function(i)
         {
+            this.nextSlide = i;
+
             if (this.status == "stopped")
             {
                 this.transition();
@@ -171,16 +164,18 @@
             {
                 this.pause().play();
             }
-
+            
             return this;
+        },
+
+        next: function()
+        {
+            return this.goTo(this.nextSlide);
         },
 
         previous: function()
         {
-            this.nextSlide = this.currentSlide == 0 ? this.lastSlide : this.currentSlide - 1;
-            this.next();
-
-            return this;
+            return this.goTo(this.currentSlide == 0 ? this.lastSlide : this.currentSlide - 1);
         }
     }
 
