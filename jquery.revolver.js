@@ -185,6 +185,16 @@
         previous: function()
         {
             return this.goTo(this.currentSlide == 0 ? this.lastSlide : this.currentSlide - 1);
+        },
+
+        first: function()
+        {
+            return this.goTo(0);
+        },
+
+        last: function()
+        {
+            return this.goTo(this.lastSlide);
         }
     }
 
