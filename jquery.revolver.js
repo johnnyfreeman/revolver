@@ -35,6 +35,7 @@
         options: {
             rotationSpeed:      4000,       // how long (in milliseconds) to stay on each slide before going to the next
             transitionSpeed:    1500,       // how long (in milliseconds) the transition should last
+            transitionType:    'fade',      // choose between none or fade
             autoPlay:           true,       // whether or not to automatically begin playing the slides
             slideClass:         'slide'     // this is what revolver will look for to determin what is a slide 
         },
@@ -101,9 +102,19 @@
 
         transition: function()
         {
-            // fadeout previous, fadein current
-            this.slides.eq(this.currentSlide).fadeOut(this.options.transitionSpeed);
-            this.slides.eq(this.nextSlide).fadeIn(this.options.transitionSpeed);
+            switch(this.transitionType)
+            {
+                case 'fade':
+                    // fadeout previous, fadein current
+                    this.slides.eq(this.currentSlide).fadeOut(this.options.transitionSpeed);
+                    this.slides.eq(this.nextSlide).fadeIn(this.options.transitionSpeed);
+                    break;
+                case 'none':
+                default:
+                    // hide previous, show current
+                    this.slides.eq(this.currentSlide).hide();
+                    this.slides.eq(this.nextSlide).show();
+            }
 
             // update slider position
             this.currentSlide   = this.nextSlide;
