@@ -127,10 +127,13 @@
             if (this.status == 'stopped')
             {
                 this.transition();
-            };
+            }
             
-            this.status     = 'playing';
-            this.intervalId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
+            if (this.status == 'stopped')
+            {
+                this.status     = 'playing';
+                this.intervalId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
+            }
 
             return this;
         },
