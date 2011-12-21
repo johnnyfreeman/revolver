@@ -34,9 +34,12 @@
         // default settings
         options: {
             rotationSpeed:      4000,       // how long (in milliseconds) to stay on each slide before going to the next
-            transitionSpeed:    1000,       // how long (in milliseconds) the transition should last
-            transitionType:    'fade',      // choose between none or fade
             autoPlay:           true,       // whether or not to automatically begin playing the slides
+            transition: {
+                speed:          1000,       // how long (in milliseconds) the transition should last
+                type:           'fade',     // choose between none, fade, or slide,
+                direction:      'left'      // which way to slide each slide. used for the 'slide' transition type only.
+            },
             slideClass:         'slide'     // this is what revolver will look for to determin what is a slide 
         },
 
@@ -103,7 +106,7 @@
         transition: function()
         {
             // do transition, and pass the revolver object to it
-            this.transitions[this.options.transitionType](this);
+            this.transitions[this.options.transition.type](this);
 
             // update slider position
             this.currentSlide   = this.nextSlide;
@@ -122,8 +125,8 @@
 
             fade: function(revolver)
             {
-                revolver.slides.eq(revolver.currentSlide).fadeOut(revolver.options.transitionSpeed);
-                revolver.slides.eq(revolver.nextSlide).fadeIn(revolver.options.transitionSpeed);
+                revolver.slides.eq(revolver.currentSlide).fadeOut(revolver.options.transition.speed);
+                revolver.slides.eq(revolver.nextSlide).fadeIn(revolver.options.transition.speed);
 
                 return this;
             },
@@ -136,7 +139,7 @@
                     .css({
                         'left': 0
                     })
-                    .animate({left: -720}, revolver.options.transitionSpeed, function(){$(this).hide()});
+                    .animate({left: -720}, revolver.options.transition.speed, function(){ $(this).hide() });
 
                 revolver
                     .slides
@@ -145,7 +148,7 @@
                         'left': 720
                     })
                     .show()
-                    .animate({left: 0}, revolver.options.transitionSpeed);
+                    .animate({left: 0}, revolver.options.transition.speed);
 
                 return this;
             }
