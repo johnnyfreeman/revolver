@@ -54,7 +54,7 @@
         slides:     [],   // array of slides
 
         // misc
-        status:     null,  // will either be equal to "stopped" or "playing" after init() is called
+        firstRun:   true,   // keeps track of whethor or not revolver has transitioned yet
         intervalId: null,   // id set by setInterval(), used for pause() method
 
         // constructor
@@ -95,14 +95,31 @@
             {
                 this.play();
             }
-            else
-            {
-                this.status = 'stopped';
-            }
 
             return this;
         },
 
+        // status
+        status: {
+            paused:     false,  // is the slider paused
+            playing:    false,  // is the slider playing
+            stopped:    true   // is the slider stopped
+        },
+
+        changeStatus: function(newStatus)
+        {
+            var revolver = this;
+
+            // set all status' as false
+            $.each(this.status, function(key, val)
+            {
+                revolver.status[key] = key == newStatus;
+            });
+
+            return revolver;
+        },
+
+        // do transition
         transition: function()
         {
             // do transition, and pass the revolver object to it
@@ -111,8 +128,15 @@
             // update slider position
             this.currentSlide   = this.nextSlide;
             this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
+
+            // it's not the first run anymore, is it.
+            if (this.firstRun)
+            {
+                this.firstRun = false;
+            }
         },
 
+        // list of available transitions
         transitions: {
 
             none: function(revolver)
@@ -171,18 +195,17 @@
 
         play: function()
         {
-            // transition immediately only if 
-            // revolver has been stopped or paused
-            if (this.status == 'stopped')
+            if (!this.status.playing)
             {
-                this.transition();
-            }
-            
-            // create a new interval id only 
-            // if revolver is stopped
-            if (this.status != 'playing')
-            {
-                this.status     = 'playing';
+                this.changeStatus('playing');
+
+                // if this isn't the first run
+                // then do transition immediately 
+                if (!this.firstRun)
+                {
+                    this.transition();
+                }
+
                 this.intervalId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
             }
 
@@ -191,14 +214,16 @@
 
         pause: function()
         {
-            this.status = 'stopped';
+            this.changeStatus('paused');
             clearInterval(this.intervalId);
             return this;
         },
 
         stop: function()
         {
-            return this.pause().reset();
+            this.changeStatus('stopped');
+            clearInterval(this.intervalId);
+            return this.reset();
         },
 
         reset: function()
@@ -217,6 +242,16 @@
             return this.stop().play();
         },
 
+        first: function()
+        {
+            return this.goTo(0);
+        },
+
+        previous: function()
+        {
+            return this.goTo(this.currentSlide == 0 ? this.lastSlide : this.currentSlide - 1);
+        },
+
         goTo: function(i)
         {
             // bail out if already 
@@ -228,22 +263,12 @@
 
             this.nextSlide = i;
 
-            return this.status == "stopped" ? this.transition() : this.pause().play();
+            return !this.status.playing ? this.transition() : this.pause().play();
         },
 
         next: function()
         {
             return this.goTo(this.nextSlide);
-        },
-
-        previous: function()
-        {
-            return this.goTo(this.currentSlide == 0 ? this.lastSlide : this.currentSlide - 1);
-        },
-
-        first: function()
-        {
-            return this.goTo(0);
         },
 
         last: function()
