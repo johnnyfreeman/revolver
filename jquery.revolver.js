@@ -132,7 +132,7 @@
             
             // create a new interval id only 
             // if revolver is stopped
-            if (this.status == 'stopped')
+            if (this.status != 'playing')
             {
                 this.status     = 'playing';
                 this.intervalId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
