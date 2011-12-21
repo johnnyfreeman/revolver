@@ -123,12 +123,15 @@
 
         play: function()
         {
-            // transition immediately only if revolver has been stopped or paused
+            // transition immediately only if 
+            // revolver has been stopped or paused
             if (this.status == 'stopped')
             {
                 this.transition();
             }
             
+            // create a new interval id only 
+            // if revolver is stopped
             if (this.status == 'stopped')
             {
                 this.status     = 'playing';
