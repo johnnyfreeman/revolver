@@ -34,7 +34,7 @@
         // default settings
         options: {
             rotationSpeed:      4000,       // how long (in milliseconds) to stay on each slide before going to the next
-            transitionSpeed:    1500,       // how long (in milliseconds) the transition should last
+            transitionSpeed:    1000,       // how long (in milliseconds) the transition should last
             transitionType:    'fade',      // choose between none or fade
             autoPlay:           true,       // whether or not to automatically begin playing the slides
             slideClass:         'slide'     // this is what revolver will look for to determin what is a slide 
