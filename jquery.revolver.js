@@ -60,8 +60,8 @@
         // constructor
         init: function(container, options)
         {
-            // merge options with defaults
-            $.extend(this.options, options);
+            // merge options (recursively) with defaults
+            $.extend(true, this.options, options);
             
             // setup revolver
             this.container      = $(container);
@@ -133,22 +133,37 @@
 
             slide: function(revolver)
             {
-                revolver
-                    .slides
-                    .eq(revolver.currentSlide)
-                    .css({
-                        'left': 0
-                    })
-                    .animate({left: -720}, revolver.options.transition.speed, function(){ $(this).hide() });
+                var currentSlide = revolver.slides.eq(revolver.currentSlide),
+                    nextSlide = revolver.slides.eq(revolver.nextSlide),
+                    newCurrentSlidePosition = {}, 
+                    newNextSlidePosition = {};
 
-                revolver
-                    .slides
-                    .eq(revolver.nextSlide)
-                    .css({
-                        'left': 720
-                    })
-                    .show()
-                    .animate({left: 0}, revolver.options.transition.speed);
+                revolver.container.css({overflow: 'hidden',width: currentSlide.width(), height: currentSlide.height()});
+                
+                // build animation object based on the transition direction
+                switch(revolver.options.transition.direction)
+                {
+                    case 'up':
+                        newCurrentSlidePosition.top = 0 - currentSlide.height();
+                        newNextSlidePosition.top = nextSlide.height();
+                        break;
+                    case 'right':
+                        newCurrentSlidePosition.left = currentSlide.width();
+                        newNextSlidePosition.left = 0 - nextSlide.width();
+                        break;
+                    case 'down':
+                        newCurrentSlidePosition.top = currentSlide.height();
+                        newNextSlidePosition.top = 0 - nextSlide.height();
+                        break;
+                    case 'left':
+                        newCurrentSlidePosition.left = 0 - currentSlide.width();
+                        newNextSlidePosition.left = nextSlide.width();
+                        break;
+                }
+
+                // slide current out of the container and the next in
+                currentSlide.animate(newCurrentSlidePosition, revolver.options.transition.speed, function(){ $(this).hide() });
+                nextSlide.show().css(newNextSlidePosition).animate({top: 0, left: 0}, revolver.options.transition.speed);
 
                 return this;
             }
