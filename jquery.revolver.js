@@ -102,7 +102,7 @@
 
         transition: function()
         {
-            switch(this.transitionType)
+            switch(this.options.transitionType)
             {
                 case 'fade':
                     // fadeout previous, fadein current
