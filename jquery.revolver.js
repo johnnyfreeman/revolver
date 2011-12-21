@@ -102,23 +102,53 @@
 
         transition: function()
         {
-            switch(this.options.transitionType)
-            {
-                case 'fade':
-                    // fadeout previous, fadein current
-                    this.slides.eq(this.currentSlide).fadeOut(this.options.transitionSpeed);
-                    this.slides.eq(this.nextSlide).fadeIn(this.options.transitionSpeed);
-                    break;
-                case 'none':
-                default:
-                    // hide previous, show current
-                    this.slides.eq(this.currentSlide).hide();
-                    this.slides.eq(this.nextSlide).show();
-            }
+            // do transition, and pass the revolver object to it
+            this.transitions[this.options.transitionType](this);
 
             // update slider position
             this.currentSlide   = this.nextSlide;
             this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
+        },
+
+        transitions: {
+
+            none: function(revolver)
+            {
+                revolver.slides.eq(revolver.currentSlide).hide();
+                revolver.slides.eq(revolver.nextSlide).show();
+
+                return this;
+            },
+
+            fade: function(revolver)
+            {
+                revolver.slides.eq(revolver.currentSlide).fadeOut(revolver.options.transitionSpeed);
+                revolver.slides.eq(revolver.nextSlide).fadeIn(revolver.options.transitionSpeed);
+
+                return this;
+            },
+
+            slide: function(revolver)
+            {
+                revolver
+                    .slides
+                    .eq(revolver.currentSlide)
+                    .css({
+                        'left': 0
+                    })
+                    .animate({left: -720}, revolver.options.transitionSpeed, function(){$(this).hide()});
+
+                revolver
+                    .slides
+                    .eq(revolver.nextSlide)
+                    .css({
+                        'left': 720
+                    })
+                    .show()
+                    .animate({left: 0}, revolver.options.transitionSpeed);
+
+                return this;
+            }
         },
 
         play: function()
