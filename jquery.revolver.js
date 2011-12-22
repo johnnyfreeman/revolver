@@ -22,17 +22,58 @@
         });
     };
 
-    // setup constructor
+    // constructor
     var revolver = function(container, options)
     {
-        return this.init(container, options);
+        // merge options (recursively) with defaults
+        this.options = $.extend(true, {}, this.defaults, options);
+        this.status = $.extend({}, {
+            paused:     false,  // is the slider paused
+            playing:    false,  // is the slider playing
+            stopped:    true   // is the slider stopped
+        });
+        
+        // setup revolver
+        this.container      = $(container);
+        this.slides         = this.container.find('.' + this.options.slideClass);
+        this.numSlides      = this.slides.length;
+        this.currentSlide   = 0;
+        this.nextSlide      = this.numSlides > 1 ? 1 : 0;
+        this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
+
+        // Don't run if there's only one slide
+        if (this.numSlides <= 1) {
+            return;
+        };
+
+        // apply basic styling to container and images
+        this.container.css({
+            'position': 'relative'
+        });
+
+        this.slides.css({
+            'top': 0,
+            'left': 0,
+            'position': 'absolute'
+        });
+
+        // hide all slides except the first
+        this.slides.not(':first').hide();
+
+        // begin auto play, if enabled
+        if (this.options.autoPlay)
+        {
+            this.play();
+        }
+
+        return this;
     }
 
     // properties
     revolver.prototype = {
 
         // default settings
-        options: {
+        defaults: {
             rotationSpeed:      4000,       // how long (in milliseconds) to stay on each slide before going to the next
             autoPlay:           true,       // whether or not to automatically begin playing the slides
             transition: {
@@ -56,55 +97,8 @@
         // misc
         firstRun:   true,   // keeps track of whethor or not revolver has transitioned yet
         intervalId: null,   // id set by setInterval(), used for pause() method
-
-        // constructor
-        init: function(container, options)
-        {
-            // merge options (recursively) with defaults
-            $.extend(true, this.options, options);
-            
-            // setup revolver
-            this.container      = $(container);
-            this.slides         = this.container.find('.' + this.options.slideClass);
-            this.numSlides      = this.slides.length;
-            this.currentSlide   = 0;
-            this.nextSlide      = this.numSlides > 1 ? 1 : 0;
-            this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
-
-            // Don't run if there's only one slide
-            if (this.numSlides <= 1) {
-                return;
-            };
-
-            // apply basic styling to container and images
-            this.container.css({
-                'position': 'relative'
-            });
-
-            this.slides.css({
-                'top': 0,
-                'left': 0,
-                'position': 'absolute'
-            });
-
-            // hide all slides except the first
-            this.slides.not(':first').hide();
-
-            // begin auto play, if enabled
-            if (this.options.autoPlay)
-            {
-                this.play();
-            }
-
-            return this;
-        },
-
-        // status
-        status: {
-            paused:     false,  // is the slider paused
-            playing:    false,  // is the slider playing
-            stopped:    true   // is the slider stopped
-        },
+        state:      null,   // will contain the state of the slider
+        options:    null,   // will contain all options for the slider
 
         changeStatus: function(newStatus)
         {
@@ -141,16 +135,16 @@
 
             none: function(revolver)
             {
-                revolver.slides.eq(revolver.currentSlide).hide();
-                revolver.slides.eq(revolver.nextSlide).show();
+                revolver.slides.eq(revolver.currentSlide).css({top: 0, left: 0}).hide();
+                revolver.slides.eq(revolver.nextSlide).css({top: 0, left: 0}).show();
 
                 return this;
             },
 
             fade: function(revolver)
             {
-                revolver.slides.eq(revolver.currentSlide).fadeOut(revolver.options.transition.speed);
-                revolver.slides.eq(revolver.nextSlide).fadeIn(revolver.options.transition.speed);
+                revolver.slides.eq(revolver.currentSlide).css({top: 0, left: 0}).fadeOut(revolver.options.transition.speed);
+                revolver.slides.eq(revolver.nextSlide).css({top: 0, left: 0}).fadeIn(revolver.options.transition.speed);
 
                 return this;
             },
@@ -275,6 +269,6 @@
         {
             return this.goTo(this.lastSlide);
         }
-    }
+    };
 
 })(jQuery);
