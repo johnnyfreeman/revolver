@@ -17,13 +17,13 @@
             // store the revolver object using jquery's data method
             if (!$.data(this, 'revolver'))
             {
-                $.data(this, 'revolver', new revolver(this, options));
+                $.data(this, 'revolver', new Revolver(this, options));
             }
         });
     };
 
     // constructor
-    var revolver = function(container, options)
+    var Revolver = function(container, options)
     {
         // merge options (recursively) with defaults
         this.options = $.extend(true, {}, this.defaults, options);
