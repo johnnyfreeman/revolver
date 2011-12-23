@@ -178,6 +178,44 @@
             nextSlide.show().css(newNextSlidePosition).animate({top: 0, left: 0}, revolver.options.transition.speed);
 
             return this;
+        },
+
+        // slide in and out of the container
+        halfSlide: function(revolver)
+        {
+            var currentSlide = revolver.slides.eq(revolver.currentSlide),
+                nextSlide = revolver.slides.eq(revolver.nextSlide),
+                newCurrentSlidePosition = {}, 
+                newNextSlidePosition = {};
+
+            revolver.container.css({overflow: 'hidden',width: currentSlide.width(), height: currentSlide.height()});
+            
+            // build animation object based on the transition direction
+            switch(revolver.options.transition.direction)
+            {
+                case 'up':
+                    newCurrentSlidePosition.top = 0 - currentSlide.height()/2;
+                    newNextSlidePosition.top = nextSlide.height();
+                    break;
+                case 'right':
+                    newCurrentSlidePosition.left = currentSlide.width()/2;
+                    newNextSlidePosition.left = 0 - nextSlide.width();
+                    break;
+                case 'down':
+                    newCurrentSlidePosition.top = currentSlide.height()/2;
+                    newNextSlidePosition.top = 0 - nextSlide.height();
+                    break;
+                case 'left':
+                    newCurrentSlidePosition.left = 0 - currentSlide.width()/2;
+                    newNextSlidePosition.left = nextSlide.width();
+                    break;
+            }
+
+            // slide current out of the container and the next in
+            currentSlide.animate(newCurrentSlidePosition, revolver.options.transition.speed, function(){ $(this).hide() });
+            nextSlide.show().css(newNextSlidePosition).animate({top: 0, left: 0}, revolver.options.transition.speed);
+
+            return this;
         }
     };
 
