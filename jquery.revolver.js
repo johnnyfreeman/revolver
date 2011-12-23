@@ -25,7 +25,7 @@
     // constructor
     var Revolver = function(container, options)
     {
-        // merge options (recursively) with defaults
+        // merge new options (recursively) with defaults
         this.options = $.extend(true, {}, this.defaults, options);
         this.status = $.extend({}, {
             paused:     false,  // is the slider paused
@@ -69,28 +69,28 @@
         return this;
     }
 
-    // default settings
+    // default options
     Revolver.prototype.defaults = {
-        rotationSpeed:      4000,       // how long (in milliseconds) to stay on each slide before going to the next
-        autoPlay:           true,       // whether or not to automatically begin playing the slides
+        rotationSpeed:      4000,     // how long (in milliseconds) to stay on each slide before going to the next
+        autoPlay:           true,     // whether or not to automatically begin playing the slides
         transition: {
-            speed:          1000,       // how long (in milliseconds) the transition should last
-            type:           'fade',     // choose between none, fade, or slide,
-            direction:      'left'      // which way to slide each slide. used for the 'slide' transition type only.
+            speed:          1000,     // how long (in milliseconds) the transition should last
+            type:           'fade',   // choose between none, fade, or slide,
+            direction:      'left'    // which way to slide each slide. used for the 'slide' transition type only.
         },
-        slideClass:         'slide'     // this is what revolver will look for to determin what is a slide 
+        slideClass:         'slide'   // this is what revolver will look for to determin what is a slide 
     };
 
-    Revolver.prototype.currentSlide = null;     // key for current slide
-    Revolver.prototype.nextSlide    = null;     // key for next slide
-    Revolver.prototype.numSlides    = 0;        // total number of slides
-    Revolver.prototype.lastSlide    = null;     // key for last slide
-    Revolver.prototype.container    = null;     // the wrapper element for all images
-    Revolver.prototype.slides       = [];       // array of slides
-    Revolver.prototype.firstRun     = true;     // keeps track of whethor or not revolver has transitioned yet
-    Revolver.prototype.intervalId   = null;     // id set by setInterval(), used for pause() method
-    Revolver.prototype.state        = null;     // will contain the state of the slider
-    Revolver.prototype.options      = null;     // will contain all options for the slider
+    Revolver.prototype.currentSlide = null;   // key for current slide
+    Revolver.prototype.nextSlide    = null;   // key for next slide
+    Revolver.prototype.numSlides    = 0;      // total number of slides
+    Revolver.prototype.lastSlide    = null;   // key for last slide
+    Revolver.prototype.container    = null;   // the wrapper element for all images
+    Revolver.prototype.slides       = [];     // array of slides
+    Revolver.prototype.firstRun     = true;   // keeps track of whethor or not revolver has transitioned yet
+    Revolver.prototype.intervalId   = null;   // id set by setInterval(), used for pause() method
+    Revolver.prototype.state        = null;   // will contain the state of the slider
+    Revolver.prototype.options      = null;   // will contain all options for the slider
 
     Revolver.prototype.changeStatus = function(newStatus)
     {
