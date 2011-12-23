@@ -203,14 +203,26 @@
     Revolver.prototype.pause = function()
     {
         this.changeStatus('paused');
-        clearInterval(this.intervalId);
+
+        if (this.intervalId !== null)
+        {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+        };
+
         return this;
     };
 
     Revolver.prototype.stop = function()
     {
         this.changeStatus('stopped');
-        clearInterval(this.intervalId);
+
+        if (this.intervalId !== null)
+        {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+        };
+        
         return this.reset();
     };
 
