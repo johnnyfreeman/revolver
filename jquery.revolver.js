@@ -46,17 +46,6 @@
             return;
         };
 
-        // apply basic styling to container and images
-        this.container.css({
-            'position': 'relative'
-        });
-
-        this.slides.css({
-            'top': 0,
-            'left': 0,
-            'position': 'absolute'
-        });
-
         // hide all slides except the first
         this.slides.not(':first').hide();
 
@@ -127,8 +116,8 @@
         // no transition, just show and hide
         none: function(revolver)
         {
-            revolver.slides.eq(revolver.currentSlide).css({top: 0, left: 0}).hide();
-            revolver.slides.eq(revolver.nextSlide).css({top: 0, left: 0}).show();
+            revolver.slides.eq(revolver.currentSlide).hide();
+            revolver.slides.eq(revolver.nextSlide).show();
 
             return this;
         },
@@ -136,8 +125,8 @@
         // fade in and out
         fade: function(revolver)
         {
-            revolver.slides.eq(revolver.currentSlide).css({top: 0, left: 0}).fadeOut(revolver.options.transition.speed);
-            revolver.slides.eq(revolver.nextSlide).css({top: 0, left: 0}).fadeIn(revolver.options.transition.speed);
+            revolver.slides.eq(revolver.currentSlide).fadeOut(revolver.options.transition.speed);
+            revolver.slides.eq(revolver.nextSlide).fadeIn(revolver.options.transition.speed);
 
             return this;
         },
@@ -149,8 +138,6 @@
                 nextSlide = revolver.slides.eq(revolver.nextSlide),
                 newCurrentSlidePosition = {}, 
                 newNextSlidePosition = {};
-
-            revolver.container.css({overflow: 'hidden',width: currentSlide.width(), height: currentSlide.height()});
             
             // build animation object based on the transition direction
             switch(revolver.options.transition.direction)
@@ -187,8 +174,6 @@
                 nextSlide = revolver.slides.eq(revolver.nextSlide),
                 newCurrentSlidePosition = {}, 
                 newNextSlidePosition = {};
-
-            revolver.container.css({overflow: 'hidden',width: currentSlide.width(), height: currentSlide.height()});
             
             // build animation object based on the transition direction
             switch(revolver.options.transition.direction)
