@@ -201,7 +201,20 @@
             nextSlide.show().css(newNextSlidePosition).animate({top: 0, left: 0}, revolver.options.transition.speed);
 
             return this;
-        }
+        },
+
+        // reveal
+        reveal: function(revolver)
+        {
+            revolver.slides.eq(revolver.currentSlide).css('z-index': 0);
+            revolver.slides.eq(revolver.nextSlide).css('z-index', 1).animate({width: revolver.dimensions.width}, revolver.options.transition.speed,
+                function()
+                {
+                    revolver.slides.eq(revolver.currentSlide).css('width': 0);
+                });
+
+            return this;
+        },
     };
 
     Revolver.prototype.play = function()
