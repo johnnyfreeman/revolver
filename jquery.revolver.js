@@ -27,11 +27,6 @@
     {
         // merge new options (recursively) with defaults
         this.options = $.extend(true, {}, this.defaults, options);
-        this.status = $.extend({}, {
-            paused:     false,  // is the slider paused
-            playing:    false,  // is the slider playing
-            stopped:    true   // is the slider stopped
-        });
         
         // setup revolver
         this.container      = $(container);
@@ -40,14 +35,13 @@
         this.currentSlide   = 0;
         this.nextSlide      = this.numSlides > 1 ? 1 : 0;
         this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
+        this.status         = { paused: false, playing: false, stopped: true };
+        this.dimensions     = { height: this.container.height(), width: this.container.width() };
 
         // Don't run if there's only one slide
         if (this.numSlides <= 1) {
             return;
         };
-
-        // hide all slides except the first
-        this.slides.not(':first').hide();
 
         // begin auto play, if enabled
         if (this.options.autoPlay)
@@ -76,10 +70,11 @@
     Revolver.prototype.lastSlide    = null;   // key for last slide
     Revolver.prototype.container    = null;   // the wrapper element for all images
     Revolver.prototype.slides       = [];     // array of slides
-    Revolver.prototype.firstRun     = true;   // keeps track of whethor or not revolver has transitioned yet
+    Revolver.prototype.iteration    = 0;      // keeps track of the number of transitions that have occured
     Revolver.prototype.intervalId   = null;   // id set by setInterval(), used for pause() method
     Revolver.prototype.state        = null;   // will contain the state of the slider
     Revolver.prototype.options      = null;   // will contain all options for the slider
+    Revolver.prototype.dimensions   = null;   // contains width & height of the slider
 
     Revolver.prototype.changeStatus = function(newStatus)
     {
@@ -103,11 +98,7 @@
         this.currentSlide   = this.nextSlide;
         this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
 
-        // it's not the first run anymore, is it.
-        if (this.firstRun)
-        {
-            this.firstRun = false;
-        }
+        this.iteration++;
     };
 
     // logic for transitions
@@ -116,6 +107,12 @@
         // no transition, just show and hide
         none: function(revolver)
         {
+            // hide all slides except the first on first run
+            if (revolver.iteration === 0)
+            {
+                revolver.slides.not(':first').hide();
+            }
+
             revolver.slides.eq(revolver.currentSlide).hide();
             revolver.slides.eq(revolver.nextSlide).show();
 
@@ -125,6 +122,12 @@
         // fade in and out
         fade: function(revolver)
         {
+            // hide all slides except the first
+            if (revolver.iteration === 0)
+            {
+                revolver.slides.not(':first').hide();
+            }
+
             revolver.slides.eq(revolver.currentSlide).fadeOut(revolver.options.transition.speed);
             revolver.slides.eq(revolver.nextSlide).fadeIn(revolver.options.transition.speed);
 
@@ -136,33 +139,35 @@
         {
             var currentSlide = revolver.slides.eq(revolver.currentSlide),
                 nextSlide = revolver.slides.eq(revolver.nextSlide),
-                newCurrentSlidePosition = {}, 
-                newNextSlidePosition = {};
-            
+                currentSlidePosition = {}, 
+                nextSlidePosition = {};
+
+            // make sure next slide is on top of current slide
+            revolver.slides.eq(revolver.nextSlide).css('z-index', revolver.iteration + 1);
+
             // build animation object based on the transition direction
             switch(revolver.options.transition.direction)
             {
                 case 'up':
-                    newCurrentSlidePosition.top = 0 - currentSlide.height();
-                    newNextSlidePosition.top = nextSlide.height();
+                    currentSlidePosition.top = 0 - currentSlide.height();
+                    nextSlidePosition.top = nextSlide.height();
                     break;
                 case 'right':
-                    newCurrentSlidePosition.left = currentSlide.width();
-                    newNextSlidePosition.left = 0 - nextSlide.width();
+                    currentSlidePosition.left = currentSlide.width();
+                    nextSlidePosition.left = 0 - nextSlide.width();
                     break;
                 case 'down':
-                    newCurrentSlidePosition.top = currentSlide.height();
-                    newNextSlidePosition.top = 0 - nextSlide.height();
+                    currentSlidePosition.top = currentSlide.height();
+                    nextSlidePosition.top = 0 - nextSlide.height();
                     break;
                 case 'left':
-                    newCurrentSlidePosition.left = 0 - currentSlide.width();
-                    newNextSlidePosition.left = nextSlide.width();
+                    currentSlidePosition.left = 0 - currentSlide.width();
+                    nextSlidePosition.left = nextSlide.width();
                     break;
             }
-
             // slide current out of the container and the next in
-            currentSlide.animate(newCurrentSlidePosition, revolver.options.transition.speed, function(){ $(this).hide() });
-            nextSlide.show().css(newNextSlidePosition).animate({top: 0, left: 0}, revolver.options.transition.speed);
+            currentSlide.animate(currentSlidePosition, revolver.options.transition.speed, function(){ $(this).hide() });
+            nextSlide.show().css(nextSlidePosition).animate({top: 0, left: 0}, revolver.options.transition.speed);
 
             return this;
         },
@@ -170,10 +175,19 @@
         // slide in and out of the container
         halfSlide: function(revolver)
         {
+            // hide all slides except the first
+            if (revolver.iteration === 0)
+            {
+                revolver.slides.not(':first').hide();
+            }
+
             var currentSlide = revolver.slides.eq(revolver.currentSlide),
                 nextSlide = revolver.slides.eq(revolver.nextSlide),
                 newCurrentSlidePosition = {}, 
                 newNextSlidePosition = {};
+
+            // make sure next slide is on top of current slide
+            revolver.slides.eq(revolver.nextSlide).css('z-index', revolver.iteration + 1);
             
             // build animation object based on the transition direction
             switch(revolver.options.transition.direction)
@@ -206,15 +220,13 @@
         // reveal
         reveal: function(revolver)
         {
-            revolver.slides.eq(revolver.currentSlide).css('z-index': 0);
-            revolver.slides.eq(revolver.nextSlide).css('z-index', 1).animate({width: revolver.dimensions.width}, revolver.options.transition.speed,
-                function()
-                {
-                    revolver.slides.eq(revolver.currentSlide).css('width': 0);
-                });
+            // make sure next slide is on top of current slide
+            revolver.slides.eq(revolver.nextSlide).css('z-index', revolver.iteration + 1);
+
+            revolver.slides.eq(revolver.nextSlide).css('width', 0).animate({width: revolver.dimensions.width}, revolver.options.transition.speed);
 
             return this;
-        },
+        }
     };
 
     Revolver.prototype.play = function()
@@ -225,7 +237,7 @@
 
             // if this isn't the first run
             // then do transition immediately 
-            if (!this.firstRun)
+            if (this.iteration > 0)
             {
                 this.transition();
             }
