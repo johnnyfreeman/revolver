@@ -328,11 +328,6 @@
         return this.goTo(this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1);
     };
 
-    Revolver.prototype.previous = function()
-    {
-        return this.goTo(this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1);
-    };
-
     Revolver.prototype.goTo = function(i)
     {
         // bail out if already 
