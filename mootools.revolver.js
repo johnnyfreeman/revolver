@@ -1,3 +1,40 @@
+/* =========================================================================================================
+ *
+ * "Y8888888b.                                     `Y88                                        ::
+ *   888   Y88b                                     888
+ *   888   dX8P   .d888b. `Y8b      d8P  .d8888b.   888 `Y8b      d8P  .d888b.  `Y88.d88b.    `Y88  .d8888b
+ *   888888YK    d8P   Y8b  Y8b    d8P  d88P""Y88b  888   Y8b    d8P  d8P   Y8b  888P" "Y8b    888  88K
+ *   888  "Y8b.  888888888   Y8b  d8P   88K    X88  888    Y8b  d8P   888888888  888           888  "Y8888b.
+ *   888    88b  Y8b.         Y8bd8P    Y88b..d88P  888     Y8bd8P    Y8b.       888           888       X88
+ * .d888    888   "Y888P"      Y88P      "Y8888P"   888.     Y88P      "Y888P"   888      ::   888   Y88888"
+ *          Y88b.                                                                             .88P
+ *                                                                                           d88"
+ * =========================================================================================================
+ * 
+ * Revolver.js
+ *
+ * Revolver is a content slider built with no assumptions about your markup. Think of Revolver as a 
+ * boilerplate or framework for making your own slider, exactly the way you want it. But don't let that 
+ * scare you, it's really easy, I promise!
+ * 
+ * Documentation:   http://johnnyfreeman.github.com/revolver
+ * Support:         https://github.com/johnnyfreeman/revolver/issues
+ * Bug Fixes:       https://github.com/johnnyfreeman/revolver/pulls
+ * Author:          Johnny Freeman (http://johnnyfreeman.us)
+ * 
+ * Contribute:
+ * 
+ * If Revolver has been beneficial to you and you'd like to give back, there are a few ways you can 
+ * contribute. You can answer questions on StackOverflow and our issue tracker. Or if you have a feature 
+ * request or a bug fix you can submit a pull request on Github at http://github.com/johnnyfreeman/revolver.
+ * 
+ * License:
+ * 
+ * This software is open source and free to use under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ * 
+ */
+
 var Revolver, RevolverSlide;
 
 Revolver = new Class({
