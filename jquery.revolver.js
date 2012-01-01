@@ -37,10 +37,8 @@
  
 ;(function ($) {
 
-    var Revolver, RevolverSlide;
-
     // constructor
-    Revolver = function(container, options)
+    var Revolver = function(container, options)
     {
         // merge new options (recursively) with defaults
         this.options = $.extend(true, {}, this.defaults, options);
