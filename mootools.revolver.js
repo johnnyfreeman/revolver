@@ -47,7 +47,7 @@ Revolver = new Class({
 	    transition: {
 	        direction:      'left',   		// which way to slide each slide. used for the 'slide' transition type only.
 	        easing: 		'sine:in:out', 	// default easing method
-	        speed:          1000,     		// how long (in milliseconds) the transition should last
+	        speed:          600,     		// how long (in milliseconds) the transition should last
 	        type:           'fade'   		// choose between none, fade, or slide,
 	    },
 	    slideClass:         'slide'   		// this is what revolver will look for to determin what is a slide 
@@ -86,7 +86,6 @@ Revolver = new Class({
 
 	    // Don't run if there's only one slide
 	    if (this.numSlides <= 1) {
-	    	console.log('no slides... bailing out');
 	        return;
 	    };
 
@@ -120,6 +119,9 @@ Revolver = new Class({
 		// merge options with the defaults
 		var options = Object.merge( Object.clone(this.options.transition), options );
 
+	    // fire onTransition event
+	    this.fireEvent('transitionStart');
+
 	    // do transition, and pass the transition options to it
 	    this.transitions[options.type].bind(this)(options);
 
@@ -127,9 +129,6 @@ Revolver = new Class({
 	    this.currentSlide   = this.nextSlide;
 	    this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
 	    this.iteration++;
-
-	    // fire onTransition event
-	    this.fireEvent('transition');
 
 	    return this;
 	},
