@@ -36,45 +36,47 @@
  */
  
 ;(function ($) {
-    
-    // turn the plugin
-    $.fn.revolver = function(options)
-    {
-        return this.each(function()
-        {
-            // store the revolver object using jquery's data method
-            if (!$.data(this, 'revolver'))
-            {
-                $.data(this, 'revolver', new Revolver(this, options));
-            }
-        });
-    };
+
+    var Revolver, RevolverSlide;
 
     // constructor
-    var Revolver = function(container, options)
+    Revolver = function(container, options)
     {
         // merge new options (recursively) with defaults
         this.options = $.extend(true, {}, this.defaults, options);
         
         // setup revolver
         this.container      = $(container);
-        this.slides         = this.container.find('.' + this.options.slideClass);
+        this.dimensions     = { height: this.container.height(), width: this.container.width() };
+        this.slides         = this.container.find('.'+this.options.slideClass).each(function(){this.addSlide(this)}.bind(this));
         this.numSlides      = this.slides.length;
         this.currentSlide   = 0;
         this.nextSlide      = this.numSlides > 1 ? 1 : 0;
         this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
         this.status         = { paused: false, playing: false, stopped: true };
-        this.dimensions     = { height: this.container.height(), width: this.container.width() };
 
         // Don't run if there's only one slide
         if (this.numSlides <= 1) {
             return;
         };
 
+        // bind custom events to container
+        this.container.bind({
+            'transitionStart.revolver': this.options.onTransitionStart,
+            'transitionComplete.revolver': this.options.onTransitionComplete,
+            'ready.revolver': this.options.onReady,
+            'play.revolver': this.options.onPlay,
+            'stop.revolver': this.options.onStop,
+            'pause.revolver': this.options.onPause,
+            'restart.revolver': this.options.onRestart
+        });
+
+        this.container.trigger('ready.revolver');
+
         // begin auto play, if enabled
         if (this.options.autoPlay)
         {
-            this.play();
+            this.play({}, true);
         }
 
         return this;
@@ -85,11 +87,21 @@
         rotationSpeed:      4000,     // how long (in milliseconds) to stay on each slide before going to the next
         autoPlay:           true,     // whether or not to automatically begin playing the slides
         transition: {
-            speed:          1000,     // how long (in milliseconds) the transition should last
-            type:           'fade',   // choose between none, fade, or slide,
-            direction:      'left'    // which way to slide each slide. used for the 'slide' transition type only.
+            direction:      'left',     // which way to slide each slide. used for the 'slide' transition type only.
+            easing:         'swing',    // default easing method
+            speed:          500,        // how long (in milliseconds) the transition should last
+            type:           'fade'      // choose between none, fade, or slide,
         },
-        slideClass:         'slide'   // this is what revolver will look for to determin what is a slide 
+        slideClass:         'slide',    // this is what revolver will look for to determin what is a slide 
+
+        // custom events
+        onTransitionStart:      function(){},
+        onTransitionComplete:   function(){},
+        onReady:                function(){},
+        onPlay:                 function(){},
+        onStop:                 function(){},
+        onPause:                function(){},
+        onRestart:              function(){}
     };
 
     Revolver.prototype.currentSlide = null;   // key for current slide
@@ -104,6 +116,11 @@
     Revolver.prototype.options      = null;   // will contain all options for the slider
     Revolver.prototype.dimensions   = null;   // contains width & height of the slider
 
+    Revolver.prototype.addSlide = function(slide)
+    {
+        this.slides.push(slide);
+    };
+
     Revolver.prototype.changeStatus = function(newStatus)
     {
         // set all status' as false
@@ -117,157 +134,143 @@
     };
 
     // do transition
-    Revolver.prototype.transition = function()
+    Revolver.prototype.transition = function(options)
     {
+        // merge options with the defaults
+        var options = $.extend(true, {}, this.options.transition, options);
+
+        // fire onTransition event
+        this.container.trigger('transitionStart.revolver');
+
         // do transition, and pass the revolver object to it for reference
-        this.transitions[this.options.transition.type](this);
+        this.transitions[this.options.transition.type].bind(this)(options);
 
         // update slider position
         this.currentSlide   = this.nextSlide;
         this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
-
         this.iteration++;
+
+        return this;
     };
 
     // logic for transitions
     Revolver.prototype.transitions = {
 
         // no transition, just show and hide
-        none: function(revolver)
+        none: function(options)
         {
-            // hide all slides except the first on first run
-            if (revolver.iteration === 0)
-            {
-                revolver.slides.not(':first').hide();
-            }
+            this.slides.eq(this.currentSlide).hide();
+            this.slides.eq(this.nextSlide).show();
 
-            revolver.slides.eq(revolver.currentSlide).hide();
-            revolver.slides.eq(revolver.nextSlide).show();
-
-            return this;
+            // since this transitions is instantaneous we'll go 
+            // ahead and trigger the transitionComplete event
+            this.container.trigger('transitionComplete.revolver');
         },
 
         // fade in and out
-        fade: function(revolver)
+        fade: function(options)
         {
-            // hide all slides except the first
-            if (revolver.iteration === 0)
-            {
-                revolver.slides.not(':first').hide();
-            }
-
-            revolver.slides.eq(revolver.currentSlide).fadeOut(revolver.options.transition.speed);
-            revolver.slides.eq(revolver.nextSlide).fadeIn(revolver.options.transition.speed);
-
-            return this;
+            this.slides.eq(this.currentSlide).fadeOut(options.speed);
+            this.slides.eq(this.nextSlide).fadeIn(
+                options.speed,
+                // after the next slide is finished fading in,
+                    // trigger the onTransitionComplete event
+                $.proxy(function() {
+                    this.container.trigger('transitionComplete.revolver');
+                }, this)
+            );
         },
 
         // slide in and out of the container
-        slide: function(revolver)
+        slide: function(options)
         {
-            var currentSlide = revolver.slides.eq(revolver.currentSlide),
-                nextSlide = revolver.slides.eq(revolver.nextSlide),
+            var currentSlide = this.slides.eq(this.currentSlide),
+                nextSlide = this.slides.eq(this.nextSlide),
                 currentSlidePosition = {}, 
-                nextSlidePosition = {};
+                nextSlidePosition = {},
+                resetPosition = {top: 0, left: 0};
 
             // make sure next slide is on top of current slide
-            revolver.slides.eq(revolver.nextSlide).css('z-index', revolver.iteration + 1);
+            this.slides.eq(this.nextSlide).css('z-index', this.iteration + 1);
 
             // build animation object based on the transition direction
-            switch(revolver.options.transition.direction)
+            switch(options.direction)
             {
                 case 'up':
-                    currentSlidePosition.top = 0 - currentSlide.height();
-                    nextSlidePosition.top = nextSlide.height();
+                    currentSlidePosition.top = 0 - this.dimensions.height;
+                    nextSlidePosition.top = this.dimensions.height;
                     break;
                 case 'right':
-                    currentSlidePosition.left = currentSlide.width();
-                    nextSlidePosition.left = 0 - nextSlide.width();
+                    currentSlidePosition.left = this.dimensions.width;
+                    nextSlidePosition.left = 0 - this.dimensions.width;
                     break;
                 case 'down':
-                    currentSlidePosition.top = currentSlide.height();
-                    nextSlidePosition.top = 0 - nextSlide.height();
+                    currentSlidePosition.top = this.dimensions.height;
+                    nextSlidePosition.top = 0 - this.dimensions.height;
                     break;
                 case 'left':
-                    currentSlidePosition.left = 0 - currentSlide.width();
-                    nextSlidePosition.left = nextSlide.width();
-                    break;
-            }
-            // slide current out of the container and the next in
-            currentSlide.animate(currentSlidePosition, revolver.options.transition.speed, function(){ $(this).hide() });
-            nextSlide.show().css(nextSlidePosition).animate({top: 0, left: 0}, revolver.options.transition.speed);
-
-            return this;
-        },
-
-        // slide in and out of the container
-        halfSlide: function(revolver)
-        {
-            // hide all slides except the first
-            if (revolver.iteration === 0)
-            {
-                revolver.slides.not(':first').hide();
-            }
-
-            var currentSlide = revolver.slides.eq(revolver.currentSlide),
-                nextSlide = revolver.slides.eq(revolver.nextSlide),
-                newCurrentSlidePosition = {}, 
-                newNextSlidePosition = {};
-
-            // make sure next slide is on top of current slide
-            revolver.slides.eq(revolver.nextSlide).css('z-index', revolver.iteration + 1);
-            
-            // build animation object based on the transition direction
-            switch(revolver.options.transition.direction)
-            {
-                case 'up':
-                    newCurrentSlidePosition.top = 0 - currentSlide.height()/2;
-                    newNextSlidePosition.top = nextSlide.height();
-                    break;
-                case 'right':
-                    newCurrentSlidePosition.left = currentSlide.width()/2;
-                    newNextSlidePosition.left = 0 - nextSlide.width();
-                    break;
-                case 'down':
-                    newCurrentSlidePosition.top = currentSlide.height()/2;
-                    newNextSlidePosition.top = 0 - nextSlide.height();
-                    break;
-                case 'left':
-                    newCurrentSlidePosition.left = 0 - currentSlide.width()/2;
-                    newNextSlidePosition.left = nextSlide.width();
+                default:
+                    currentSlidePosition.left = 0 - this.dimensions.width;
+                    nextSlidePosition.left = this.dimensions.width;
                     break;
             }
 
-            // slide current out of the container and the next in
-            currentSlide.animate(newCurrentSlidePosition, revolver.options.transition.speed, function(){ $(this).hide() });
-            nextSlide.show().css(newNextSlidePosition).animate({top: 0, left: 0}, revolver.options.transition.speed);
+            // slide current out of the container
+            currentSlide.animate(
+                currentSlidePosition, 
+                options.speed, 
+                function() {
+                    $(this).hide()
+                }
+            );
 
-            return this;
+            // slide next out of the container
+            nextSlide
+                .show()
+                .css(nextSlidePosition)
+                .animate(
+                    resetPosition, 
+                    options.speed,
+                    // after the next slide is finished sliding in,
+                    // trigger the onTransitionComplete event
+                    $.proxy(function() {
+                        this.container.trigger('transitionComplete.revolver');
+                    }, this)
+                );
         },
 
         // reveal
-        reveal: function(revolver)
+        reveal: function(options)
         {
-            // make sure next slide is on top of current slide
-            revolver.slides.eq(revolver.nextSlide).css('z-index', revolver.iteration + 1);
-
-            revolver.slides.eq(revolver.nextSlide).css('width', 0).animate({width: revolver.dimensions.width}, revolver.options.transition.speed);
+            this.slides.eq(this.nextSlide)
+                .css({width: 0, height: this.dimensions.height, 'z-index': this.iteration+1})
+                .show()
+                .animate(
+                    {width: this.dimensions.width}, 
+                    options.speed,
+                    // after the next slide is finished revealing itself,
+                    // trigger the onTransitionComplete event
+                    $.proxy(function() {
+                        this.container.trigger('transitionComplete.revolver');
+                    }, this)
+                );
 
             return this;
         }
     };
 
-    Revolver.prototype.play = function()
+    Revolver.prototype.play = function(options, firstTime)
     {
         if (!this.status.playing)
         {
             this.changeStatus('playing');
+            this.container.trigger('play.revolver');
 
             // if this isn't the first run
             // then do transition immediately 
-            if (this.iteration > 0)
+            if (!firstTime)
             {
-                this.transition();
+                this.transition(options);
             }
 
             this.intervalId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
@@ -278,12 +281,16 @@
 
     Revolver.prototype.pause = function()
     {
-        this.changeStatus('paused');
-
-        if (this.intervalId !== null)
+        if (!this.status.paused)
         {
-            clearInterval(this.intervalId);
-            this.intervalId = null;
+            this.changeStatus('paused');
+            this.container.trigger('pause.revolver');
+
+            if (this.intervalId !== null)
+            {
+                clearInterval(this.intervalId);
+                this.intervalId = null;
+            }; 
         };
 
         return this;
@@ -291,12 +298,16 @@
 
     Revolver.prototype.stop = function()
     {
-        this.changeStatus('stopped');
-
-        if (this.intervalId !== null)
+        if (!this.status.stopped)
         {
-            clearInterval(this.intervalId);
-            this.intervalId = null;
+            this.changeStatus('stopped');
+            this.container.trigger('stop.revolver');
+
+            if (this.intervalId !== null)
+            {
+                clearInterval(this.intervalId);
+                this.intervalId = null;
+            };
         };
         
         return this.reset();
@@ -313,22 +324,23 @@
         return this;
     };
 
-    Revolver.prototype.restart = function()
+    Revolver.prototype.restart = function(options)
     {
-        return this.stop().play();
+        this.container.trigger('restart.revolver');
+        return this.stop().play(options);
     };
 
-    Revolver.prototype.first = function()
+    Revolver.prototype.first = function(options)
     {
-        return this.goTo(0);
+        return this.goTo(0, options);
     };
 
-    Revolver.prototype.previous = function()
+    Revolver.prototype.previous = function(options)
     {
-        return this.goTo(this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1);
+        return this.goTo(this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1, options);
     };
 
-    Revolver.prototype.goTo = function(i)
+    Revolver.prototype.goTo = function(i, options)
     {
         // bail out if already 
         // on the intended slide
@@ -339,17 +351,30 @@
 
         this.nextSlide = i;
 
-        return !this.status.playing ? this.transition() : this.pause().play();
+        return !this.status.playing ? this.transition(options) : this.pause().play(options);
     };
 
-    Revolver.prototype.next = function()
+    Revolver.prototype.next = function(options)
     {
-        return this.goTo(this.nextSlide);
+        return this.goTo(this.nextSlide, options);
     };
 
-    Revolver.prototype.last = function()
+    Revolver.prototype.last = function(options)
     {
-        return this.goTo(this.lastSlide);
+        return this.goTo(this.lastSlide, options);
+    };
+    
+    // jquery plugin
+    $.fn.revolver = function(options)
+    {
+        return this.each(function()
+        {
+            // store the revolver object using jquery's data method
+            if (!$.data(this, 'revolver'))
+            {
+                $.data(this, 'revolver', new Revolver(this, options));
+            }
+        });
     };
 
 })(jQuery);
