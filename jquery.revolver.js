@@ -46,7 +46,7 @@
         // setup revolver
         this.container      = $(container);
         this.dimensions     = { height: this.container.height(), width: this.container.width() };
-        this.slides         = this.container.find('.'+this.options.slideClass).each(function(){this.addSlide(this)}.bind(this));
+        this.slides         = this.container.find('.'+this.options.slideClass).each( $.proxy(function(){ this.addSlide(this) }, this) );
         this.numSlides      = this.slides.length;
         this.currentSlide   = 0;
         this.nextSlide      = this.numSlides > 1 ? 1 : 0;
@@ -134,14 +134,14 @@
     // do transition
     Revolver.prototype.transition = function(options)
     {
-        // merge options with the defaults
-        var options = $.extend(true, {}, this.options.transition, options);
+        var options         = $.extend(true, {}, this.options.transition, options)
+            doTransition    = $.proxy(this.transitions[options.type], this);
 
         // fire onTransition event
         this.container.trigger('transitionStart.revolver');
 
-        // do transition, and pass the revolver object to it for reference
-        this.transitions[this.options.transition.type].bind(this)(options);
+        // do transition
+        doTransition(options);
 
         // update slider position
         this.currentSlide   = this.nextSlide;
@@ -271,7 +271,7 @@
                 this.transition(options);
             }
 
-            this.intervalId = setInterval(this.transition.bind(this), parseFloat(this.options.rotationSpeed));
+            this.intervalId = setInterval( $.proxy(this.transition, this), parseFloat(this.options.rotationSpeed));
         }
 
         return this;
