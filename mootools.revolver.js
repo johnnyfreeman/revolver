@@ -185,13 +185,12 @@ Revolver = new Class({
 	    // slide in and out of the container
 	    slide: function(options)
 	    {
-		    var self = this,
-		    	currentSlide = this.slides[this.currentSlide],
+		    var currentSlide = this.slides[this.currentSlide],
 	    		nextSlide = this.slides[this.nextSlide],
 	    		slideOut = new Fx.Tween(currentSlide.container, {
 				    duration: options.speed,
 				    transition: options.easing,
-				    onComplete: function(){ self.hide() }
+				    onComplete: function(){ currentSlide.hide() }
 				}),
 				slideIn = new Fx.Tween(nextSlide.container, {
 				    duration: options.speed,
