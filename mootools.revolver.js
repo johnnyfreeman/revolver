@@ -50,7 +50,16 @@ Revolver = new Class({
 	        speed:          500,     		// how long (in milliseconds) the transition should last
 	        type:           'fade'   		// choose between none, fade, or slide,
 	    },
-	    slideClass:         'slide'   		// this is what revolver will look for to determin what is a slide 
+	    slideClass:         'slide',  		// this is what revolver will look for to determin what is a slide 
+
+	    // custom events
+        onTransitionStart:      function(){},
+        onTransitionComplete:   function(){},
+        onReady:                function(){},
+        onPlay:                 function(){},
+        onStop:                 function(){},
+        onPause:                function(){},
+        onRestart:              function(){}
 	},
 
 	currentSlide: null,		// key for current slide
@@ -89,6 +98,9 @@ Revolver = new Class({
 	        return;
 	    };
 
+	    // fire onReady event
+	    this.fireEvent('ready');
+
 	    // begin auto play, if enabled
 	    if (this.options.autoPlay)
 	    {
@@ -100,7 +112,7 @@ Revolver = new Class({
 
     addSlide: function(slide)
     {
-    	this.slides.push( new RevolverSlide(slide, this) );
+    	this.slides.push( new RevolverSlide(slide) );
     },
 
     changeStatus: function(newStatus)
@@ -138,22 +150,84 @@ Revolver = new Class({
 	    // no transition, just show and hide
 	    none: function(options)
 	    {
-	        this.slides[revolver.currentSlide].hide(options);
-	        this.slides[revolver.nextSlide].show(options);
+	        this.slides[this.currentSlide].hide();
+	        this.slides[this.nextSlide].show();
+
+		    // fire onTransitionComplete event
+		    this.fireEvent('transitionComplete');
 	    },
 
 	    // fade in and out
 	    fade: function(options)
 	    {
-	        this.slides[this.currentSlide].fadeOut(options);
-	        this.slides[this.nextSlide].fadeIn(options);
+        
+	    	var currentSlide = this.slides[this.currentSlide],
+	    		nextSlide = this.slides[this.nextSlide],
+	    		fadeOut = new Fx.Tween(currentSlide.container, {
+				    duration: options.speed,
+				    transition: options.easing
+				}),
+				fadeIn = new Fx.Tween(nextlide.container, {
+				    duration: options.speed,
+				    transition: options.easing,
+				    onComplete: function(){ this.fireEvent('transitionComplete') }
+				});
+
+	    	// fade out current slide
+			currentSlide.show().container.setStyle('opacity', 1);
+	    	fadeOut.start('opacity', 0);
+			
+			// fade in next slide
+			nextSlide.show().container.setStyle('opacity', 0);
+	    	fadeIn.start('opacity', 1);
 	    },
 
 	    // slide in and out of the container
 	    slide: function(options)
 	    {
-	        this.slides[this.currentSlide].slideOut(options);
-	    	this.slides[this.nextSlide].slideIn(options);
+		    var self = this,
+		    	currentSlide = this.slides[this.currentSlide],
+	    		nextSlide = this.slides[this.nextSlide],
+	    		slideOut = new Fx.Tween(currentSlide.container, {
+				    duration: options.speed,
+				    transition: options.easing,
+				    onComplete: function(){ self.hide() }
+				}),
+				slideIn = new Fx.Tween(nextSlide.container, {
+				    duration: options.speed,
+				    transition: options.easing,
+				    onComplete: function(){ this.fireEvent('transitionComplete') }
+				});
+			
+			// prepare slides for animation
+			currentSlide.container.setStyles({top: 0, left: 0});
+	    	nextSlide.show();
+
+	    	// do animation based on the direction
+	    	if (options.direction == "up")
+	    	{
+	    		nextSlide.container.setStyle('top', this.dimensions.y);
+		    	slideIn.start('top', 0);
+	    		slideOut.start('top', 0 - this.dimensions.y);
+	    	}
+	    	else if (options.direction == "right")
+	    	{
+	    		nextSlide.container.setStyle('left', 0 - this.dimensions.x);
+		    	slideIn.start('left', 0);
+	    		slideOut.start('left', this.dimensions.x);
+	    	}
+	    	else if (options.direction == "down")
+	    	{
+	    		nextSlide.container.setStyle('top', 0 - this.dimensions.y);
+		    	slideIn.start('top', 0);
+	    		slideOut.start('top', this.dimensions.y);
+	    	}
+	    	else if (options.direction == "left")
+	    	{
+	    		nextSlide.container.setStyle('left', this.dimensions.x);
+		    	slideIn.start('left', 0);
+	    		slideOut.start('left', 0 - this.dimensions.x);
+	    	}
 	    },
 
 	    // reveal
@@ -162,7 +236,7 @@ Revolver = new Class({
 	        // make sure next slide is on top of current slide
 	        this.slides[this.nextSlide].container.setStyle('z-index', this.iteration + 1);
 
-	        this.slides[this.nextSlide].container.setStyle('width', 0).morph({width: this.dimensions.width});
+	        this.slides[this.nextSlide].container.setStyle('width', 0).tween('width', this.dimensions.x);
 	    }
 	},
 
@@ -170,7 +244,7 @@ Revolver = new Class({
 	{
 	    if (!this.status.playing)
 	    {
-	        this.changeStatus('playing');
+	        this.fireEvent('play').changeStatus('playing');
 
 	        // transition immediately?
 	        if (!firstTime)
@@ -186,26 +260,32 @@ Revolver = new Class({
 
 	pause: function()
 	{
-	    this.changeStatus('paused');
+		if (!this.status.paused)
+		{
+			this.fireEvent('pause').changeStatus('paused');
 
-	    if (this.intervalId !== null)
-	    {
-	        clearInterval(this.intervalId);
-	        this.intervalId = null;
-	    };
+		    if (this.intervalId !== null)
+		    {
+		        clearInterval(this.intervalId);
+		        this.intervalId = null;
+		    }
+		}
 
 	    return this;
 	},
 
 	stop: function()
 	{
-	    this.changeStatus('stopped');
+		if (!this.status.stopped)
+		{
+			this.fireEvent('stop').changeStatus('stopped');
 
-	    if (this.intervalId !== null)
-	    {
-	        clearInterval(this.intervalId);
-	        this.intervalId = null;
-	    };
+		    if (this.intervalId !== null)
+		    {
+		        clearInterval(this.intervalId);
+		        this.intervalId = null;
+		    }
+		}
 	    
 	    return this.reset();
 	},
@@ -221,38 +301,19 @@ Revolver = new Class({
 	    return this;
 	},
 
-	restart: function()
+	restart: function(options)
 	{
-	    return this.stop().play();
+	    return this.fireEvent('restart').stop().play(options);
 	},
 
-	first: function()
+	first: function(options)
 	{
-	    return this.goTo(0);
+	    return this.goTo(0, options);
 	},
 
-	previous: function()
+	previous: function(options)
 	{
-		var currentDirection = this.options.transition.direction,
-			newDirection;
-
-		switch(currentDirection)
-        {
-            case 'up':
-                newDirection = 'down';
-                break;
-            case 'right':
-                newDirection = 'left';
-                break;
-            case 'down':
-                newDirection = 'up';
-                break;
-            case 'left':
-                newDirection = 'right';
-                break;
-        }
-
-	    return this.goTo(this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1, {direction: newDirection});
+		return this.goTo(this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1, options);
 	},
 
 	goTo: function(i, options)
@@ -269,30 +330,25 @@ Revolver = new Class({
 	    return this.status.playing ? this.pause().play(options) : this.transition(options);
 	},
 
-	next: function()
+	next: function(options)
 	{
-	    return this.goTo(this.nextSlide);
+	    return this.goTo(this.nextSlide, options);
 	},
 
-	last: function()
+	last: function(options)
 	{
-	    return this.goTo(this.lastSlide);
+	    return this.goTo(this.lastSlide, options);
 	}
 });
 
 RevolverSlide = new Class({
 
 	container: null, 	// key for current slide
-	size: null, 		// dimensions for this slide
 
 	// constructor
-    initialize: function(container, Revolver)
+    initialize: function(container)
     {
 	    this.container 	= container;
-	    this.size 		= Revolver.dimensions;
-
-	    // set morph defaults
-	    this.container.set('morph', { duration: Revolver.options.transition.speed });
 
 	    return this;
     },
@@ -307,94 +363,6 @@ RevolverSlide = new Class({
     hide: function(options)
     {
     	this.container.setStyles({display: 'none'});
-
-    	return this;
-    },
-
-    fadeIn: function(options)
-    {
-    	var fadeIn = new Fx.Morph(this.container, {
-		    duration: options.speed,
-		    transition: options.easing
-		});
-
-		this.show().container.setStyle('opacity', 0);
-    	fadeIn.start({opacity: 1});
-    },
-
-    fadeOut: function(options)
-    {
-    	var fadeOut = new Fx.Morph(this.container, {
-		    duration: options.speed,
-		    transition: options.easing
-		});
-
-		this.show().container.setStyle('opacity', 1);
-    	fadeOut.start({opacity: 0});
-    },
-
-    slideIn: function(options)
-    {
-    	var self = this,
-    		slideIn = new Fx.Morph(this.container, {
-			    duration: options.speed,
-			    transition: options.easing,
-			    onComplete: function(){ }
-			}),
-    		resetPosition = {top: 0, left: 0};
-
-    	this.show();
-
-    	if (options.direction == "up")
-    	{
-    		this.container.setStyle('top', this.size.y);
-    	}
-    	else if (options.direction == "right")
-    	{
-    		this.container.setStyle('left', 0 - this.size.x);
-    	}
-    	else if (options.direction == "down")
-    	{
-    		this.container.setStyle('top', 0 - this.size.y);
-    	}
-    	else if (options.direction == "left")
-    	{
-    		this.container.setStyle('left', this.size.x);
-    	}
-
-    	slideIn.start(resetPosition);
-
-    	return this;
-    },
-
-    slideOut: function(options)
-    {
-    	var self = this,
-    		slideOut = new Fx.Tween(this.container, {
-			    duration: options.speed,
-			    transition: options.easing,
-			    onComplete: function(){ self.hide() }
-			});
-
-		// reset position
-		this.container.setStyles({top: 0, left: 0});
-
-    	if (options.direction == "up")
-    	{
-    		slideOut.start('top', 0 - this.size.y);
-    	}
-    	else if (options.direction == "right")
-    	{
-    		slideOut.start('left', this.size.x);
-    	}
-    	else if (options.direction == "down")
-    	{
-    		slideOut.start('top', this.size.y);
-    	}
-    	else if (options.direction == "left")
-    	{
-    		slideOut.start('left', 0 - this.size.x);
-    	}
 
     	return this;
     }
