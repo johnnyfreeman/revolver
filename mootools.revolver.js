@@ -160,7 +160,6 @@ Revolver = new Class({
 	    // fade in and out
 	    fade: function(options)
 	    {
-        
 	    	var currentSlide = this.slides[this.currentSlide],
 	    		nextSlide = this.slides[this.nextSlide],
 	    		fadeOut = new Fx.Tween(currentSlide.container, {
