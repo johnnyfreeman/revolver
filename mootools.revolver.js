@@ -128,14 +128,14 @@ Revolver = new Class({
     
     transition: function(options)
 	{
-		// merge options with the defaults
-		var options = Object.merge( Object.clone(this.options.transition), options );
+		var options 		= Object.merge( Object.clone(this.options.transition), options ),
+			doTransitions 	= this.transitions[options.type].bind(this);
 
 	    // fire onTransition event
 	    this.fireEvent('transitionStart');
 
 	    // do transition, and pass the transition options to it
-	    this.transitions[options.type].bind(this)(options);
+	    doTransitions(options);
 
 	    // update slider position
 	    this.currentSlide   = this.nextSlide;
