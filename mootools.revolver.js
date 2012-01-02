@@ -47,7 +47,7 @@ Revolver = new Class({
 	    transition: {
 	        direction:      'left',   		// which way to slide each slide. used for the 'slide' transition type only.
 	        easing: 		'sine:in:out', 	// default easing method
-	        speed:          600,     		// how long (in milliseconds) the transition should last
+	        speed:          500,     		// how long (in milliseconds) the transition should last
 	        type:           'fade'   		// choose between none, fade, or slide,
 	    },
 	    slideClass:         'slide'   		// this is what revolver will look for to determin what is a slide 
