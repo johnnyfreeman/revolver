@@ -58,18 +58,8 @@
             return;
         };
 
-        // bind custom events to container
-        this.container.bind({
-            'transitionStart.revolver': this.options.transition.onStart,
-            'transitionFinish.revolver': this.options.transition.onFinish,
-            'ready.revolver': this.options.onReady,
-            'play.revolver': this.options.onPlay,
-            'stop.revolver': this.options.onStop,
-            'pause.revolver': this.options.onPause,
-            'restart.revolver': this.options.onRestart
-        });
-
-        this.container.trigger('ready.revolver');
+        // fire onReady event handler
+        $.proxy(this.options.onReady, this);
 
         // begin auto play, if enabled
         if (this.options.autoPlay)
@@ -108,7 +98,7 @@
     Revolver.prototype.slides       = [];     // array of slides
     Revolver.prototype.iteration    = 0;      // keeps track of the number of transitions that have occured
     Revolver.prototype.intervalId   = null;   // id set by setInterval(), used for pause() method
-    Revolver.prototype.state        = null;   // will contain the state of the slider
+    Revolver.prototype.status       = null;   // will contain the state of the slider
     Revolver.prototype.options      = null;   // will contain all options for the slider
     Revolver.prototype.dimensions   = null;   // contains width & height of the slider
 
@@ -135,9 +125,6 @@
         var options         = $.extend(true, {}, this.options.transition, options)
             doTransition    = $.proxy(this.transitions[options.type], this);
 
-        // fire onTransition event
-        this.container.trigger('transitionStart.revolver');
-
         // do transition
         doTransition(options);
 
@@ -145,6 +132,9 @@
         this.currentSlide   = this.nextSlide;
         this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
         this.iteration++;
+
+        // fire onTransition event
+        $.proxy(options.onStart, this);
 
         return this;
     };
@@ -160,7 +150,7 @@
 
             // since this transitions is instantaneous we'll go 
             // ahead and trigger the transitionComplete event
-            this.container.trigger('transitionFinish.revolver');
+            $.proxy(options.onFinish, this);
         },
 
         // fade in and out
@@ -170,10 +160,8 @@
             this.slides.eq(this.nextSlide).fadeIn(
                 options.speed,
                 // after the next slide is finished fading in,
-                    // trigger the onTransitionComplete event
-                $.proxy(function() {
-                    this.container.trigger('transitionFinish.revolver');
-                }, this)
+                // trigger the onTransitionComplete event
+                $.proxy(options.onFinish, this);
             );
         },
 
@@ -229,9 +217,7 @@
                     options.speed,
                     // after the next slide is finished sliding in,
                     // trigger the onTransitionComplete event
-                    $.proxy(function() {
-                        this.container.trigger('transitionFinish.revolver');
-                    }, this)
+                    $.proxy(options.onFinish, this);
                 );
         },
 
@@ -246,9 +232,7 @@
                     options.speed,
                     // after the next slide is finished revealing itself,
                     // trigger the onTransitionComplete event
-                    $.proxy(function() {
-                        this.container.trigger('transitionFinish.revolver');
-                    }, this)
+                    $.proxy(options.onFinish, this);
                 );
 
             return this;
