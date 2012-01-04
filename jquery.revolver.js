@@ -60,8 +60,8 @@
 
         // bind custom events to container
         this.container.bind({
-            'transitionStart.revolver': this.options.onTransitionStart,
-            'transitionComplete.revolver': this.options.onTransitionComplete,
+            'transitionStart.revolver': this.options.transition.onStart,
+            'transitionFinish.revolver': this.options.transition.onFinish,
             'ready.revolver': this.options.onReady,
             'play.revolver': this.options.onPlay,
             'stop.revolver': this.options.onStop,
@@ -160,7 +160,7 @@
 
             // since this transitions is instantaneous we'll go 
             // ahead and trigger the transitionComplete event
-            this.container.trigger('transitionComplete.revolver');
+            this.container.trigger('transitionFinish.revolver');
         },
 
         // fade in and out
@@ -172,7 +172,7 @@
                 // after the next slide is finished fading in,
                     // trigger the onTransitionComplete event
                 $.proxy(function() {
-                    this.container.trigger('transitionComplete.revolver');
+                    this.container.trigger('transitionFinish.revolver');
                 }, this)
             );
         },
@@ -230,7 +230,7 @@
                     // after the next slide is finished sliding in,
                     // trigger the onTransitionComplete event
                     $.proxy(function() {
-                        this.container.trigger('transitionComplete.revolver');
+                        this.container.trigger('transitionFinish.revolver');
                     }, this)
                 );
         },
@@ -247,7 +247,7 @@
                     // after the next slide is finished revealing itself,
                     // trigger the onTransitionComplete event
                     $.proxy(function() {
-                        this.container.trigger('transitionComplete.revolver');
+                        this.container.trigger('transitionFinish.revolver');
                     }, this)
                 );
 
