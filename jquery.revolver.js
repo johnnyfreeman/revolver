@@ -161,7 +161,7 @@
                 options.speed,
                 // after the next slide is finished fading in,
                 // trigger the onTransitionComplete event
-                $.proxy(options.onFinish, this);
+                $.proxy(options.onFinish, this)
             );
         },
 
@@ -217,7 +217,7 @@
                     options.speed,
                     // after the next slide is finished sliding in,
                     // trigger the onTransitionComplete event
-                    $.proxy(options.onFinish, this);
+                    $.proxy(options.onFinish, this)
                 );
         },
 
@@ -232,7 +232,7 @@
                     options.speed,
                     // after the next slide is finished revealing itself,
                     // trigger the onTransitionComplete event
-                    $.proxy(options.onFinish, this);
+                    $.proxy(options.onFinish, this)
                 );
 
             return this;
