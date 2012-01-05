@@ -59,7 +59,7 @@
         };
 
         // fire onReady event handler
-        $.proxy(this.options.onReady, this);
+        $.proxy(this.options.onReady, this)();
 
         // begin auto play, if enabled
         if (this.options.autoPlay)
@@ -244,7 +244,7 @@
         if (!this.status.playing)
         {
             this.changeStatus('playing');
-            this.container.trigger('play.revolver');
+            $.proxy(this.onPlay, this)();
 
             // if this isn't the first run
             // then do transition immediately 
@@ -264,7 +264,7 @@
         if (!this.status.paused)
         {
             this.changeStatus('paused');
-            this.container.trigger('pause.revolver');
+            $.proxy(this.onPause, this)();
 
             if (this.intervalId !== null)
             {
@@ -281,7 +281,7 @@
         if (!this.status.stopped)
         {
             this.changeStatus('stopped');
-            this.container.trigger('stop.revolver');
+            $.proxy(this.onStop, this)();
 
             if (this.intervalId !== null)
             {
@@ -306,7 +306,7 @@
 
     Revolver.prototype.restart = function(options)
     {
-        this.container.trigger('restart.revolver');
+        $.proxy(this.onRestart, this)();
         return this.stop().play(options);
     };
 
