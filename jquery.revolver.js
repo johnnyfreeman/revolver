@@ -134,7 +134,7 @@
         this.iteration++;
 
         // fire onTransition event
-        $.proxy(options.onStart, this);
+        $.proxy(options.onStart, this)();
 
         return this;
     };
