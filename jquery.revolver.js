@@ -244,7 +244,7 @@
         if (!this.status.playing)
         {
             this.changeStatus('playing');
-            $.proxy(this.onPlay, this)();
+            $.proxy(this.options.onPlay, this)();
 
             // if this isn't the first run
             // then do transition immediately 
@@ -264,7 +264,7 @@
         if (!this.status.paused)
         {
             this.changeStatus('paused');
-            $.proxy(this.onPause, this)();
+            $.proxy(this.options.onPause, this)();
 
             if (this.intervalId !== null)
             {
@@ -281,7 +281,7 @@
         if (!this.status.stopped)
         {
             this.changeStatus('stopped');
-            $.proxy(this.onStop, this)();
+            $.proxy(this.options.onStop, this)();
 
             if (this.intervalId !== null)
             {
@@ -306,7 +306,7 @@
 
     Revolver.prototype.restart = function(options)
     {
-        $.proxy(this.onRestart, this)();
+        $.proxy(this.options.onRestart, this)();
         return this.stop().play(options);
     };
 
