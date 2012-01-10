@@ -182,45 +182,46 @@ Revolver = new Class({
 	    {
 		    var currentSlide = this.slides[this.currentSlide],
 	    		nextSlide = this.slides[this.nextSlide],
-	    		slideOut = new Fx.Tween(currentSlide.container, {
+	    		slideOut = new Fx.Morph(currentSlide.container, {
 				    duration: options.speed,
 				    transition: options.easing,
 				    onComplete: function(){ currentSlide.hide() }
 				}),
-				slideIn = new Fx.Tween(nextSlide.container, {
+				slideIn = new Fx.Morph(nextSlide.container, {
 				    duration: options.speed,
 				    transition: options.easing,
 				    onComplete: options.onFinish.bind(this)
-				});
+				}),
+				resetPosition = {top: 0, left: 0};
 			
 			// prepare slides for animation
-			currentSlide.container.setStyles({top: 0, left: 0});
+			currentSlide.container.setStyles(resetPosition);
 	    	nextSlide.show();
 
 	    	// do animation based on the direction
 	    	if (options.direction == "up")
 	    	{
-	    		nextSlide.container.setStyle('top', this.dimensions.y);
-		    	slideIn.start('top', 0);
-	    		slideOut.start('top', 0 - this.dimensions.y);
+	    		nextSlide.container.setStyles({top: this.dimensions.y, left: 0});
+		    	slideIn.start(resetPosition);
+	    		slideOut.start({top: 0 - this.dimensions.y, left: 0});
 	    	}
 	    	else if (options.direction == "right")
 	    	{
 	    		nextSlide.container.setStyle('left', 0 - this.dimensions.x);
-		    	slideIn.start('left', 0);
-	    		slideOut.start('left', this.dimensions.x);
+		    	slideIn.start(resetPosition);
+	    		slideOut.start({top: 0, left: this.dimensions.x});
 	    	}
 	    	else if (options.direction == "down")
 	    	{
 	    		nextSlide.container.setStyle('top', 0 - this.dimensions.y);
-		    	slideIn.start('top', 0);
-	    		slideOut.start('top', this.dimensions.y);
+		    	slideIn.start(resetPosition);
+	    		slideOut.start({top: this.dimensions.y, left: 0});
 	    	}
 	    	else if (options.direction == "left")
 	    	{
 	    		nextSlide.container.setStyle('left', this.dimensions.x);
-		    	slideIn.start('left', 0);
-	    		slideOut.start('left', 0 - this.dimensions.x);
+		    	slideIn.start(resetPosition);
+	    		slideOut.start({top: 0, left: 0 - this.dimensions.x});
 	    	}
 	    },
 

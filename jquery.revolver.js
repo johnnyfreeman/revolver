@@ -161,21 +161,21 @@
             switch(options.direction)
             {
                 case 'up':
-                    currentSlidePosition.top = 0 - this.dimensions.height;
-                    nextSlidePosition.top = this.dimensions.height;
+                    currentSlidePosition = {top: 0 - this.dimensions.height, left: 0};
+                    nextSlidePosition = {top: this.dimensions.height, left: 0};
                     break;
                 case 'right':
-                    currentSlidePosition.left = this.dimensions.width;
-                    nextSlidePosition.left = 0 - this.dimensions.width;
+                    currentSlidePosition = {top: 0, left: this.dimensions.width};
+                    nextSlidePosition = {top: 0, left: 0 - this.dimensions.width};
                     break;
                 case 'down':
-                    currentSlidePosition.top = this.dimensions.height;
-                    nextSlidePosition.top = 0 - this.dimensions.height;
+                    currentSlidePosition = {top: this.dimensions.height, left: 0};
+                    nextSlidePosition = {top: 0 - this.dimensions.height, left: 0};
                     break;
                 case 'left':
                 default:
-                    currentSlidePosition.left = 0 - this.dimensions.width;
-                    nextSlidePosition.left = this.dimensions.width;
+                    currentSlidePosition = {left: 0 - this.dimensions.width, top: 0};
+                    nextSlidePosition = {left: this.dimensions.width, top: 0};
                     break;
             }
 
