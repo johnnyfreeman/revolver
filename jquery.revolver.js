@@ -180,7 +180,7 @@
             }
 
             // slide current out of the container
-            currentSlide.animate(
+            currentSlide.stop(true).animate(
                 currentSlidePosition, 
                 options.speed, 
                 function() {
@@ -192,6 +192,7 @@
             nextSlide
                 .show()
                 .css(nextSlidePosition)
+                .stop(true)
                 .animate(
                     resetPosition, 
                     options.speed,
