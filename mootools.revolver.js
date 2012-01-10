@@ -164,7 +164,8 @@ Revolver = new Class({
 	    // fade in and out
 	    fade: function(options)
 	    {
-	    	var currentSlide = this.slides[this.currentSlide],
+	    	var Revolver = this,
+	    		currentSlide = this.slides[this.currentSlide],
 	    		nextSlide = this.slides[this.nextSlide],
 	    		fadeOut = new Fx.Tween(currentSlide.container, {
 				    duration: options.speed,
@@ -174,8 +175,8 @@ Revolver = new Class({
 				    duration: options.speed,
 				    transition: options.easing,
 				    onComplete: function(){
-					    options.onFinish.bind(this)();
-						this.isAnimating = false;
+					    options.onFinish.bind(Revolver)();
+						Revolver.isAnimating = false;
 					}
 				});
 
@@ -191,7 +192,8 @@ Revolver = new Class({
 	    // slide in and out of the container
 	    slide: function(options)
 	    {
-		    var currentSlide = this.slides[this.currentSlide],
+		    var Revolver = this,
+	    		currentSlide = this.slides[this.currentSlide],
 	    		nextSlide = this.slides[this.nextSlide],
 	    		slideOut = new Fx.Morph(currentSlide.container, {
 				    duration: options.speed,
@@ -202,8 +204,8 @@ Revolver = new Class({
 				    duration: options.speed,
 				    transition: options.easing,
 				    onComplete: function(){
-					    options.onFinish.bind(this)();
-						this.isAnimating = false;
+					    options.onFinish.bind(Revolver)();
+						Revolver.isAnimating = false;
 					}
 				}),
 				resetPosition = {top: 0, left: 0};
@@ -242,13 +244,14 @@ Revolver = new Class({
 	    // reveal
 	    reveal: function(options)
 	    {
-	    	var nextSlide = this.slides[this.nextSlide].container,
+	    	var Revolver = this,
+	    		nextSlide = this.slides[this.nextSlide].container,
 	    		reveal = new Fx.Tween(nextSlide, {
 				    duration: options.speed,
 				    transition: options.easing,
 				    onComplete: function(){
-					    options.onFinish.bind(this)();
-						this.isAnimating = false;
+					    options.onFinish.bind(Revolver)();
+						Revolver.isAnimating = false;
 					}
 				});
 			

@@ -144,14 +144,16 @@
         // fade in and out
         fade: function(options)
         {
+            var Revolver = this;
+                
             this.slides.eq(this.currentSlide).fadeOut(options.speed);
             this.slides.eq(this.nextSlide).fadeIn(
                 options.speed,
                 // after the next slide is finished fading in,
                 // trigger the onTransitionComplete event
                 function(){
-                    $.proxy(options.onFinish, this)();
-                    this.isAnimating = false;
+                    $.proxy(options.onFinish, Revolver)();
+                    Revolver.isAnimating = false;
                 }
             );
         },
@@ -159,7 +161,8 @@
         // slide in and out of the container
         slide: function(options)
         {
-            var currentSlide = this.slides.eq(this.currentSlide),
+            var Revolver = this,
+                currentSlide = this.slides.eq(this.currentSlide),
                 nextSlide = this.slides.eq(this.nextSlide),
                 currentSlidePosition = {}, 
                 nextSlidePosition = {},
@@ -210,8 +213,8 @@
                     // after the next slide is finished sliding in,
                     // trigger the onTransitionComplete event
                     function(){
-                        $.proxy(options.onFinish, this)();
-                        this.isAnimating = false;
+                        $.proxy(options.onFinish, Revolver)();
+                        Revolver.isAnimating = false;
                     }
                 );
         },
@@ -219,6 +222,8 @@
         // reveal
         reveal: function(options)
         {
+            var Revolver = this;
+
             this.slides.eq(this.nextSlide)
                 .css({width: 0, height: this.dimensions.height, 'z-index': this.iteration+1})
                 .show()
@@ -228,8 +233,8 @@
                     // after the next slide is finished revealing itself,
                     // trigger the onTransitionComplete event
                     function(){
-                        $.proxy(options.onFinish, this)();
-                        this.isAnimating = false;
+                        $.proxy(options.onFinish, Revolver)();
+                        Revolver.isAnimating = false;
                     }
                 );
 
