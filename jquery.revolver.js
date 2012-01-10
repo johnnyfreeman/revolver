@@ -52,6 +52,7 @@
         this.nextSlide      = this.numSlides > 1 ? 1 : 0;
         this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
         this.status         = { paused: false, playing: false, stopped: true };
+        this.isAnimating    = false;
 
         // Don't run if there's only one slide
         if (this.numSlides <= 1) {
@@ -81,6 +82,7 @@
     Revolver.prototype.status       = null;   // will contain the state of the slider
     Revolver.prototype.options      = null;   // will contain all options for the slider
     Revolver.prototype.dimensions   = null;   // contains width & height of the slider
+    Revolver.prototype.isAnimating  = null;   // whethor revolver is currently in transition
 
     Revolver.prototype.addSlide = function(slide)
     {
@@ -102,19 +104,24 @@
     // do transition
     Revolver.prototype.transition = function(options)
     {
-        var options         = $.extend(true, {}, this.options.transition, options)
-            doTransition    = $.proxy(this.transitions[options.type], this);
+        if (this.isAnimating === false)
+        {
+            var options         = $.extend(true, {}, this.options.transition, options)
+                doTransition    = $.proxy(this.transitions[options.type], this);
 
-        // do transition
-        doTransition(options);
+            this.isAnimating = true;
 
-        // update slider position
-        this.currentSlide   = this.nextSlide;
-        this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
-        this.iteration++;
+            // do transition
+            doTransition(options);
 
-        // fire onTransition event
-        $.proxy(options.onStart, this)();
+            // update slider position
+            this.currentSlide   = this.nextSlide;
+            this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
+            this.iteration++;
+
+            // fire onTransition event
+            $.proxy(options.onStart, this)();
+        };
 
         return this;
     };
@@ -131,6 +138,7 @@
             // since this transitions is instantaneous we'll go 
             // ahead and trigger the transitionComplete event
             $.proxy(options.onFinish, this);
+            this.isAnimating = false;
         },
 
         // fade in and out
@@ -141,7 +149,10 @@
                 options.speed,
                 // after the next slide is finished fading in,
                 // trigger the onTransitionComplete event
-                $.proxy(options.onFinish, this)
+                function(){
+                    $.proxy(options.onFinish, this)();
+                    this.isAnimating = false;
+                }
             );
         },
 
@@ -198,7 +209,10 @@
                     options.speed,
                     // after the next slide is finished sliding in,
                     // trigger the onTransitionComplete event
-                    $.proxy(options.onFinish, this)
+                    function(){
+                        $.proxy(options.onFinish, this)();
+                        this.isAnimating = false;
+                    }
                 );
         },
 
@@ -213,7 +227,10 @@
                     options.speed,
                     // after the next slide is finished revealing itself,
                     // trigger the onTransitionComplete event
-                    $.proxy(options.onFinish, this)
+                    function(){
+                        $.proxy(options.onFinish, this)();
+                        this.isAnimating = false;
+                    }
                 );
 
             return this;

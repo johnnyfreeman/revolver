@@ -69,6 +69,7 @@ Revolver = new Class({
 	state: null,   			// will contain the state of the slider
 	options: null,   		// will contain all options for the slider
 	dimensions: null,   	// contains width & height of the slider
+    isAnimating: null,      // whethor revolver is currently in transition
 
 	// constructor
     initialize: function(container, options)
@@ -88,6 +89,7 @@ Revolver = new Class({
 	    this.nextSlide      = this.numSlides > 1 ? 1 : 0;
 	    this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
 	    this.status         = { paused: false, playing: false, stopped: true };
+        this.isAnimating    = false;
 
 	    // Don't run if there's only one slide
 	    if (this.numSlides <= 1) {
@@ -124,19 +126,24 @@ Revolver = new Class({
     
     transition: function(options)
 	{
-		var options 		= Object.merge( Object.clone(this.options.transition), options ),
-			doTransitions 	= this.transitions[options.type].bind(this);
+		if (this.isAnimating === false)
+		{
+			var options 		= Object.merge( Object.clone(this.options.transition), options ),
+				doTransitions 	= this.transitions[options.type].bind(this);
 
-	    // do transition, and pass the transition options to it
-	    doTransitions(options);
+			this.isAnimating = true;
 
-	    // update slider position
-	    this.currentSlide   = this.nextSlide;
-	    this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
-	    this.iteration++;
+		    // do transition, and pass the transition options to it
+		    doTransitions(options);
 
-	    // fire transition.onStart event
-	    options.onStart.bind(this)();
+		    // update slider position
+		    this.currentSlide   = this.nextSlide;
+		    this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
+		    this.iteration++;
+
+		    // fire transition.onStart event
+		    options.onStart.bind(this)();
+		};
 
 	    return this;
 	},
@@ -151,6 +158,7 @@ Revolver = new Class({
 
 		    // fire transition.onFinish event
 		    options.onFinish.bind(this)();
+			this.isAnimating = false;
 	    },
 
 	    // fade in and out
@@ -165,7 +173,10 @@ Revolver = new Class({
 				fadeIn = new Fx.Tween(nextlide.container, {
 				    duration: options.speed,
 				    transition: options.easing,
-				    onComplete: options.onFinish.bind(this)
+				    onComplete: function(){
+					    options.onFinish.bind(this)();
+						this.isAnimating = false;
+					}
 				});
 
 	    	// fade out current slide
@@ -190,7 +201,10 @@ Revolver = new Class({
 				slideIn = new Fx.Morph(nextSlide.container, {
 				    duration: options.speed,
 				    transition: options.easing,
-				    onComplete: options.onFinish.bind(this)
+				    onComplete: function(){
+					    options.onFinish.bind(this)();
+						this.isAnimating = false;
+					}
 				}),
 				resetPosition = {top: 0, left: 0};
 			
@@ -232,7 +246,10 @@ Revolver = new Class({
 	    		reveal = new Fx.Tween(nextSlide, {
 				    duration: options.speed,
 				    transition: options.easing,
-				    onComplete: options.onFinish.bind(this)
+				    onComplete: function(){
+					    options.onFinish.bind(this)();
+						this.isAnimating = false;
+					}
 				});
 			
 	        // make sure next slide is on top of current slide
