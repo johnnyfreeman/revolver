@@ -50,7 +50,7 @@ Revolver = new Class({
         slideClass:         'slide',        // this is what revolver will look for to determin what is a slide
         transition: {
             direction:      'left',         // which way to slide each slide. used for the 'slide' transition type only.
-            easing:         'swing',        // default easing method
+            easing:         'sine:in:out',  // default easing method
             onStart:        function(){},   // gets called when the transition animation begins
             onFinish:       function(){},   // gets called when the animation is done
             speed:          500,            // how long (in milliseconds) the transition should last
@@ -171,7 +171,7 @@ Revolver = new Class({
 				    duration: options.speed,
 				    transition: options.easing
 				}),
-				fadeIn = new Fx.Tween(nextlide.container, {
+				fadeIn = new Fx.Tween(nextSlide.container, {
 				    duration: options.speed,
 				    transition: options.easing,
 				    onComplete: function(){
