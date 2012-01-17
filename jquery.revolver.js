@@ -46,7 +46,7 @@ var Revolver;
         this.options = $.extend(true, {}, this.defaults, options);
 
         // setup revolver
-        this.container      = $(container);
+        this.container      = container;
         this.dimensions     = { height: this.container.height(), width: this.container.width() };
         this.slides         = this.container.find('.'+this.options.slideClass).each( $.proxy(function(){ this.addSlide(this) }, this) );
         this.numSlides      = this.slides.length;
@@ -377,7 +377,7 @@ var Revolver;
             // store the revolver object using jquery's data method
             if (!$.data(this, 'revolver'))
             {
-                $.data(this, 'revolver', new Revolver(this, options));
+                $.data(this, 'revolver', new Revolver($(this), options));
             }
         });
     };
