@@ -403,7 +403,7 @@ var Revolver;
 	Elements.implement({
 	    revolver: function(options){
 	        return this.each(function(element){
-	            return new Revolver(element, options);
+	        	return element.revolver(options);
 	        });
 	    }
 	});
@@ -411,7 +411,11 @@ var Revolver;
 
 	Element.implement({
 	    revolver: function(options){
-	        return new Revolver(this, options);
+	    	if (this.retrieve('revolver') === null)
+	    	{
+	    		this.store('revolver', new Revolver(this, options));
+	    	}
+	    	return this;
 	    }
 	});
 	
