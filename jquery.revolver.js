@@ -17,7 +17,7 @@
  * boilerplate or framework for making your own slider, exactly the way you want it. But don't let that 
  * scare you, it's really easy, I promise!
  * 
- * Documentation:   http://johnnyfreeman.github.com/revolver
+ * Documentation:   http://revolverjs.com
  * Support:         https://github.com/johnnyfreeman/revolver/issues
  * Bug Fixes:       https://github.com/johnnyfreeman/revolver/pulls
  * Author:          Johnny Freeman (http://johnnyfreeman.us)
