@@ -43,7 +43,7 @@ var Revolver;
     Revolver = function(container, options)
     {
         // merge new options (recursively) with defaults
-        this.options = $.extend(true, {}, $.fn.revolver.defaults, options);
+        this.options = $.extend(true, {}, this.defaults, options);
 
         // setup revolver
         this.container      = $(container);
@@ -72,6 +72,26 @@ var Revolver;
 
         return this;
     }
+    
+    // default options
+    Revolver.prototype.defaults = {
+        autoPlay:           true,           // whether or not to automatically begin playing the slides
+        onReady:            function(){},   // gets called when revolver is setup and ready to go
+        onPlay:             function(){},   // gets called when the play() method is called
+        onStop:             function(){},   // gets called when the stop() method is called
+        onPause:            function(){},   // gets called when the pause() method is called
+        onRestart:          function(){},   // gets called when the restart() method is called
+        rotationSpeed:      4000,           // how long (in milliseconds) to stay on each slide before going to the next
+        slideClass:         'slide',        // this is what revolver will look for to determin what is a slide
+        transition: {
+            direction:      'left',         // which way to slide each slide. used for the 'slide' transition type only.
+            easing:         'swing',        // default easing method
+            onStart:        function(){},   // gets called when the transition animation begins
+            onFinish:       function(){},   // gets called when the animation is done
+            speed:          500,            // how long (in milliseconds) the transition should last
+            type:           'fade'          // choose between none, fade, or slide
+        }
+    };
 
     Revolver.prototype.currentSlide = null;   // key for current slide
     Revolver.prototype.nextSlide    = null;   // key for next slide
@@ -360,26 +380,6 @@ var Revolver;
                 $.data(this, 'revolver', new Revolver(this, options));
             }
         });
-    };
-    
-    // default options
-    $.fn.revolver.defaults = {
-        autoPlay:           true,           // whether or not to automatically begin playing the slides
-        onReady:            function(){},   // gets called when revolver is setup and ready to go
-        onPlay:             function(){},   // gets called when the play() method is called
-        onStop:             function(){},   // gets called when the stop() method is called
-        onPause:            function(){},   // gets called when the pause() method is called
-        onRestart:          function(){},   // gets called when the restart() method is called
-        rotationSpeed:      4000,           // how long (in milliseconds) to stay on each slide before going to the next
-        slideClass:         'slide',        // this is what revolver will look for to determin what is a slide
-        transition: {
-            direction:      'left',         // which way to slide each slide. used for the 'slide' transition type only.
-            easing:         'swing',        // default easing method
-            onStart:        function(){},   // gets called when the transition animation begins
-            onFinish:       function(){},   // gets called when the animation is done
-            speed:          500,            // how long (in milliseconds) the transition should last
-            type:           'fade'          // choose between none, fade, or slide
-        }
     };
 
 })(jQuery);
