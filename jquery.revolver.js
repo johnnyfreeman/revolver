@@ -359,9 +359,9 @@
             }
         });
     };
-	
-	// default options
-	$.fn.revolver.defaults = {
+    
+    // default options
+    $.fn.revolver.defaults = {
         autoPlay:           true,           // whether or not to automatically begin playing the slides
         onReady:            function(){},   // gets called when revolver is setup and ready to go
         onPlay:             function(){},   // gets called when the play() method is called
@@ -378,6 +378,6 @@
             speed:          500,            // how long (in milliseconds) the transition should last
             type:           'fade'          // choose between none, fade, or slide
         }
-	};
+    };
 
 })(jQuery);
