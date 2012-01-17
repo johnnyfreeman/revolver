@@ -34,11 +34,13 @@
  * http://www.opensource.org/licenses/mit-license.php
  * 
  */
+
+var Revolver;
  
 ;(function ($) {
 
     // constructor
-    var Revolver = function(container, options)
+    Revolver = function(container, options)
     {
         // merge new options (recursively) with defaults
         this.options = $.extend(true, {}, $.fn.revolver.defaults, options);
