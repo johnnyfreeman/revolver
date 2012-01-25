@@ -35,7 +35,9 @@
  * 
  */
 
-;(function($){
+;(function($) {
+
+    "use strict";
 
     var RevolverSlide;
 
@@ -85,19 +87,23 @@
             // get container and it's slides
             this.container      = container;
             this.dimensions     = this.container.getSize();
-            this.container.getChildren('.' + this.options.slideClass).each(function(slide){ this.addSlide(slide)}.bind(this) );
+
+            this.container.getChildren('.' + this.options.slideClass).each(function(slide)
+            {
+                this.addSlide(slide);
+            }.bind(this));
 
             this.numSlides      = this.slides.length;
             this.currentSlide   = 0;
             this.nextSlide      = this.numSlides > 1 ? 1 : 0;
-            this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
+            this.lastSlide      = this.numSlides === 0 ? null : this.numSlides - 1;
             this.status         = { paused: false, playing: false, stopped: true };
             this.isAnimating    = false;
 
             // Don't run if there's only one slide
             if (this.numSlides <= 1) {
                 return;
-            };
+            }
 
             // fire onReady event
             this.options.onReady.bind(this)();
@@ -121,7 +127,7 @@
             // set all status' as false
             Object.each(this.status, function(val, key)
             {
-                this.status[key] = key == newStatus;
+                this.status[key] = key === newStatus;
             }, this);
 
             return this;
@@ -131,22 +137,21 @@
         {
             if (this.isAnimating === false)
             {
-                var options         = Object.merge( Object.clone(this.options.transition), options ),
-                    doTransitions   = this.transitions[options.type].bind(this);
-
-                this.isAnimating = true;
+                options             = Object.merge( Object.clone(this.options.transition), options );
+                var doTransitions   = this.transitions[options.type].bind(this);
+                this.isAnimating    = true;
 
                 // do transition, and pass the transition options to it
                 doTransitions(options);
 
                 // update slider position
                 this.currentSlide   = this.nextSlide;
-                this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
+                this.nextSlide      = this.currentSlide === this.lastSlide ? 0 : this.currentSlide + 1;
                 this.iteration++;
 
                 // fire transition.onStart event
                 options.onStart.bind(this)();
-            };
+            }
 
             return this;
         },
@@ -201,7 +206,7 @@
                     slideOut = new Fx.Morph(currentSlide.container, {
                         duration: options.speed,
                         transition: options.easing,
-                        onComplete: function(){ currentSlide.hide() }
+                        onComplete: function(){ currentSlide.hide(); }
                     }),
                     slideIn = new Fx.Morph(nextSlide.container, {
                         duration: options.speed,
@@ -218,25 +223,25 @@
                 nextSlide.show();
 
                 // do animation based on the direction
-                if (options.direction == "up")
+                if (options.direction === "up")
                 {
                     nextSlide.container.setStyles({top: this.dimensions.y, left: 0});
                     slideIn.start(resetPosition);
                     slideOut.start({top: 0 - this.dimensions.y, left: 0});
                 }
-                else if (options.direction == "right")
+                else if (options.direction === "right")
                 {
                     nextSlide.container.setStyle('left', 0 - this.dimensions.x);
                     slideIn.start(resetPosition);
                     slideOut.start({top: 0, left: this.dimensions.x});
                 }
-                else if (options.direction == "down")
+                else if (options.direction === "down")
                 {
                     nextSlide.container.setStyle('top', 0 - this.dimensions.y);
                     slideIn.start(resetPosition);
                     slideOut.start({top: this.dimensions.y, left: 0});
                 }
-                else if (options.direction == "left")
+                else if (options.direction === "left")
                 {
                     nextSlide.container.setStyle('left', this.dimensions.x);
                     slideIn.start(resetPosition);
@@ -321,7 +326,7 @@
         reset: function()
         {
             // reset only if not already on the first slide
-            if (this.currentSlide != 0)
+            if (this.currentSlide !== 0)
             {
                 this.nextSlide = 0;
             }
@@ -349,7 +354,7 @@
         {
             // bail out if already 
             // on the intended slide
-            if (i == this.currentSlide)
+            if (i === this.currentSlide)
             {
                 return this;
             }

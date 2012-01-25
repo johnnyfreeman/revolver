@@ -37,6 +37,8 @@
  
 ;(function ($) {
 
+    "use strict";
+
     // constructor
     window.Revolver = function(container, options)
     {
@@ -46,18 +48,18 @@
         // setup revolver
         this.container      = container;
         this.dimensions     = { height: this.container.height(), width: this.container.width() };
-        this.slides         = this.container.find('.'+this.options.slideClass).each( $.proxy(function(){ this.addSlide(this) }, this) );
+        this.slides         = this.container.find('.'+this.options.slideClass).each( $.proxy(function(){ this.addSlide(this); }, this) );
         this.numSlides      = this.slides.length;
         this.currentSlide   = 0;
         this.nextSlide      = this.numSlides > 1 ? 1 : 0;
-        this.lastSlide      = this.numSlides == 0 ? null : this.numSlides - 1;
+        this.lastSlide      = this.numSlides === 0 ? null : this.numSlides - 1;
         this.status         = { paused: false, playing: false, stopped: true };
         this.isAnimating    = false;
 
         // Don't run if there's only one slide
         if (this.numSlides <= 1) {
             return;
-        };
+        }
 
         // fire onReady event handler
         $.proxy(this.options.onReady, this)();
@@ -69,7 +71,7 @@
         }
 
         return this;
-    }
+    };
     
     // default options
     Revolver.prototype.defaults = {
@@ -116,7 +118,7 @@
         var Revolver = this;
         $.each(this.status, function(key, val)
         {
-            Revolver.status[key] = key == newStatus;
+            Revolver.status[key] = key === newStatus;
         });
 
         return this;
@@ -127,22 +129,21 @@
     {
         if (this.isAnimating === false)
         {
-            var options         = $.extend(true, {}, this.options.transition, options)
-                doTransition    = $.proxy(this.transitions[options.type], this);
-
-            this.isAnimating = true;
+            options             = $.extend(true, {}, this.options.transition, options);
+            var doTransition    = $.proxy(this.transitions[options.type], this);
+            this.isAnimating    = true;
 
             // do transition
             doTransition(options);
 
             // update slider position
             this.currentSlide   = this.nextSlide;
-            this.nextSlide      = this.currentSlide == this.lastSlide ? 0 : this.currentSlide + 1;
+            this.nextSlide      = this.currentSlide === this.lastSlide ? 0 : this.currentSlide + 1;
             this.iteration++;
 
             // fire onTransition event
             $.proxy(options.onStart, this)();
-        };
+        }
 
         return this;
     };
@@ -193,25 +194,25 @@
             this.slides.eq(this.nextSlide).css('z-index', this.iteration + 1);
 
             // build animation object based on the transition direction
-            switch(options.direction)
+            if (options.direction === "up")
             {
-                case 'up':
-                    currentSlidePosition = {top: 0 - this.dimensions.height, left: 0};
-                    nextSlidePosition = {top: this.dimensions.height, left: 0};
-                    break;
-                case 'right':
-                    currentSlidePosition = {top: 0, left: this.dimensions.width};
-                    nextSlidePosition = {top: 0, left: 0 - this.dimensions.width};
-                    break;
-                case 'down':
-                    currentSlidePosition = {top: this.dimensions.height, left: 0};
-                    nextSlidePosition = {top: 0 - this.dimensions.height, left: 0};
-                    break;
-                case 'left':
-                default:
-                    currentSlidePosition = {left: 0 - this.dimensions.width, top: 0};
-                    nextSlidePosition = {left: this.dimensions.width, top: 0};
-                    break;
+                currentSlidePosition = {top: 0 - this.dimensions.height, left: 0};
+                nextSlidePosition = {top: this.dimensions.height, left: 0};
+            }
+            else if (options.direction === "right")
+            {
+                currentSlidePosition = {top: 0, left: this.dimensions.width};
+                nextSlidePosition = {top: 0, left: 0 - this.dimensions.width};
+            }
+            else if (options.direction === "down")
+            {
+                currentSlidePosition = {top: this.dimensions.height, left: 0};
+                nextSlidePosition = {top: 0 - this.dimensions.height, left: 0};
+            }
+            else if (options.direction === "left")
+            {
+                currentSlidePosition = {left: 0 - this.dimensions.width, top: 0};
+                nextSlidePosition = {left: this.dimensions.width, top: 0};
             }
 
             // slide current out of the container
@@ -219,7 +220,7 @@
                 currentSlidePosition, 
                 options.speed, 
                 function() {
-                    $(this).hide()
+                    $(this).hide();
                 }
             );
 
@@ -294,8 +295,8 @@
             {
                 clearInterval(this.intervalId);
                 this.intervalId = null;
-            }; 
-        };
+            }
+        }
 
         return this;
     };
@@ -311,8 +312,8 @@
             {
                 clearInterval(this.intervalId);
                 this.intervalId = null;
-            };
-        };
+            }
+        }
         
         return this.reset();
     };
@@ -320,7 +321,7 @@
     Revolver.prototype.reset = function()
     {
         // reset only if not already on the first slide
-        if (this.currentSlide != 0)
+        if (this.currentSlide !== 0)
         {
             this.nextSlide = 0;
         }
@@ -348,7 +349,7 @@
     {
         // bail out if already 
         // on the intended slide
-        if (i == this.currentSlide)
+        if (i === this.currentSlide)
         {
             return this;
         }
