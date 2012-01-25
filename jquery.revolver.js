@@ -34,13 +34,11 @@
  * http://www.opensource.org/licenses/mit-license.php
  * 
  */
-
-var Revolver;
  
 ;(function ($) {
 
     // constructor
-    Revolver = function(container, options)
+    window.Revolver = function(container, options)
     {
         // merge new options (recursively) with defaults
         this.options = $.extend(true, {}, this.defaults, options);
@@ -93,18 +91,19 @@ var Revolver;
         }
     };
 
-    Revolver.prototype.currentSlide = null;   // key for current slide
-    Revolver.prototype.nextSlide    = null;   // key for next slide
-    Revolver.prototype.numSlides    = 0;      // total number of slides
-    Revolver.prototype.lastSlide    = null;   // key for last slide
-    Revolver.prototype.container    = null;   // the wrapper element for all images
-    Revolver.prototype.slides       = [];     // array of slides
-    Revolver.prototype.iteration    = 0;      // keeps track of the number of transitions that have occured
-    Revolver.prototype.intervalId   = null;   // id set by setInterval(), used for pause() method
-    Revolver.prototype.status       = null;   // will contain the state of the slider
-    Revolver.prototype.options      = null;   // will contain all options for the slider
-    Revolver.prototype.dimensions   = null;   // contains width & height of the slider
-    Revolver.prototype.isAnimating  = null;   // whethor revolver is currently in transition
+    Revolver.prototype.currentSlide = null;     // key for current slide
+    Revolver.prototype.nextSlide    = null;     // key for next slide
+    Revolver.prototype.numSlides    = 0;        // total number of slides
+    Revolver.prototype.lastSlide    = null;     // key for last slide
+    Revolver.prototype.container    = null;     // the wrapper element for all images
+    Revolver.prototype.slides       = [];       // array of slides
+    Revolver.prototype.iteration    = 0;        // keeps track of the number of transitions that have occured
+    Revolver.prototype.intervalId   = null;     // id set by setInterval(), used for pause() method
+    Revolver.prototype.status       = null;     // will contain the state of the slider
+    Revolver.prototype.options      = null;     // will contain all options for the slider
+    Revolver.prototype.dimensions   = null;     // contains width & height of the slider
+    Revolver.prototype.isAnimating  = null;     // whethor revolver is currently in transition
+    Revolver.prototype.VERSION      = '1.0.3';  // version info
 
     Revolver.prototype.addSlide = function(slide)
     {

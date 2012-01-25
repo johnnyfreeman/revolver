@@ -35,13 +35,11 @@
  * 
  */
 
-var Revolver;
-
-(function($){
+;(function($){
 
     var RevolverSlide;
 
-    Revolver = new Class({
+    window.Revolver = new Class({
 
         defaults: {
             autoPlay:           true,           // whether or not to automatically begin playing the slides
@@ -74,6 +72,7 @@ var Revolver;
         options: null,          // will contain all options for the slider
         dimensions: null,       // contains width & height of the slider
         isAnimating: null,      // whethor revolver is currently in transition
+        VERSION: '1.0.3';       // version info
 
         // constructor
         initialize: function(container, options)
