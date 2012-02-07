@@ -62,6 +62,7 @@
             }
         },
 
+        previousSlide: null,    // key for previous slide
         currentSlide: null,     // key for current slide
         nextSlide: null,        // key for next slide
         numSlides: 0,           // total number of slides
@@ -84,7 +85,6 @@
             // this.setOptions(options);
             this.options = Object.merge(this.defaults, options);
             
-            // get container and it's slides
             this.container      = container;
             this.dimensions     = this.container.getSize();
 
@@ -93,10 +93,9 @@
                 this.addSlide(slide);
             }.bind(this));
 
-            this.numSlides      = this.slides.length;
+            this.previousSlide  = this.lastSlide;
             this.currentSlide   = 0;
             this.nextSlide      = this.numSlides > 1 ? 1 : 0;
-            this.lastSlide      = this.numSlides === 0 ? null : this.numSlides - 1;
             this.status         = { paused: false, playing: false, stopped: true };
             this.isAnimating    = false;
 
@@ -120,6 +119,9 @@
         addSlide: function(slide)
         {
             this.slides.push( new RevolverSlide(slide) );
+
+            this.numSlides      = this.slides.length;
+            this.lastSlide      = this.numSlides === 0 ? null : this.numSlides - 1;
         },
 
         changeStatus: function(newStatus)
@@ -145,6 +147,7 @@
                 doTransitions(options);
 
                 // update slider position
+                this.previousSlide  = this.currentSlide;
                 this.currentSlide   = this.nextSlide;
                 this.nextSlide      = this.currentSlide === this.lastSlide ? 0 : this.currentSlide + 1;
                 this.iteration++;
