@@ -199,8 +199,8 @@
             // build animation object based on the transition direction
             if (options.direction === "up")
             {
-                currentSlidePosition = {top: 0 - this.dimensions.height, left: 0};
-                nextSlidePosition = {top: this.dimensions.height, left: 0};
+                currentSlidePosition = {top: this.dimensions.height, left: 0};
+                nextSlidePosition = {top: 0 - this.dimensions.height, left: 0};
             }
             else if (options.direction === "right")
             {
@@ -209,8 +209,8 @@
             }
             else if (options.direction === "down")
             {
-                currentSlidePosition = {top: this.dimensions.height, left: 0};
-                nextSlidePosition = {top: 0 - this.dimensions.height, left: 0};
+                currentSlidePosition = {top: 0 - this.dimensions.height, left: 0};
+                nextSlidePosition = {top: this.dimensions.height, left: 0};
             }
             else if (options.direction === "left")
             {

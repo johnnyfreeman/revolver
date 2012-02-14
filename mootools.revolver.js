@@ -228,9 +228,9 @@
                 // do animation based on the direction
                 if (options.direction === "up")
                 {
-                    nextSlide.container.setStyles({top: this.dimensions.y, left: 0});
+                    nextSlide.container.setStyle('top', 0 - this.dimensions.y);
                     slideIn.start(resetPosition);
-                    slideOut.start({top: 0 - this.dimensions.y, left: 0});
+                    slideOut.start({top: this.dimensions.y, left: 0});
                 }
                 else if (options.direction === "right")
                 {
@@ -240,9 +240,9 @@
                 }
                 else if (options.direction === "down")
                 {
-                    nextSlide.container.setStyle('top', 0 - this.dimensions.y);
+                    nextSlide.container.setStyles({top: this.dimensions.y, left: 0});
                     slideIn.start(resetPosition);
-                    slideOut.start({top: this.dimensions.y, left: 0});
+                    slideOut.start({top: 0 - this.dimensions.y, left: 0});
                 }
                 else if (options.direction === "left")
                 {
