@@ -345,7 +345,7 @@
 
     Revolver.prototype.previous = function(options)
     {
-        return this.goTo(this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1, options);
+        return this.goTo(this.previousSlide === 0 ? this.lastSlide : this.currentSlide - 1, options);
     };
 
     Revolver.prototype.goTo = function(i, options)

@@ -39,9 +39,9 @@
 
     "use strict";
 
-    var RevolverSlide;
+    var Revolver, RevolverSlide;
 
-    window.Revolver = new Class({
+    Revolver = new Class({
 
         defaults: {
             autoPlay:           true,           // whether or not to automatically begin playing the slides
@@ -378,6 +378,9 @@
         }
     });
 
+    // make Revolver globally available
+    window.Revolver = Revolver;
+
 
     RevolverSlide = new Class({
 
@@ -414,7 +417,7 @@
             });
         }
     });
-
+    
 
     Element.implement({
         revolver: function(options){
