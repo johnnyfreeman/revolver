@@ -350,12 +350,12 @@
 
         previous: function(options)
         {
-            return this.goTo(this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1, options);
+            return this.goTo(this.previousSlide, options);
         },
 
         goTo: function(i, options)
         {
-            // bail out if already 
+            // bail out if already
             // on the intended slide
             if (i === this.currentSlide)
             {
@@ -417,7 +417,7 @@
             });
         }
     });
-    
+
 
     Element.implement({
         revolver: function(options){
