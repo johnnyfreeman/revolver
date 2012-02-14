@@ -163,7 +163,7 @@
             this.slides.eq(this.currentSlide).hide();
             this.slides.eq(this.nextSlide).show();
 
-            // since this transitions is instantaneous we'll go 
+            // since this transitions is instantaneous we'll go
             // ahead and trigger the transitionComplete event
             $.proxy(options.onFinish, this);
             this.isAnimating = false;
@@ -192,7 +192,7 @@
             var Revolver = this,
                 currentSlide = this.slides.eq(this.currentSlide),
                 nextSlide = this.slides.eq(this.nextSlide),
-                currentSlidePosition = {}, 
+                currentSlidePosition = {},
                 nextSlidePosition = {},
                 resetPosition = {top: 0, left: 0};
 
@@ -223,7 +223,7 @@
 
             // slide current out of the container
             currentSlide.stop(true).animate(
-                currentSlidePosition, 
+                currentSlidePosition,
                 options.speed, 
                 function() {
                     $(this).hide();
@@ -236,7 +236,7 @@
                 .css(nextSlidePosition)
                 .stop(true)
                 .animate(
-                    resetPosition, 
+                    resetPosition,
                     options.speed,
                     // after the next slide is finished sliding in,
                     // trigger the onTransitionComplete event
@@ -256,7 +256,7 @@
                 .css({width: 0, height: this.dimensions.height, 'z-index': this.iteration+1})
                 .show()
                 .animate(
-                    {width: this.dimensions.width}, 
+                    {width: this.dimensions.width},
                     options.speed,
                     // after the next slide is finished revealing itself,
                     // trigger the onTransitionComplete event
@@ -278,7 +278,7 @@
             $.proxy(this.options.onPlay, this)();
 
             // if this isn't the first run
-            // then do transition immediately 
+            // then do transition immediately
             if (!firstTime)
             {
                 this.transition(options);
@@ -353,7 +353,7 @@
 
     Revolver.prototype.goTo = function(i, options)
     {
-        // bail out if already 
+        // bail out if already
         // on the intended slide
         if (i === this.currentSlide)
         {
