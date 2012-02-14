@@ -39,11 +39,8 @@
 
     "use strict";
 
-    // make Revolver available outside of this scope
-    var Revolver = window.Revolver;
-
     // constructor
-    Revolver = function (container, options)
+    var Revolver = function (container, options)
     {
         // merge new options (recursively) with defaults
         this.options = $.extend(true, {}, this.defaults, options);
@@ -224,7 +221,7 @@
             // slide current out of the container
             currentSlide.stop(true).animate(
                 currentSlidePosition,
-                options.speed, 
+                options.speed,
                 function() {
                     $(this).hide();
                 }
@@ -374,6 +371,9 @@
     {
         return this.goTo(this.lastSlide, options);
     };
+
+    // make Revolver globally available
+    window.Revolver = Revolver;
     
     // jquery plugin
     $.fn.revolver = function(options)
