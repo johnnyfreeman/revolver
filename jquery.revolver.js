@@ -57,8 +57,10 @@
         this.status         = { paused: false, playing: false, stopped: true };
         this.isAnimating    = false;
 
-        // Don't run if there's only one slide
+        // Completely disable Revolver
+        // if there is only one slide
         if (this.numSlides <= 1) {
+            this.disabled = true;
             return;
         }
 
@@ -107,6 +109,7 @@
     Revolver.prototype.options       = null;     // will contain all options for the slider
     Revolver.prototype.dimensions    = null;     // contains width & height of the slider
     Revolver.prototype.isAnimating   = null;     // whethor revolver is currently in transition
+    Revolver.prototype.disabled      = false;    // disables all functionality in a Revolver instance
     Revolver.prototype.VERSION       = '1.0.3';  // version info
 
     Revolver.prototype.addSlide = function(slide)
@@ -129,7 +132,7 @@
     // do transition
     Revolver.prototype.transition = function(options)
     {
-        if (this.isAnimating === false)
+        if (this.disabled === false && this.isAnimating === false)
         {
             options             = $.extend(true, {}, this.options.transition, options);
             var doTransition    = $.proxy(this.transitions[options.type], this);
@@ -269,7 +272,7 @@
 
     Revolver.prototype.play = function(options, firstTime)
     {
-        if (!this.status.playing)
+        if (this.disabled === false && !this.status.playing)
         {
             this.changeStatus('playing');
             $.proxy(this.options.onPlay, this)();
@@ -289,7 +292,7 @@
 
     Revolver.prototype.pause = function()
     {
-        if (!this.status.paused)
+        if (this.disabled === false && !this.status.paused)
         {
             this.changeStatus('paused');
             $.proxy(this.options.onPause, this)();
@@ -306,7 +309,7 @@
 
     Revolver.prototype.stop = function()
     {
-        if (!this.status.stopped)
+        if (this.disabled === false && !this.status.stopped)
         {
             this.changeStatus('stopped');
             $.proxy(this.options.onStop, this)();
@@ -334,6 +337,11 @@
 
     Revolver.prototype.restart = function(options)
     {
+        if (this.disabled === true)
+        {
+            return this;
+        }
+
         $.proxy(this.options.onRestart, this)();
         return this.stop().play(options);
     };
@@ -352,7 +360,7 @@
     {
         // bail out if already
         // on the intended slide
-        if (i === this.currentSlide)
+        if (this.disabled === true || i === this.currentSlide)
         {
             return this;
         }

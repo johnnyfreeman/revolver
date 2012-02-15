@@ -75,6 +75,7 @@
         options: null,          // will contain all options for the slider
         dimensions: null,       // contains width & height of the slider
         isAnimating: null,      // whethor revolver is currently in transition
+        disabled: false,        // disables all functionality in a Revolver instance
         VERSION: '1.0.3',       // version info
 
         // constructor
@@ -83,7 +84,7 @@
             // setOptions is a method provided by the Options mixin
             // it merges the options passed in with the defaults
             // this.setOptions(options);
-            this.options = Object.merge(this.defaults, options);
+            this.options        = Object.merge(this.defaults, options);
             
             this.container      = container;
             this.dimensions     = this.container.getSize();
@@ -101,6 +102,7 @@
 
             // Don't run if there's only one slide
             if (this.numSlides <= 1) {
+                this.disabled = true;
                 return;
             }
 
@@ -137,7 +139,7 @@
         
         transition: function(options)
         {
-            if (this.isAnimating === false)
+            if (this.disabled === false && this.isAnimating === false)
             {
                 options             = Object.merge( Object.clone(this.options.transition), options );
                 var doTransitions   = this.transitions[options.type].bind(this);
@@ -275,7 +277,7 @@
 
         play: function(options, firstTime)
         {
-            if (!this.status.playing)
+            if (this.disabled === false && !this.status.playing)
             {
                 this.changeStatus('playing');
                 this.options.onPlay.bind(this)();
@@ -294,7 +296,7 @@
 
         pause: function()
         {
-            if (!this.status.paused)
+            if (this.disabled === false && !this.status.paused)
             {
                 this.changeStatus('paused');
                 this.options.onPause.bind(this)();
@@ -311,7 +313,7 @@
 
         stop: function()
         {
-            if (!this.status.stopped)
+            if (this.disabled === false && !this.status.stopped)
             {
                 this.changeStatus('stopped');
                 this.options.onStop.bind(this)();
@@ -339,6 +341,12 @@
 
         restart: function(options)
         {
+            // bail out if the Revolver has been disabled
+            if (this.disabled === true)
+            {
+                return this;
+            }
+
             this.options.onRestart.bind(this)();
             return this.stop().play(options);
         },
@@ -355,9 +363,9 @@
 
         goTo: function(i, options)
         {
-            // bail out if already
-            // on the intended slide
-            if (i === this.currentSlide)
+            // bail out if already on the intended slide
+            // or the slider is disabled
+            if (this.disabled === true || i === this.currentSlide)
             {
                 return this;
             }
