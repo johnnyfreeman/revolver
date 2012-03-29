@@ -167,10 +167,12 @@ var Revolver;
         fade: function(options)
         {
             var Revolver = this;
-                
-            this.slides.eq(this.currentSlide).fadeOut(options.speed);
-            this.slides.eq(this.nextSlide).fadeIn(
-                options.speed,
+            
+												// make sure current next is under of the current slide
+												this.slides.eq(this.nextSlide).css('z-index', 9998).show();
+
+												// make sure current slide is on top of all slides
+            this.slides.eq(this.currentSlide).css('z-index', 9999).fadeOut(options.speed,
                 // after the next slide is finished fading in,
                 // trigger the onTransitionComplete event
                 function(){
