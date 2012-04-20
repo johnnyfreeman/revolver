@@ -258,8 +258,8 @@
             reveal: function(options)
             {
                 var Revolver = this,
-                    nextSlide = this.slides[this.nextSlide].container,
-                    reveal = new Fx.Tween(nextSlide, {
+                    nextSlide = this.slides[this.nextSlide],
+                    reveal = new Fx.Tween(nextSlide.container, {
                         duration: options.speed,
                         transition: options.easing,
                         onComplete: function(){
@@ -267,9 +267,10 @@
                             Revolver.isAnimating = false;
                         }
                     });
-                
+
                 // make sure next slide is on top of current slide
-                nextSlide.setStyles({'z-index': this.iteration + 1, 'width': 0});
+                nextSlide.container.setStyles({'z-index': this.iteration + 1, 'width': 0});
+                nextSlide.show();
 
                 reveal.start('width', this.dimensions.x);
             }
