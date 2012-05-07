@@ -196,6 +196,7 @@
                 // fade out current slide
                 currentSlide.show().container.setStyle('opacity', 1);
                 fadeOut.start('opacity', 0);
+                currentSlide.hide();
                 
                 // fade in next slide
                 nextSlide.show().container.setStyle('opacity', 0);
