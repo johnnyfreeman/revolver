@@ -365,6 +365,9 @@
 
         goTo: function(i, options)
         {
+            // keep transition arithmetic from breaking
+            i = parseInt(i);
+
             // bail out if already on the intended slide
             // or the slider is disabled
             if (this.disabled === true || i === this.currentSlide)
