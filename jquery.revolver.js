@@ -174,9 +174,13 @@
         {
             var Revolver = this;
                 
-            this.slides.eq(this.currentSlide).fadeOut(options.speed);
+            this.slides.eq(this.currentSlide).fadeOut(
+                options.speed,
+                options.easing
+            );
             this.slides.eq(this.nextSlide).fadeIn(
                 options.speed,
+                options.easing,
                 // after the next slide is finished fading in,
                 // trigger the onTransitionComplete event
                 function(){
@@ -225,6 +229,7 @@
             currentSlide.stop(true).animate(
                 currentSlidePosition,
                 options.speed,
+                options.easing,
                 function() {
                     $(this).hide();
                 }
@@ -238,6 +243,7 @@
                 .animate(
                     resetPosition,
                     options.speed,
+                    options.easing,
                     // after the next slide is finished sliding in,
                     // trigger the onTransitionComplete event
                     function(){
@@ -258,6 +264,7 @@
                 .animate(
                     {width: this.dimensions.width},
                     options.speed,
+                    options.easing,
                     // after the next slide is finished revealing itself,
                     // trigger the onTransitionComplete event
                     function(){
