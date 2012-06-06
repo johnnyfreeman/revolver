@@ -142,8 +142,8 @@
             doTransition(options);
 
             // update slider position
-            this.previousSlide  = this.currentSlide;
             this.currentSlide   = this.nextSlide;
+            this.previousSlide  = this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1;
             this.nextSlide      = this.currentSlide === this.lastSlide ? 0 : this.currentSlide + 1;
             this.iteration++;
 
