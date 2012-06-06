@@ -76,7 +76,7 @@
         dimensions: null,       // contains width & height of the slider
         isAnimating: null,      // whethor revolver is currently in transition
         disabled: false,        // disables all functionality in a Revolver instance
-        VERSION: '1.0.3',       // version info
+        VERSION: '1.0.4',       // version info
 
         // constructor
         initialize: function(container, options)
