@@ -56,7 +56,8 @@
                 direction:      'left',         // which way to slide each slide. used for the 'slide' transition type only.
                 easing:         'sine:in:out',  // default easing method
                 onStart:        function(){},   // gets called when the transition animation begins
-                onFinish:       function(){},   // gets called when the animation is done
+                onFinish:       false,          // deprecated
+                onComplete:     function(){},   // gets called when the animation is done
                 speed:          500,            // how long (in milliseconds) the transition should last
                 type:           'fade'          // choose between none, fade, or slide
             }
@@ -104,6 +105,26 @@
             if (this.numSlides <= 1) {
                 this.disabled = true;
                 return;
+            }
+
+            // always disable isAnimating flag 
+            // after transition is complete
+            this.on('transitionComplete', function() {
+                this.isAnimating = false;
+            });
+
+            // register all event handlers
+            this.on('play', this.options.onPlay);
+            this.on('stop', this.options.onStop);
+            this.on('pause', this.options.onPause);
+            this.on('restart', this.options.onRestart);
+            this.on('transitionStart', this.options.transition.onStart);
+            this.on('transitionComplete', this.options.transition.onComplete);
+            
+            // temperorary fix for deprecated option
+            if (typeof this.options.transition.onFinish == 'function') {
+                console.warn('The options.transition.onFinish property has been deprecated and will be removed in future versions. Please use options.transition.onComplete to aviod breakage. Love Revolver.js.');
+                this.on('transitionComplete', this.options.transition.onFinish);
             }
 
             // fire onReady event
@@ -154,8 +175,8 @@
                 this.nextSlide      = this.currentSlide === this.lastSlide ? 0 : this.currentSlide + 1;
                 this.iteration++;
 
-                // fire transition.onStart event
-                options.onStart.bind(this)();
+                // fire transitionStart event
+                this.trigger('transitionStart');
             }
 
             return this;
@@ -169,16 +190,14 @@
                 this.slides[this.currentSlide].hide();
                 this.slides[this.nextSlide].show();
 
-                // fire transition.onFinish event
-                options.onFinish.bind(this)();
-                this.isAnimating = false;
+                // fire transitionComplete event
+                this.trigger('transitionComplete');
             },
 
             // fade in and out
             fade: function(options)
             {
-                var Revolver = this,
-                    currentSlide = this.slides[this.currentSlide],
+                var currentSlide = this.slides[this.currentSlide],
                     nextSlide = this.slides[this.nextSlide],
                     fadeOut = new Fx.Tween(currentSlide.container, {
                         duration: options.speed,
@@ -187,10 +206,7 @@
                     fadeIn = new Fx.Tween(nextSlide.container, {
                         duration: options.speed,
                         transition: options.easing,
-                        onComplete: function(){
-                            options.onFinish.bind(Revolver)();
-                            Revolver.isAnimating = false;
-                        }
+                        onComplete: this.trigger.bind(this, 'transitionComplete')
                     });
 
                 // fade out current slide
@@ -206,8 +222,7 @@
             // slide in and out of the container
             slide: function(options)
             {
-                var Revolver = this,
-                    currentSlide = this.slides[this.currentSlide],
+                var currentSlide = this.slides[this.currentSlide],
                     nextSlide = this.slides[this.nextSlide],
                     slideOut = new Fx.Morph(currentSlide.container, {
                         duration: options.speed,
@@ -217,10 +232,7 @@
                     slideIn = new Fx.Morph(nextSlide.container, {
                         duration: options.speed,
                         transition: options.easing,
-                        onComplete: function(){
-                            options.onFinish.bind(Revolver)();
-                            Revolver.isAnimating = false;
-                        }
+                        onComplete: this.trigger.bind(this, 'transitionComplete')
                     }),
                     resetPosition = {top: 0, left: 0};
                 
@@ -263,10 +275,7 @@
                     reveal = new Fx.Tween(nextSlide.container, {
                         duration: options.speed,
                         transition: options.easing,
-                        onComplete: function(){
-                            options.onFinish.bind(Revolver)();
-                            Revolver.isAnimating = false;
-                        }
+                        onComplete: this.trigger.bind(this, 'transitionComplete')
                     });
 
                 // make sure next slide is on top of current slide
@@ -282,7 +291,7 @@
             if (this.disabled === false && !this.status.playing)
             {
                 this.changeStatus('playing');
-                this.options.onPlay.bind(this)();
+                this.trigger('play');
 
                 // transition immediately?
                 if (!firstTime)
@@ -301,7 +310,7 @@
             if (this.disabled === false && !this.status.paused)
             {
                 this.changeStatus('paused');
-                this.options.onPause.bind(this)();
+                this.trigger('pause');
 
                 if (this.intervalId !== null)
                 {
@@ -318,7 +327,7 @@
             if (this.disabled === false && !this.status.stopped)
             {
                 this.changeStatus('stopped');
-                this.options.onStop.bind(this)();
+                this.trigger('stop');
 
                 if (this.intervalId !== null)
                 {
@@ -349,7 +358,7 @@
                 return this;
             }
 
-            this.options.onRestart.bind(this)();
+            this.trigger('restart');
             return this.stop().play(options);
         },
 
@@ -388,6 +397,16 @@
         last: function(options)
         {
             return this.goTo(this.lastSlide, options);
+        },
+
+        on: function(eventName, callback)
+        {
+            return this.container.addEvent(eventName + '.revolver', callback.bind(this));
+        },
+
+        trigger: function(eventName)
+        {
+            return this.container.fireEvent(eventName + '.revolver');
         }
     });
 

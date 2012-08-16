@@ -55,13 +55,40 @@
         this.lastSlide      = this.numSlides === 0 ? null : this.numSlides - 1;
         this.previousSlide  = this.lastSlide;
         this.status         = { paused: false, playing: false, stopped: true };
-        this.isAnimating    = false;
+        this.isAnimating    = false,
+ 	this.isLoading      = $.Deferred();
 
         // Completely disable Revolver
         // if there is only one slide
         if (this.numSlides <= 1) {
             this.disabled = true;
             return;
+        }
+
+        // always disable isAnimating flag 
+        // after transition is complete
+        this.on('transitionComplete', function() {
+            this.isAnimating = false;
+        });
+
+        // register all event handlers
+        this.on('play', this.options.onPlay);
+        this.on('stop', this.options.onStop);
+        this.on('pause', this.options.onPause);
+        this.on('restart', this.options.onRestart);
+        this.on('transitionStart', this.options.transition.onStart);
+        this.on('transitionComplete', this.options.transition.onComplete);
+        
+        // temperorary fix for deprecated option
+        if (typeof this.options.transition.onFinish == 'function') {
+            console.warn('The options.transition.onFinish property has been deprecated and will be removed in future versions. Please use options.transition.onComplete to aviod breakage. Love Revolver.js.');
+            this.on('transitionComplete', this.options.transition.onFinish);
+        }
+
+		// do preload
+		if (this.options.preload)
+        {
+            this.preload(1);
         }
 
         // fire onReady event handler
@@ -84,13 +111,15 @@
         onStop:             function(){},   // gets called when the stop() method is called
         onPause:            function(){},   // gets called when the pause() method is called
         onRestart:          function(){},   // gets called when the restart() method is called
+		preload:            true,
         rotationSpeed:      4000,           // how long (in milliseconds) to stay on each slide before going to the next
         slideClass:         'slide',        // this is what revolver will look for to determin what is a slide
         transition: {
             direction:      'left',         // which way to slide each slide. used for the 'slide' transition type only.
             easing:         'swing',        // default easing method
             onStart:        function(){},   // gets called when the transition animation begins
-            onFinish:       function(){},   // gets called when the animation is done
+            onFinish:       false,          // deprecated
+            onComplete:     function(){},   // gets called when the animation is done
             speed:          500,            // how long (in milliseconds) the transition should last
             type:           'fade'          // choose between none, fade, or slide
         }
@@ -135,11 +164,17 @@
         if (this.disabled === false && this.isAnimating === false)
         {
             options             = $.extend(true, {}, this.options.transition, options);
-            var doTransition    = $.proxy(this.transitions[options.type], this);
+            var Revolver = this,
+				doTransition    = $.proxy(this.transitions[options.type], this),
+				doPreload		= $.proxy(this.preload, this);
             this.isAnimating    = true;
 
-            // do transition
-            doTransition(options);
+            $.when(this.isLoading).done(function() {
+				// do transition
+				doTransition(options);
+				// fire onTransition event
+	            Revolver.trigger('transitionStart');
+			});
 
             // update slider position
             this.currentSlide   = this.nextSlide;
@@ -147,12 +182,34 @@
             this.nextSlide      = this.currentSlide === this.lastSlide ? 0 : this.currentSlide + 1;
             this.iteration++;
 
-            // fire onTransition event
-            $.proxy(options.onStart, this)();
+			// do preload
+			if (this.options.preload)
+			{
+				doPreload(this.nextSlide)
+			} else {
+				this.isLoading.resolve();
+			};
+
         }
 
         return this;
     };
+
+	// do Preload
+	Revolver.prototype.preload = function(slide) {
+		var Revolver = this,
+			slide = $(this.slides[slide]);
+		if (slide.data('src')) {
+			var preloadImg = new Image();
+			$(preloadImg).load(function() {
+				slide.prop('src', this.src).removeAttr('data-src');
+				Revolver.isLoading.resolve(true);
+			});
+			preloadImg.src = slide.data('src');		
+		} else {
+			this.isLoading.resolve();
+		}
+	};
 
     // logic for transitions
     Revolver.prototype.transitions = {
@@ -162,11 +219,7 @@
         {
             this.slides.eq(this.currentSlide).hide();
             this.slides.eq(this.nextSlide).show();
-
-            // since this transitions is instantaneous we'll go
-            // ahead and trigger the transitionComplete event
-            $.proxy(options.onFinish, this);
-            this.isAnimating = false;
+            this.trigger('transitionComplete');
         },
 
         // fade in and out
@@ -174,19 +227,12 @@
         {
             var Revolver = this;
                 
-            this.slides.eq(this.currentSlide).fadeOut(
-                options.speed,
-                options.easing
-            );
-            this.slides.eq(this.nextSlide).fadeIn(
+           	// make sure current next is under of the current slide
+            this.slides.eq(this.nextSlide).css('z-index', this.nextSlide).show();
+            this.slides.eq(this.currentSlide).css('z-index', this.numSlides).fadeOut(
                 options.speed,
                 options.easing,
-                // after the next slide is finished fading in,
-                // trigger the onTransitionComplete event
-                function(){
-                    $.proxy(options.onFinish, Revolver)();
-                    Revolver.isAnimating = false;
-                }
+                this.trigger.bind(this, 'transitionComplete')
             );
         },
 
@@ -244,12 +290,7 @@
                     resetPosition,
                     options.speed,
                     options.easing,
-                    // after the next slide is finished sliding in,
-                    // trigger the onTransitionComplete event
-                    function(){
-                        $.proxy(options.onFinish, Revolver)();
-                        Revolver.isAnimating = false;
-                    }
+                    this.trigger.bind(this, 'transitionComplete')
                 );
         },
 
@@ -265,12 +306,7 @@
                     {width: this.dimensions.width},
                     options.speed,
                     options.easing,
-                    // after the next slide is finished revealing itself,
-                    // trigger the onTransitionComplete event
-                    function(){
-                        $.proxy(options.onFinish, Revolver)();
-                        Revolver.isAnimating = false;
-                    }
+                    this.trigger.bind(this, 'transitionComplete')
                 );
 
             return this;
@@ -282,7 +318,7 @@
         if (this.disabled === false && !this.status.playing)
         {
             this.changeStatus('playing');
-            $.proxy(this.options.onPlay, this)();
+            this.trigger('play');
 
             // if this isn't the first run
             // then do transition immediately
@@ -302,7 +338,7 @@
         if (this.disabled === false && !this.status.paused)
         {
             this.changeStatus('paused');
-            $.proxy(this.options.onPause, this)();
+            this.trigger('pause');
 
             if (this.intervalId !== null)
             {
@@ -319,7 +355,7 @@
         if (this.disabled === false && !this.status.stopped)
         {
             this.changeStatus('stopped');
-            $.proxy(this.options.onStop, this)();
+            this.trigger('stop');
 
             if (this.intervalId !== null)
             {
@@ -349,7 +385,7 @@
             return this;
         }
 
-        $.proxy(this.options.onRestart, this)();
+        this.trigger('restart');
         return this.stop().play(options);
     };
 
@@ -389,6 +425,16 @@
     {
         return this.goTo(this.lastSlide, options);
     };
+
+    Revolver.prototype.on = function(eventName, callback)
+    {
+        return this.container.on(eventName + '.revolver', $.proxy(callback, this));
+    }
+
+    Revolver.prototype.trigger = function(eventName)
+    {
+        return this.container.trigger(eventName + '.revolver');
+    }
 
     // make Revolver globally available
     window.Revolver = Revolver;
