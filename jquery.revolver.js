@@ -55,7 +55,8 @@
         this.lastSlide      = this.numSlides === 0 ? null : this.numSlides - 1;
         this.previousSlide  = this.lastSlide;
         this.status         = { paused: false, playing: false, stopped: true };
-        this.isAnimating    = false;
+        this.isAnimating    = false,
+ 	this.isLoading      = $.Deferred();
 
         // Completely disable Revolver
         // if there is only one slide
@@ -84,6 +85,12 @@
             this.on('transitionComplete', this.options.transition.onFinish);
         }
 
+		// do preload
+		if (this.options.preload)
+        {
+            this.preload(1);
+        }
+
         // fire onReady event handler
         $.proxy(this.options.onReady, this)();
 
@@ -104,6 +111,7 @@
         onStop:             function(){},   // gets called when the stop() method is called
         onPause:            function(){},   // gets called when the pause() method is called
         onRestart:          function(){},   // gets called when the restart() method is called
+		preload:            true,
         rotationSpeed:      4000,           // how long (in milliseconds) to stay on each slide before going to the next
         slideClass:         'slide',        // this is what revolver will look for to determin what is a slide
         transition: {
@@ -156,11 +164,17 @@
         if (this.disabled === false && this.isAnimating === false)
         {
             options             = $.extend(true, {}, this.options.transition, options);
-            var doTransition    = $.proxy(this.transitions[options.type], this);
+            var Revolver = this,
+				doTransition    = $.proxy(this.transitions[options.type], this),
+				doPreload		= $.proxy(this.preload, this);
             this.isAnimating    = true;
 
-            // do transition
-            doTransition(options);
+            $.when(this.isLoading).done(function() {
+				// do transition
+				doTransition(options);
+				// fire onTransition event
+	            Revolver.trigger('transitionStart');
+			});
 
             // update slider position
             this.currentSlide   = this.nextSlide;
@@ -168,12 +182,34 @@
             this.nextSlide      = this.currentSlide === this.lastSlide ? 0 : this.currentSlide + 1;
             this.iteration++;
 
-            // fire onTransition event
-            this.trigger('transitionStart');
+			// do preload
+			if (this.options.preload)
+			{
+				doPreload(this.nextSlide)
+			} else {
+				this.isLoading.resolve();
+			};
+
         }
 
         return this;
     };
+
+	// do Preload
+	Revolver.prototype.preload = function(slide) {
+		var Revolver = this,
+			slide = $(this.slides[slide]);
+		if (slide.data('src')) {
+			var preloadImg = new Image();
+			$(preloadImg).load(function() {
+				slide.prop('src', this.src).removeAttr('data-src');
+				Revolver.isLoading.resolve(true);
+			});
+			preloadImg.src = slide.data('src');		
+		} else {
+			this.isLoading.resolve();
+		}
+	};
 
     // logic for transitions
     Revolver.prototype.transitions = {
@@ -191,11 +227,9 @@
         {
             var Revolver = this;
                 
-            this.slides.eq(this.currentSlide).fadeOut(
-                options.speed,
-                options.easing
-            );
-            this.slides.eq(this.nextSlide).fadeIn(
+           	// make sure current next is under of the current slide
+            this.slides.eq(this.nextSlide).css('z-index', this.nextSlide).show();
+            this.slides.eq(this.currentSlide).css('z-index', this.numSlides).fadeOut(
                 options.speed,
                 options.easing,
                 this.trigger.bind(this, 'transitionComplete')
