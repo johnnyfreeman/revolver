@@ -397,6 +397,11 @@
         return this.container.on(eventName + '.revolver', $.proxy(callback, this));
     };
 
+    Revolver.prototype.off = function(eventName, callback)
+    {
+        return this.container.off(eventName + '.revolver', $.proxy(callback, this));
+    };
+
     Revolver.prototype.trigger = function(eventName)
     {
         return this.container.trigger(eventName + '.revolver');

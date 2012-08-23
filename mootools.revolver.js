@@ -404,6 +404,11 @@
             return this.container.addEvent(eventName + '.revolver', callback.bind(this));
         },
 
+        off: function(eventName, callback)
+        {
+            return this.container.removeEvent(eventName + '.revolver', callback.bind(this));
+        },
+
         trigger: function(eventName)
         {
             return this.container.fireEvent(eventName + '.revolver');
