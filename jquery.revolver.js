@@ -395,12 +395,12 @@
     Revolver.prototype.on = function(eventName, callback)
     {
         return this.container.on(eventName + '.revolver', $.proxy(callback, this));
-    }
+    };
 
     Revolver.prototype.trigger = function(eventName)
     {
         return this.container.trigger(eventName + '.revolver');
-    }
+    };
 
     // make Revolver globally available
     window.Revolver = Revolver;
