@@ -113,13 +113,12 @@
         rotationSpeed:      4000,           // how long (in milliseconds) to stay on each slide before going to the next
         slideClass:         'slide',        // this is what revolver will look for to determin what is a slide
         transition: {
-            direction:      'left',         // which way to slide each slide. used for the 'slide' transition type only.
             easing:         'swing',        // default easing method
             onStart:        function(){},   // gets called when the transition animation begins
             onFinish:       false,          // deprecated
             onComplete:     function(){},   // gets called when the animation is done
             speed:          500,            // how long (in milliseconds) the transition should last
-            type:           'fade'          // choose between none, fade, or slide
+            type:           'fade'          // choose between none, fade, slide, or reveal
         }
     };
 
@@ -190,80 +189,6 @@
             this.slides.eq(this.currentSlide).hide();
             this.slides.eq(this.nextSlide).show();
             this.trigger('transitionComplete');
-        },
-
-        // fade in and out
-        fade: function(options)
-        {
-            var Revolver = this;
-                
-            this.slides.eq(this.currentSlide).fadeOut(
-                options.speed,
-                options.easing
-            );
-            this.slides.eq(this.nextSlide).fadeIn(
-                options.speed,
-                options.easing,
-                this.trigger.bind(this, 'transitionComplete')
-            );
-        },
-
-        // slide in and out of the container
-        slide: function(options)
-        {
-            var Revolver = this,
-                currentSlide = this.slides.eq(this.currentSlide),
-                nextSlide = this.slides.eq(this.nextSlide),
-                currentSlidePosition = {},
-                nextSlidePosition = {},
-                resetPosition = {top: 0, left: 0};
-
-            // make sure next slide is on top of current slide
-            this.slides.eq(this.nextSlide).css('z-index', this.iteration + 1);
-
-            // build animation object based on the transition direction
-            if (options.direction === "up")
-            {
-                currentSlidePosition = {top: this.dimensions.height, left: 0};
-                nextSlidePosition = {top: 0 - this.dimensions.height, left: 0};
-            }
-            else if (options.direction === "right")
-            {
-                currentSlidePosition = {top: 0, left: this.dimensions.width};
-                nextSlidePosition = {top: 0, left: 0 - this.dimensions.width};
-            }
-            else if (options.direction === "down")
-            {
-                currentSlidePosition = {top: 0 - this.dimensions.height, left: 0};
-                nextSlidePosition = {top: this.dimensions.height, left: 0};
-            }
-            else if (options.direction === "left")
-            {
-                currentSlidePosition = {left: 0 - this.dimensions.width, top: 0};
-                nextSlidePosition = {left: this.dimensions.width, top: 0};
-            }
-
-            // slide current out of the container
-            currentSlide.stop(true).animate(
-                currentSlidePosition,
-                options.speed,
-                options.easing,
-                function() {
-                    $(this).hide();
-                }
-            );
-
-            // slide next out of the container
-            nextSlide
-                .show()
-                .css(nextSlidePosition)
-                .stop(true)
-                .animate(
-                    resetPosition,
-                    options.speed,
-                    options.easing,
-                    this.trigger.bind(this, 'transitionComplete')
-                );
         },
 
         // reveal
@@ -411,6 +336,280 @@
     Revolver.prototype.trigger = function(eventName)
     {
         return this.container.trigger(eventName + '.revolver');
+    };
+
+    /**
+     * Fade Transition
+     */
+    Revolver.prototype.transitions.fade = function(options) {
+        var currentSlide, nextSlide, nextSlidePromise, revolver;
+
+        revolver        = this;
+        easingMap       = {swing: 'ease-in-out', linear: 'linear'};
+        easing          = easingMap[options.easing];
+        nextSlide       = this.slides.eq(this.nextSlide);
+        currentSlide    = this.slides.eq(this.currentSlide);
+
+        // move current slide above the next slide
+        currentSlide.css('z-index', this.numSlides);
+        nextSlide.css('z-index', this.nextSlide);
+
+        // now that the nextSlide is tucked behind 
+        // the current one, we can show() it
+        nextSlidePromise = nextSlide.show(0).promise();
+
+        // after we are sure the next slide is visable
+        // we'll fade out the current one
+        nextSlidePromise.done(function() {
+
+            // using css3 transitions
+            if (Modernizr.csstransitions)
+            {
+                currentSlide.css({
+                    opacity: 0,
+                    transition: 'opacity ' + (options.speed / 1000) + 's ' + easing
+                });
+
+                setTimeout(function() {
+                    currentSlide.hide().css({
+                        opacity: 1,
+                        transition: 'opacity 0s ' + easing
+                    });
+                    revolver.trigger('transitionComplete');
+                }, options.speed);
+            }
+
+            // using jquery animations
+            else
+            {
+                currentSlide.fadeOut(
+                    options.speed,
+                    options.easing,
+                    function() { 
+                        revolver.trigger('transitionComplete'); 
+                    }
+                );
+            };
+            
+        });
+    };
+
+    /**
+     * Slide Transition
+     */
+    Revolver.prototype.transitions.slide = function(options) {
+        return $.proxy(this.transitions.slide[options.direction], this)(options);
+    };
+
+    // define default value for the new option
+    Revolver.prototype.defaults.transition.direction = 'left';
+
+    // slide left
+    Revolver.prototype.transitions.slide.left = function(options) {
+        var currentSlide, easing, easingMap, nextSlide, nextSlidePromise, resetPosition, revolver;
+
+        currentSlide    = this.slides.eq(this.currentSlide);
+        easingMap       = {swing: 'ease-in-out', linear: 'linear'};
+        easing          = easingMap[options.easing];
+        nextSlide       = this.slides.eq(this.nextSlide);
+        revolver        = this;
+
+        // position/reveal the next slide in preperation for the animation
+        nextSlidePromise = nextSlide.css({left: revolver.dimensions.width, top: 0, transition: 'left 0s ' + easing}).show(0).promise();
+
+        nextSlidePromise.done(function() {
+            // move next slide above the current slide
+            nextSlide.css('z-index', this.numSlides);
+            currentSlide.css('z-index', this.currentSlide);
+
+            if (Modernizr.csstransitions)
+            {
+                currentSlide.css({left: 0 - revolver.dimensions.width, top: 0, transition: 'left ' + (options.speed / 1000) + 's ' + easing});
+                nextSlide.css({top: 0, left: 0, transition: 'left ' + (options.speed / 1000) + 's ' + easing});
+
+                setTimeout(function() {
+                    currentSlide.hide();
+                    revolver.trigger('transitionComplete');
+                }, options.speed);
+            }
+            else
+            {
+                currentSlide.stop(true).animate(
+                    {left: 0 - revolver.dimensions.width, top: 0},
+                    options.speed,
+                    options.easing,
+                    function() {
+                        $(this).hide();
+                    }
+                );
+
+                // slide next out of the container
+                nextSlide.stop(true).animate(
+                    {top: 0, left: 0},
+                    options.speed,
+                    options.easing,
+                    function() {
+                        this.trigger('transitionComplete');
+                    }
+                );
+            };
+        });
+    };
+
+    // slide right
+    Revolver.prototype.transitions.slide.right = function(options) {
+        var currentSlide, easing, easingMap, nextSlide, nextSlidePromise, resetPosition, revolver;
+
+        currentSlide    = this.slides.eq(this.currentSlide);
+        easingMap       = {swing: 'ease-in-out', linear: 'linear'};
+        easing          = easingMap[options.easing];
+        nextSlide       = this.slides.eq(this.nextSlide);
+        revolver        = this;
+
+        // position/reveal the next slide in preperation for the animation
+        nextSlidePromise = nextSlide.css({left: 0 - revolver.dimensions.width, top: 0, transition: 'left 0s ' + easing}).show(0).promise();
+
+        nextSlidePromise.done(function() {
+            // move next slide above the current slide
+            nextSlide.css('z-index', this.numSlides);
+            currentSlide.css('z-index', this.currentSlide);
+
+            if (Modernizr.csstransitions)
+            {
+                currentSlide.css({left: revolver.dimensions.width, top: 0, transition: 'left ' + (options.speed / 1000) + 's ' + easing});
+                nextSlide.css({top: 0, left: 0, transition: 'left ' + (options.speed / 1000) + 's ' + easing});
+
+                setTimeout(function() {
+                    currentSlide.hide();
+                    revolver.trigger('transitionComplete');
+                }, options.speed);
+            }
+            else
+            {
+                currentSlide.stop(true).animate(
+                    {left: revolver.dimensions.width, top: 0},
+                    options.speed,
+                    options.easing,
+                    function() {
+                        $(this).hide();
+                    }
+                );
+
+                // slide next out of the container
+                nextSlide.stop(true).animate(
+                    {top: 0, left: 0},
+                    options.speed,
+                    options.easing,
+                    function() {
+                        this.trigger('transitionComplete');
+                    }
+                );
+            };
+        });
+    };
+
+    // slide up
+    Revolver.prototype.transitions.slide.up = function(options) {
+        var currentSlide, easing, easingMap, nextSlide, nextSlidePromise, resetPosition, revolver;
+
+        currentSlide    = this.slides.eq(this.currentSlide);
+        easingMap       = {swing: 'ease-in-out', linear: 'linear'};
+        easing          = easingMap[options.easing];
+        nextSlide       = this.slides.eq(this.nextSlide);
+        revolver        = this;
+
+        // position/reveal the next slide in preperation for the animation
+        nextSlidePromise = nextSlide.css({left: 0, top: revolver.dimensions.height, transition: 'top 0s ' + easing}).show(0).promise();
+
+        nextSlidePromise.done(function() {
+            // move next slide above the current slide
+            nextSlide.css('z-index', this.numSlides);
+            currentSlide.css('z-index', this.currentSlide);
+
+            if (Modernizr.csstransitions)
+            {
+                currentSlide.css({left: 0, top: 0 - revolver.dimensions.height, transition: 'top ' + (options.speed / 1000) + 's ' + easing});
+                nextSlide.css({top: 0, left: 0, transition: 'top ' + (options.speed / 1000) + 's ' + easing});
+
+                setTimeout(function() {
+                    currentSlide.hide();
+                    revolver.trigger('transitionComplete');
+                }, options.speed);
+            }
+            else
+            {
+                currentSlide.stop(true).animate(
+                    {left: 0, top: 0 - revolver.dimensions.height},
+                    options.speed,
+                    options.easing,
+                    function() {
+                        $(this).hide();
+                    }
+                );
+
+                // slide next out of the container
+                nextSlide.stop(true).animate(
+                    {top: 0, left: 0},
+                    options.speed,
+                    options.easing,
+                    function() {
+                        this.trigger('transitionComplete');
+                    }
+                );
+            };
+        });
+    };
+
+    // slide down
+    Revolver.prototype.transitions.slide.down = function(options) {
+        var currentSlide, easing, easingMap, nextSlide, nextSlidePromise, resetPosition, revolver;
+
+        currentSlide    = this.slides.eq(this.currentSlide);
+        easingMap       = {swing: 'ease-in-out', linear: 'linear'};
+        easing          = easingMap[options.easing];
+        nextSlide       = this.slides.eq(this.nextSlide);
+        revolver        = this;
+
+        // position/reveal the next slide in preperation for the animation
+        nextSlidePromise = nextSlide.css({left: 0, top: 0 - revolver.dimensions.height, transition: 'top 0s ' + easing}).show(0).promise();
+
+        nextSlidePromise.done(function() {
+            // move next slide above the current slide
+            nextSlide.css('z-index', this.numSlides);
+            currentSlide.css('z-index', this.currentSlide);
+
+            if (Modernizr.csstransitions)
+            {
+                currentSlide.css({left: 0, top: revolver.dimensions.height, transition: 'top ' + (options.speed / 1000) + 's ' + easing});
+                nextSlide.css({top: 0, left: 0, transition: 'top ' + (options.speed / 1000) + 's ' + easing});
+
+                setTimeout(function() {
+                    currentSlide.hide();
+                    revolver.trigger('transitionComplete');
+                }, options.speed);
+            }
+            else
+            {
+                currentSlide.stop(true).animate(
+                    {left: 0, top: revolver.dimensions.height},
+                    options.speed,
+                    options.easing,
+                    function() {
+                        $(this).hide();
+                    }
+                );
+
+                // slide next out of the container
+                nextSlide.stop(true).animate(
+                    {top: 0, left: 0},
+                    options.speed,
+                    options.easing,
+                    function() {
+                        this.trigger('transitionComplete');
+                    }
+                );
+            };
+        });
     };
 
     // make Revolver globally available
