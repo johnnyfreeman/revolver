@@ -342,7 +342,7 @@
      * Fade Transition
      */
     Revolver.prototype.transitions.fade = function(options) {
-        var revolver, easingMap, easing, nextSlide, nextSlidePromise, currentSlide, ;
+        var revolver, easingMap, easing, nextSlide, nextSlidePromise, currentSlide;
 
         revolver        = this;
         easingMap       = {swing: 'ease-in-out', linear: 'linear'};
