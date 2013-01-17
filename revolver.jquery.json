@@ -9,7 +9,7 @@
         "image-slider"
     ],
     "description": "Revolver is a new content slider that makes no assumptions about your markup. Think of Revolver as a boilerplate or framework for making your own slider, exactly the way you want it.",
-    "version": "1.0.6",
+    "version": "v1.0.6",
     "homepage": "http://revolverjs.com",
     "docs": "http://revolverjs.com/docs.html",
     "demo": "http://revolverjs.com/examples.html",
