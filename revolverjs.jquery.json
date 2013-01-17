@@ -1,7 +1,13 @@
 {
     "name": "revolver",
     "title": "Revolver.js",
-    "keywords": ["slider","slideshow","slide-show","content-slider","image-slider"],
+    "keywords": [
+        "slider",
+        "slideshow",
+        "slide-show",
+        "content-slider",
+        "image-slider"
+    ],
     "description": "Revolver is a new content slider that makes no assumptions about your markup. Think of Revolver as a boilerplate or framework for making your own slider, exactly the way you want it.",
     "version": "1.0.6",
     "homepage": "http://revolverjs.com",
@@ -19,6 +25,10 @@
           "url": "http://www.opensource.org/licenses/mit-license.php"
         }
     ],
+    "repository": {
+        "type": "git", 
+        "url": "git@github.com:revolverjs/revolver-jquery.git"
+    }, 
     "dependencies": {
         "jquery": ">=1.8.0"
     }
