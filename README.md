@@ -1,6 +1,6 @@
 # Revolver.js
 
-Revolver.js is a new content slider that makes no assumptions about your markup. Think of Revolver as a boilerplate or framework for making your own slider, exactly the way you want it.
+Revolver.js is a content slider that makes no assumptions about your markup. Think of Revolver as a boilerplate or framework for making your own slider, exactly the way you want it.
 
 http://revolverjs.com/
 
