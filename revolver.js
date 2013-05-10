@@ -616,18 +616,5 @@
 
     // make Revolver globally available
     window.Revolver = Revolver;
-    
-    // jquery plugin
-    $.fn.revolver = function(options)
-    {
-        return this.each(function()
-        {
-            // store the revolver object using jquery's data method
-            if (!$.data(this, 'revolver'))
-            {
-                $.data(this, 'revolver', new Revolver($(this), options));
-            }
-        });
-    };
 
 })(jQuery, this);
