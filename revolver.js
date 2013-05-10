@@ -119,7 +119,6 @@
   Revolver.prototype.isAnimating   = null;     // whethor revolver is currently in transition
   Revolver.prototype.disabled      = false;    // disables all functionality in a Revolver instance
   Revolver.prototype.VERSION       = '2.0';    // version info
-  Revolver.prototype.events        = {};       // events namespace
 
   Revolver.prototype.addSlide = function(slide) {
     this.slides.push(slide);
@@ -279,23 +278,23 @@
 
   // attaches event listeners
   Revolver.prototype.on = function(eventName, callback) {
-    return bean.on(this.events, eventName, _.bind(callback, this));
+    return bean.on(this, eventName, _.bind(callback, this));
   };
 
   // alias for on() except that the handler 
   // will removed after the first execution
   Revolver.prototype.one = function(eventName, callback) {
-    return bean.one(this.events, eventName, _.bind(callback, this));
+    return bean.one(this, eventName, _.bind(callback, this));
   };
 
   // removes event listeners
   Revolver.prototype.off = function(eventName, callback) {
-    return bean.off(this.events, eventName, _.bind(callback, this));
+    return bean.off(this, eventName, _.bind(callback, this));
   };
 
   // triggers an event
   Revolver.prototype.trigger = function(eventName) {
-    return bean.fire(this.events, eventName);
+    return bean.fire(this, eventName);
   };
 
   // make Revolver globally available
