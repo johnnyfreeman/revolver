@@ -35,21 +35,22 @@
  * 
  */
 
-;(function ($, window) {
+;(function () {
 
     "use strict";
 
     // constructor
-    var Revolver = function (container, options)
+    var Revolver = function (slides, options)
     {
-        // merge new options (recursively) with defaults
-        this.options = $.extend(true, {}, this.defaults, options);
+        // merge new options with defaults
+        this.options        = _.extend(this.defaults, options);
 
         // setup revolver
-        this.container      = container;
-        this.dimensions     = { height: this.container.height(), width: this.container.width() };
         this.currentSlide   = 0;
-        this.slides         = this.container.find('.'+this.options.slideClass).each( $.proxy(function(){ this.addSlide(this); }, this) );
+
+        // add slides
+        _.each(slides, this.addSlide, this);
+
         this.previousSlide  = this.lastSlide;
         this.status         = { paused: false, playing: false, stopped: true };
         this.isAnimating    = false;
@@ -57,7 +58,7 @@
         // Completely disable Revolver
         // if there is only one slide
         if (this.numSlides <= 1) {
-            this.disabled = true;
+            this.disabled   = true;
             return;
         }
 
@@ -127,15 +128,10 @@
     Revolver.prototype.dimensions    = null;     // contains width & height of the slider
     Revolver.prototype.isAnimating   = null;     // whethor revolver is currently in transition
     Revolver.prototype.disabled      = false;    // disables all functionality in a Revolver instance
-    Revolver.prototype.VERSION       = '1.0.6';  // version info
+    Revolver.prototype.VERSION       = '2.0';  // version info
 
     Revolver.prototype.addSlide = function(slide)
     {
-        // if jquery object is passed get the first HTMLElement
-        if (slide instanceof $ && slide[0] instanceof HTMLElement) {
-            slide = slide[0];
-        };
-
         this.slides.push(slide);
 
         this.numSlides     = this.slides.length;
@@ -304,22 +300,34 @@
         return this.goTo(this.lastSlide, options);
     };
 
+    // Revolver's internal event emitter uses bean - https://github.com/fat/bean
+   
+    // attaches event listeners
     Revolver.prototype.on = function(eventName, callback)
     {
-        return this.container.on(eventName + '.revolver', $.proxy(callback, this));
+        return bean.on(this.events, eventName, _.bind(callback, this));
     };
 
+    // alias for on() except that the handler 
+    // will removed after the first execution
+    Revolver.prototype.one = function(eventName, callback)
+    {
+        return bean.one(this.events, eventName, _.bind(callback, this));
+    };
+
+    // removes event listeners
     Revolver.prototype.off = function(eventName, callback)
     {
-        return this.container.off(eventName + '.revolver', $.proxy(callback, this));
+        return bean.off(this.events, eventName, _.bind(callback, this));
     };
 
+    // triggers an event
     Revolver.prototype.trigger = function(eventName)
     {
-        return this.container.trigger(eventName + '.revolver');
+        return bean.fire(this.events, eventName);
     };
 
     // make Revolver globally available
-    window.Revolver = Revolver;
+    this.Revolver = Revolver;
 
-})(jQuery, this);
+})();
