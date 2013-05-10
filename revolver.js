@@ -118,7 +118,8 @@
   Revolver.prototype.dimensions    = null;     // contains width & height of the slider
   Revolver.prototype.isAnimating   = null;     // whethor revolver is currently in transition
   Revolver.prototype.disabled      = false;    // disables all functionality in a Revolver instance
-  Revolver.prototype.VERSION       = '2.0';  // version info
+  Revolver.prototype.VERSION       = '2.0';    // version info
+  Revolver.prototype.events        = {};       // events namespace
 
   Revolver.prototype.addSlide = function(slide) {
     this.slides.push(slide);
