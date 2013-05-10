@@ -37,297 +37,268 @@
 
 ;(function () {
 
-    "use strict";
+  "use strict";
 
-    // constructor
-    var Revolver = function (slides, options)
+  // constructor
+  var Revolver = function (slides, options) {
+    // setup revolver
+    this.options        = _.extend(this.defaults, options);
+    this.currentSlide   = 0;
+
+    // add slides
+    _.each(slides, this.addSlide, this);
+
+    this.previousSlide  = this.lastSlide;
+    this.status         = { paused: false, playing: false, stopped: true };
+    this.isAnimating    = false;
+
+    // Completely disable Revolver
+    // if there is only one slide
+    if (this.numSlides <= 1) {
+      this.disabled   = true;
+      return;
+    }
+
+    // always disable isAnimating flag 
+    // after transition is complete
+    this.on('transitionComplete', function() {
+      this.isAnimating = false;
+    });
+
+    // register all event handlers
+    this.on('play', this.options.onPlay);
+    this.on('stop', this.options.onStop);
+    this.on('pause', this.options.onPause);
+    this.on('restart', this.options.onRestart);
+    this.on('transitionStart', this.options.transition.onStart);
+    this.on('transitionComplete', this.options.transition.onComplete);
+
+    // fire onReady event handler
+    _.bind(this.options.onReady, this)();
+
+    // begin auto play, if enabled
+    if (this.options.autoPlay)
     {
-        // merge new options with defaults
-        this.options        = _.extend(this.defaults, options);
+      this.play({}, true);
+    }
 
-        // setup revolver
-        this.currentSlide   = 0;
+    return this;
+  };
+  
+  // default options
+  Revolver.prototype.defaults = {
+    autoPlay:           true,           // whether or not to automatically begin playing the slides
+    onReady:            function(){},   // gets called when revolver is setup and ready to go
+    onPlay:             function(){},   // gets called when the play() method is called
+    onStop:             function(){},   // gets called when the stop() method is called
+    onPause:            function(){},   // gets called when the pause() method is called
+    onRestart:          function(){},   // gets called when the restart() method is called
+    rotationSpeed:      4000,           // how long (in milliseconds) to stay on each slide before going to the next
+    transition: {
+      easing:         'swing',        // default easing method
+      onStart:        function(){},   // gets called when the transition animation begins
+      onFinish:       false,          // deprecated
+      onComplete:     function(){},   // gets called when the animation is done
+      speed:          500,            // how long (in milliseconds) the transition should last
+      name:           'fade'          // default transition
+    }
+  };
 
-        // add slides
-        _.each(slides, this.addSlide, this);
+  Revolver.prototype.previousSlide = null;     // key for previous slide
+  Revolver.prototype.currentSlide  = null;     // key for current slide
+  Revolver.prototype.nextSlide     = null;     // key for next slide
+  Revolver.prototype.numSlides     = 0;        // total number of slides
+  Revolver.prototype.lastSlide     = null;     // key for last slide
+  Revolver.prototype.container     = null;     // the wrapper element for all images
+  Revolver.prototype.slides        = [];       // array of slides
+  Revolver.prototype.iteration     = 0;        // keeps track of the number of transitions that have occured
+  Revolver.prototype.intervalId    = null;     // id set by setInterval(), used for pause() method
+  Revolver.prototype.status        = null;     // will contain the state of the slider
+  Revolver.prototype.options       = null;     // will contain all options for the slider
+  Revolver.prototype.dimensions    = null;     // contains width & height of the slider
+  Revolver.prototype.isAnimating   = null;     // whethor revolver is currently in transition
+  Revolver.prototype.disabled      = false;    // disables all functionality in a Revolver instance
+  Revolver.prototype.VERSION       = '2.0';  // version info
 
-        this.previousSlide  = this.lastSlide;
-        this.status         = { paused: false, playing: false, stopped: true };
-        this.isAnimating    = false;
+  Revolver.prototype.addSlide = function(slide) {
+    this.slides.push(slide);
 
-        // Completely disable Revolver
-        // if there is only one slide
-        if (this.numSlides <= 1) {
-            this.disabled   = true;
-            return;
-        }
+    this.numSlides     = this.slides.length;
+    this.lastSlide     = this.numSlides === 0 ? 0 : this.numSlides - 1;
+    var currentPlusOne = this.currentSlide + 1;
+    this.nextSlide     = currentPlusOne > this.lastSlide ? 0 : currentPlusOne;
+  };
 
-        // always disable isAnimating flag 
-        // after transition is complete
-        this.on('transitionComplete', function() {
-            this.isAnimating = false;
-        });
+  // changes the status of the slider
+  Revolver.prototype.changeStatus = function(newStatus) {
+    // set all status' as false
+    _.each(this.status, function(key, val) {
+      this.status[key] = key === newStatus;
+    }, this);
 
-        // register all event handlers
-        this.on('play', this.options.onPlay);
-        this.on('stop', this.options.onStop);
-        this.on('pause', this.options.onPause);
-        this.on('restart', this.options.onRestart);
-        this.on('transitionStart', this.options.transition.onStart);
-        this.on('transitionComplete', this.options.transition.onComplete);
-        
-        // temperorary fix for deprecated option
-        if (typeof this.options.transition.onFinish === 'function') {
-            console.warn('The options.transition.onFinish property has been deprecated and will be removed in future versions. Please use options.transition.onComplete to aviod breakage. Love Revolver.js.');
-            this.on('transitionComplete', this.options.transition.onFinish);
-        }
+    return this;
+  };
 
-        // fire onReady event handler
-        $.proxy(this.options.onReady, this)();
+  // do transition
+  Revolver.prototype.transition = function(options) {
+    if (this.disabled === false && this.isAnimating === false)  {
+      options             = _.extend(this.options.transition, options);
+      var doTransition    = _.bind(this.transitions[options.type], this);
+      this.isAnimating    = true;
 
-        // begin auto play, if enabled
-        if (this.options.autoPlay)
-        {
-            this.play({}, true);
-        }
+      // do transition
+      doTransition(options);
 
-        return this;
-    };
+      // update slider position
+      this.currentSlide   = this.nextSlide;
+      this.previousSlide  = this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1;
+      this.nextSlide      = this.currentSlide === this.lastSlide ? 0 : this.currentSlide + 1;
+      this.iteration++;
+
+      // fire onTransition event
+      this.trigger('transitionStart');
+    }
+
+    return this;
+  };
+
+  // logic for transitions
+  Revolver.prototype.transitions = {
+    none: function(options) {
+      this.slides.eq(this.currentSlide).hide();
+      this.slides.eq(this.nextSlide).show();
+      this.trigger('transitionComplete');
+    }
+  };
+
+  // play the slider
+  Revolver.prototype.play = function(options, firstTime) {
+    if (this.disabled === false && !this.status.playing) {
+      this.changeStatus('playing');
+      this.trigger('play');
+
+      // if this isn't the first run
+      // then do transition immediately
+      if (!firstTime)
+      {
+        this.transition(options);
+      }
+
+      this.intervalId = setInterval( _.bind(this.transition, this), parseFloat(this.options.rotationSpeed));
+    }
+
+    return this;
+  };
+
+  // pause the slider
+  Revolver.prototype.pause = function() {
+    if (this.disabled === false && !this.status.paused) {
+      this.changeStatus('paused');
+      this.trigger('pause');
+
+      if (this.intervalId !== null) {
+        clearInterval(this.intervalId);
+        this.intervalId = null;
+      }
+    }
+
+    return this;
+  };
+
+  // stop the slider
+  Revolver.prototype.stop = function() {
+    if (this.disabled === false && !this.status.stopped) {
+      this.changeStatus('stopped');
+      this.trigger('stop');
+
+      if (this.intervalId !== null) {
+        clearInterval(this.intervalId);
+        this.intervalId = null;
+      }
+    }
     
-    // default options
-    Revolver.prototype.defaults = {
-        autoPlay:           true,           // whether or not to automatically begin playing the slides
-        onReady:            function(){},   // gets called when revolver is setup and ready to go
-        onPlay:             function(){},   // gets called when the play() method is called
-        onStop:             function(){},   // gets called when the stop() method is called
-        onPause:            function(){},   // gets called when the pause() method is called
-        onRestart:          function(){},   // gets called when the restart() method is called
-        rotationSpeed:      4000,           // how long (in milliseconds) to stay on each slide before going to the next
-        slideClass:         'slide',        // this is what revolver will look for to determin what is a slide
-        transition: {
-            easing:         'swing',        // default easing method
-            onStart:        function(){},   // gets called when the transition animation begins
-            onFinish:       false,          // deprecated
-            onComplete:     function(){},   // gets called when the animation is done
-            speed:          500,            // how long (in milliseconds) the transition should last
-            type:           'fade'          // choose between none, fade, slide, or reveal
-        }
-    };
+    return this.reset();
+  };
 
-    Revolver.prototype.previousSlide = null;     // key for previous slide
-    Revolver.prototype.currentSlide  = null;     // key for current slide
-    Revolver.prototype.nextSlide     = null;     // key for next slide
-    Revolver.prototype.numSlides     = 0;        // total number of slides
-    Revolver.prototype.lastSlide     = null;     // key for last slide
-    Revolver.prototype.container     = null;     // the wrapper element for all images
-    Revolver.prototype.slides        = [];       // array of slides
-    Revolver.prototype.iteration     = 0;        // keeps track of the number of transitions that have occured
-    Revolver.prototype.intervalId    = null;     // id set by setInterval(), used for pause() method
-    Revolver.prototype.status        = null;     // will contain the state of the slider
-    Revolver.prototype.options       = null;     // will contain all options for the slider
-    Revolver.prototype.dimensions    = null;     // contains width & height of the slider
-    Revolver.prototype.isAnimating   = null;     // whethor revolver is currently in transition
-    Revolver.prototype.disabled      = false;    // disables all functionality in a Revolver instance
-    Revolver.prototype.VERSION       = '2.0';  // version info
+  // queues up the first slide
+  Revolver.prototype.reset = function() {
+    // reset only if not already on the first slide
+    if (this.currentSlide !== 0)  {
+      this.nextSlide = 0;
+    }
 
-    Revolver.prototype.addSlide = function(slide)
-    {
-        this.slides.push(slide);
+    return this;
+  };
 
-        this.numSlides     = this.slides.length;
-        this.lastSlide     = this.numSlides === 0 ? 0 : this.numSlides - 1;
-        var currentPlusOne = this.currentSlide + 1;
-        this.nextSlide     = currentPlusOne > this.lastSlide ? 0 : currentPlusOne;
-    };
+  // restart the slider
+  Revolver.prototype.restart = function(options) {
+    if (this.disabled === true) {
+      return this;
+    }
 
-    Revolver.prototype.changeStatus = function(newStatus)
-    {
-        // set all status' as false
-        var Revolver = this;
-        $.each(this.status, function(key, val)
-        {
-            Revolver.status[key] = key === newStatus;
-        });
+    this.trigger('restart');
+    return this.stop().play(options);
+  };
 
-        return this;
-    };
+  // go to the first slide
+  Revolver.prototype.first = function(options) {
+    return this.goTo(0, options);
+  };
 
-    // do transition
-    Revolver.prototype.transition = function(options)
-    {
-        if (this.disabled === false && this.isAnimating === false)
-        {
-            options             = $.extend(true, {}, this.options.transition, options);
-            var doTransition    = $.proxy(this.transitions[options.type], this);
-            this.isAnimating    = true;
+  // go to the previous slide
+  Revolver.prototype.previous = function(options) {
+    return this.goTo(this.previousSlide, options);
+  };
 
-            // do transition
-            doTransition(options);
+  // go to a specific slide
+  // most other methods use this one
+  Revolver.prototype.goTo = function(i, options) {
+    // keep transition arithmetic from breaking
+    i = parseInt(i);
 
-            // update slider position
-            this.currentSlide   = this.nextSlide;
-            this.previousSlide  = this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1;
-            this.nextSlide      = this.currentSlide === this.lastSlide ? 0 : this.currentSlide + 1;
-            this.iteration++;
+    // bail out if already
+    // on the intended slide
+    if (this.disabled === true || i === this.currentSlide) {
+      return this;
+    }
 
-            // fire onTransition event
-            this.trigger('transitionStart');
-        }
+    this.nextSlide = i;
 
-        return this;
-    };
+    return !this.status.playing ? this.transition(options) : this.pause().play(options);
+  };
 
-    // logic for transitions
-    Revolver.prototype.transitions = {
-        none: function(options)
-        {
-            this.slides.eq(this.currentSlide).hide();
-            this.slides.eq(this.nextSlide).show();
-            this.trigger('transitionComplete');
-        }
-    };
+  // go to the next slide
+  Revolver.prototype.next = function(options) {
+    return this.goTo(this.nextSlide, options);
+  };
 
-    Revolver.prototype.play = function(options, firstTime)
-    {
-        if (this.disabled === false && !this.status.playing)
-        {
-            this.changeStatus('playing');
-            this.trigger('play');
+  // go to the last slide
+  Revolver.prototype.last = function(options) {
+    return this.goTo(this.lastSlide, options);
+  };
 
-            // if this isn't the first run
-            // then do transition immediately
-            if (!firstTime)
-            {
-                this.transition(options);
-            }
+  // attaches event listeners
+  Revolver.prototype.on = function(eventName, callback) {
+    return bean.on(this.events, eventName, _.bind(callback, this));
+  };
 
-            this.intervalId = setInterval( $.proxy(this.transition, this), parseFloat(this.options.rotationSpeed));
-        }
+  // alias for on() except that the handler 
+  // will removed after the first execution
+  Revolver.prototype.one = function(eventName, callback) {
+    return bean.one(this.events, eventName, _.bind(callback, this));
+  };
 
-        return this;
-    };
+  // removes event listeners
+  Revolver.prototype.off = function(eventName, callback) {
+    return bean.off(this.events, eventName, _.bind(callback, this));
+  };
 
-    Revolver.prototype.pause = function()
-    {
-        if (this.disabled === false && !this.status.paused)
-        {
-            this.changeStatus('paused');
-            this.trigger('pause');
+  // triggers an event
+  Revolver.prototype.trigger = function(eventName) {
+    return bean.fire(this.events, eventName);
+  };
 
-            if (this.intervalId !== null)
-            {
-                clearInterval(this.intervalId);
-                this.intervalId = null;
-            }
-        }
-
-        return this;
-    };
-
-    Revolver.prototype.stop = function()
-    {
-        if (this.disabled === false && !this.status.stopped)
-        {
-            this.changeStatus('stopped');
-            this.trigger('stop');
-
-            if (this.intervalId !== null)
-            {
-                clearInterval(this.intervalId);
-                this.intervalId = null;
-            }
-        }
-        
-        return this.reset();
-    };
-
-    Revolver.prototype.reset = function()
-    {
-        // reset only if not already on the first slide
-        if (this.currentSlide !== 0)
-        {
-            this.nextSlide = 0;
-        }
-
-        return this;
-    };
-
-    Revolver.prototype.restart = function(options)
-    {
-        if (this.disabled === true)
-        {
-            return this;
-        }
-
-        this.trigger('restart');
-        return this.stop().play(options);
-    };
-
-    Revolver.prototype.first = function(options)
-    {
-        return this.goTo(0, options);
-    };
-
-    Revolver.prototype.previous = function(options)
-    {
-        return this.goTo(this.previousSlide, options);
-    };
-
-    Revolver.prototype.goTo = function(i, options)
-    {
-        // keep transition arithmetic from breaking
-        i = parseInt(i);
-
-        // bail out if already
-        // on the intended slide
-        if (this.disabled === true || i === this.currentSlide)
-        {
-            return this;
-        }
-
-        this.nextSlide = i;
-
-        return !this.status.playing ? this.transition(options) : this.pause().play(options);
-    };
-
-    Revolver.prototype.next = function(options)
-    {
-        return this.goTo(this.nextSlide, options);
-    };
-
-    Revolver.prototype.last = function(options)
-    {
-        return this.goTo(this.lastSlide, options);
-    };
-
-    // Revolver's internal event emitter uses bean - https://github.com/fat/bean
-   
-    // attaches event listeners
-    Revolver.prototype.on = function(eventName, callback)
-    {
-        return bean.on(this.events, eventName, _.bind(callback, this));
-    };
-
-    // alias for on() except that the handler 
-    // will removed after the first execution
-    Revolver.prototype.one = function(eventName, callback)
-    {
-        return bean.one(this.events, eventName, _.bind(callback, this));
-    };
-
-    // removes event listeners
-    Revolver.prototype.off = function(eventName, callback)
-    {
-        return bean.off(this.events, eventName, _.bind(callback, this));
-    };
-
-    // triggers an event
-    Revolver.prototype.trigger = function(eventName)
-    {
-        return bean.fire(this.events, eventName);
-    };
-
-    // make Revolver globally available
-    this.Revolver = Revolver;
+  // make Revolver globally available
+  this.Revolver = Revolver;
 
 })();
