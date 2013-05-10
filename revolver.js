@@ -42,7 +42,7 @@
   // constructor
   var Revolver = function (slides, options) {
     // setup revolver
-    this.options        = _.extend(this.defaults, options);
+    this.options        = _.merge({}, this.defaults, options);
     this.currentSlide   = 0;
 
     // add slides
@@ -87,20 +87,20 @@
   
   // default options
   Revolver.prototype.defaults = {
-    autoPlay:           true,           // whether or not to automatically begin playing the slides
-    onReady:            function(){},   // gets called when revolver is setup and ready to go
-    onPlay:             function(){},   // gets called when the play() method is called
-    onStop:             function(){},   // gets called when the stop() method is called
-    onPause:            function(){},   // gets called when the pause() method is called
-    onRestart:          function(){},   // gets called when the restart() method is called
-    rotationSpeed:      4000,           // how long (in milliseconds) to stay on each slide before going to the next
+    autoPlay:           true,         // whether or not to automatically begin playing the slides
+    onReady:            function(){}, // gets called when revolver is setup and ready to go
+    onPlay:             function(){}, // gets called when the play() method is called
+    onStop:             function(){}, // gets called when the stop() method is called
+    onPause:            function(){}, // gets called when the pause() method is called
+    onRestart:          function(){}, // gets called when the restart() method is called
+    rotationSpeed:      4000,         // how long (in milliseconds) to stay on each slide before going to the next
     transition: {
       easing:         'swing',        // default easing method
       onStart:        function(){},   // gets called when the transition animation begins
       onFinish:       false,          // deprecated
       onComplete:     function(){},   // gets called when the animation is done
       speed:          500,            // how long (in milliseconds) the transition should last
-      name:           'fade'          // default transition
+      name:           'none'          // default transition
     }
   };
 
@@ -143,8 +143,8 @@
   // do transition
   Revolver.prototype.transition = function(options) {
     if (this.disabled === false && this.isAnimating === false)  {
-      options             = _.extend(this.options.transition, options);
-      var doTransition    = _.bind(this.transitions[options.type], this);
+      options             = _.merge({}, this.options.transition, options);
+      var doTransition    = _.bind(this.transitions[options.name], this);
       this.isAnimating    = true;
 
       // do transition
@@ -164,12 +164,11 @@
   };
 
   // logic for transitions
-  Revolver.prototype.transitions = {
-    none: function(options) {
-      this.slides.eq(this.currentSlide).hide();
-      this.slides.eq(this.nextSlide).show();
-      this.trigger('transitionComplete');
-    }
+  Revolver.prototype.transitions = {};
+  Revolver.prototype.transitions.none = function(options) {
+    this.slides[this.currentSlide].setAttribute('style', 'display: none');
+    this.slides[this.nextSlide].setAttribute('style', 'display: block');
+    this.trigger('transitionComplete');
   };
 
   // play the slider
@@ -300,6 +299,6 @@
   };
 
   // make Revolver globally available
-  this.Revolver = Revolver;
+  window.Revolver = Revolver;
 
 })();

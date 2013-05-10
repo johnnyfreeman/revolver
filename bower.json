@@ -9,7 +9,7 @@
     "**/.*"
   ],
   "dependencies": {
-    "underscore": "~1.4.4",
+    "lodash": "~1.2.1",
     "bean": "~1.0.3"
   }
 }
