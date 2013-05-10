@@ -1,0 +1,15 @@
+{
+  "name": "revolverjs",
+  "version": "2.0.0",
+  "main": [
+    "./revolver.js", 
+    "./revolver.min.js"
+  ],
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "underscore": "~1.4.4",
+    "bean": "~1.0.3"
+  }
+}
