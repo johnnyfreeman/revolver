@@ -10,29 +10,29 @@
  *          Y88b.                                                                             .88P
  *                                                                                           d88"
  * =========================================================================================================
- * 
+ *
  * Revolver.js
  *
- * Revolver is a content slider built with no assumptions about your markup. Think of Revolver as a 
- * boilerplate or framework for making your own slider, exactly the way you want it. But don't let that 
+ * Revolver is a content slider built with no assumptions about your markup. Think of Revolver as a
+ * boilerplate or framework for making your own slider, exactly the way you want it. But don't let that
  * scare you, it's really easy, I promise!
- * 
+ *
  * Documentation:   http://revolverjs.com
  * Support:         https://github.com/johnnyfreeman/revolver/issues
  * Bug Fixes:       https://github.com/johnnyfreeman/revolver/pulls
  * Author:          Johnny Freeman (http://johnnyfreeman.us)
- * 
+ *
  * Contribute:
- * 
- * If Revolver has been beneficial to you and you'd like to give back, there are a few ways you can 
- * contribute. You can answer questions on StackOverflow and our issue tracker. Or if you have a feature 
+ *
+ * If Revolver has been beneficial to you and you'd like to give back, there are a few ways you can
+ * contribute. You can answer questions on StackOverflow and our issue tracker. Or if you have a feature
  * request or a bug fix you can submit a pull request on Github at http://github.com/johnnyfreeman/revolver.
- * 
+ *
  * License:
- * 
+ *
  * This software is open source and free to use under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  */
 
 ;(function () {
@@ -59,7 +59,7 @@
       return;
     }
 
-    // always disable isAnimating flag 
+    // always disable isAnimating flag
     // after transition is complete
     this.on('transitionComplete', function() {
       this.isAnimating = false;
@@ -84,7 +84,7 @@
 
     return this;
   };
-  
+
   // default options
   Revolver.prototype.defaults = {
     autoPlay:           true,         // whether or not to automatically begin playing the slides
@@ -95,11 +95,8 @@
     onRestart:          function(){}, // gets called when the restart() method is called
     rotationSpeed:      4000,         // how long (in milliseconds) to stay on each slide before going to the next
     transition: {
-      easing:         'swing',        // default easing method
       onStart:        function(){},   // gets called when the transition animation begins
-      onFinish:       false,          // deprecated
       onComplete:     function(){},   // gets called when the animation is done
-      speed:          500,            // how long (in milliseconds) the transition should last
       name:           'none'          // default transition
     }
   };
@@ -215,7 +212,7 @@
         this.intervalId = null;
       }
     }
-    
+
     return this.reset();
   };
 
@@ -281,7 +278,7 @@
     return bean.on(this, eventName, _.bind(callback, this));
   };
 
-  // alias for on() except that the handler 
+  // alias for on() except that the handler
   // will removed after the first execution
   Revolver.prototype.one = function(eventName, callback) {
     return bean.one(this, eventName, _.bind(callback, this));
