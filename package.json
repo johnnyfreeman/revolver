@@ -1,0 +1,13 @@
+{
+  "name": "revolverjs",
+  "version": "2.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-regarde": "~0.1.1",
+    "grunt-contrib-uglify": "~0.2.0"
+  },
+  "engines": {
+    "node": "0.10.0",
+    "npm": "1.2.12"
+  }
+}
