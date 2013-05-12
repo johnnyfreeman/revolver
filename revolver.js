@@ -111,6 +111,7 @@
   // current version
   Revolver.prototype.VERSION = '2.0';
 
+  // add a new slide
   Revolver.prototype.addSlide = function(slide) {
     this.slides.push(slide);
 
@@ -153,8 +154,10 @@
     return this;
   };
 
-  // logic for transitions
+  // transition namespace
   Revolver.prototype.transitions = {};
+
+  // default transition
   Revolver.prototype.transitions.none = function(options) {
     this.slides[this.currentSlide].setAttribute('style', 'display: none');
     this.slides[this.nextSlide].setAttribute('style', 'display: block');
