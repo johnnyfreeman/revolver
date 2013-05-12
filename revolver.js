@@ -42,8 +42,15 @@
   // constructor
   var Revolver = function (slides, options) {
     // setup revolver
-    this.options        = _.merge({}, this.defaults, options);
-    this.currentSlide   = 0;
+    this.currentSlide  = 0;
+    this.nextSlide     = 0;
+    this.numSlides     = 0;
+    this.lastSlide     = 0;
+    this.slides        = [];
+    this.iteration     = 0;
+    this.intervalId    = null;
+    this.disabled      = false;
+    this.options       = _.merge({}, this.defaults, options);
 
     // add slides
     _.each(slides, this.addSlide, this);
@@ -101,21 +108,8 @@
     }
   };
 
-  Revolver.prototype.previousSlide = null;     // key for previous slide
-  Revolver.prototype.currentSlide  = null;     // key for current slide
-  Revolver.prototype.nextSlide     = null;     // key for next slide
-  Revolver.prototype.numSlides     = 0;        // total number of slides
-  Revolver.prototype.lastSlide     = null;     // key for last slide
-  Revolver.prototype.container     = null;     // the wrapper element for all images
-  Revolver.prototype.slides        = [];       // array of slides
-  Revolver.prototype.iteration     = 0;        // keeps track of the number of transitions that have occured
-  Revolver.prototype.intervalId    = null;     // id set by setInterval(), used for pause() method
-  Revolver.prototype.status        = null;     // will contain the state of the slider
-  Revolver.prototype.options       = null;     // will contain all options for the slider
-  Revolver.prototype.dimensions    = null;     // contains width & height of the slider
-  Revolver.prototype.isAnimating   = null;     // whethor revolver is currently in transition
-  Revolver.prototype.disabled      = false;    // disables all functionality in a Revolver instance
-  Revolver.prototype.VERSION       = '2.0';    // version info
+  // current version
+  Revolver.prototype.VERSION = '2.0';
 
   Revolver.prototype.addSlide = function(slide) {
     this.slides.push(slide);
