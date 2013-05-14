@@ -13,7 +13,7 @@
  *
  * Revolver.js
  *
- * Revolver is a content slider built with no assumptions about your markup. Think of Revolver as a
+ * Revolver is a javascript library for building a content (or image) slider from scratch. Think of it as a
  * boilerplate or framework for making your own slider, exactly the way you want it. But don't let that
  * scare you, it's really easy, I promise!
  *
