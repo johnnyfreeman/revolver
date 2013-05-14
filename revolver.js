@@ -1,4 +1,5 @@
-/* =========================================================================================================
+/**
+ * =========================================================================================================
  *
  * "Y8888888b.                                     `Y88                                        ::
  *   888   Y88b                                     888
@@ -10,29 +11,6 @@
  *          Y88b.                                                                             .88P
  *                                                                                           d88"
  * =========================================================================================================
- *
- * Revolver.js
- *
- * Revolver is a javascript library for building a content (or image) slider from scratch. Think of it as a
- * boilerplate or framework for making your own slider, exactly the way you want it. But don't let that
- * scare you, it's really easy, I promise!
- *
- * Documentation:   http://revolverjs.com
- * Support:         https://github.com/johnnyfreeman/revolver/issues
- * Bug Fixes:       https://github.com/johnnyfreeman/revolver/pulls
- * Author:          Johnny Freeman (http://johnnyfreeman.us)
- *
- * Contribute:
- *
- * If Revolver has been beneficial to you and you'd like to give back, there are a few ways you can
- * contribute. You can answer questions on StackOverflow and our issue tracker. Or if you have a feature
- * request or a bug fix you can submit a pull request on Github at http://github.com/johnnyfreeman/revolver.
- *
- * License:
- *
- * This software is open source and free to use under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- *
  */
 
 (function () {
