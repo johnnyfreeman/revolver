@@ -113,11 +113,10 @@
   Revolver.prototype.transition = function(options) {
     if (this.disabled === false && this.isAnimating === false)  {
       options             = _.merge({}, this.options.transition, options);
-      var doTransition    = _.bind(this.transitions[options.name], this);
       this.isAnimating    = true;
 
       // do transition
-      doTransition(options);
+      _.bind(Revolver.transitions[options.name], this)(options);
 
       // update slider position
       this.currentSlide   = this.nextSlide;
@@ -130,16 +129,6 @@
     }
 
     return this;
-  };
-
-  // transition namespace
-  Revolver.prototype.transitions = {};
-
-  // default transition
-  Revolver.prototype.transitions.none = function(options) {
-    this.slides[this.currentSlide].setAttribute('style', 'display: none');
-    this.slides[this.nextSlide].setAttribute('style', 'display: block');
-    this.trigger('transitionComplete');
   };
 
   // play the slider
@@ -267,6 +256,16 @@
   // triggers an event
   Revolver.prototype.trigger = function(eventName) {
     return bean.fire(this, eventName);
+  };
+
+  // namespace for all transitions
+  Revolver.transitions = {};
+
+  // default transition
+  Revolver.transitions.default = function(options) {
+    this.slides[this.currentSlide].setAttribute('style', 'display: none');
+    this.slides[this.nextSlide].setAttribute('style', 'display: block');
+    this.trigger('transitionComplete');
   };
 
   // make Revolver globally available
