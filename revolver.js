@@ -35,9 +35,9 @@
  *
  */
 
-;(function () {
+(function () {
 
-  "use strict";
+  'use strict';
 
   // constructor
   var Revolver = function (slides, options) {
