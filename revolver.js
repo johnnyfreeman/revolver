@@ -28,7 +28,7 @@
     this.iteration     = 0;
     this.intervalId    = null;
     this.disabled      = false;
-    this.options       = _.merge({}, this.defaults, options);
+    this.options       = _.merge({}, Revoler.defaults, options);
 
     // add slides
     _.each(slides, this.addSlide, this);
@@ -70,8 +70,8 @@
     return this;
   };
 
-  // default options
-  Revolver.prototype.defaults = {
+  // defaults namespace
+  Revolver.defaults = {
     autoPlay:           true,         // whether or not to automatically begin playing the slides
     onReady:            function(){}, // gets called when revolver is setup and ready to go
     onPlay:             function(){}, // gets called when the play() method is called
@@ -82,12 +82,12 @@
     transition: {
       onStart:        function(){},   // gets called when the transition animation begins
       onComplete:     function(){},   // gets called when the animation is done
-      name:           'none'          // default transition
+      name:           'default'          // default transition
     }
   };
 
   // current version
-  Revolver.prototype.VERSION = '2.0';
+  Revolver.VERSION = '2.0';
 
   // add a new slide
   Revolver.prototype.addSlide = function(slide) {
