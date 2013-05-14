@@ -13,7 +13,7 @@
  * =========================================================================================================
  */
 
-(function () {
+window.Revolver = (function () {
 
   'use strict';
 
@@ -28,7 +28,7 @@
     this.iteration     = 0;
     this.intervalId    = null;
     this.disabled      = false;
-    this.options       = _.merge({}, Revoler.defaults, options);
+    this.options       = _.merge({}, Revolver.defaults, options);
 
     // add slides
     _.each(slides, this.addSlide, this);
@@ -269,6 +269,6 @@
   };
 
   // make Revolver globally available
-  window.Revolver = Revolver;
+  return Revolver;
 
 })();
