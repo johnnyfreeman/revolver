@@ -72,17 +72,17 @@
 
   // defaults namespace
   Revolver.defaults = {
-    autoPlay:           true,         // whether or not to automatically begin playing the slides
-    onReady:            function(){}, // gets called when revolver is setup and ready to go
-    onPlay:             function(){}, // gets called when the play() method is called
-    onStop:             function(){}, // gets called when the stop() method is called
-    onPause:            function(){}, // gets called when the pause() method is called
-    onRestart:          function(){}, // gets called when the restart() method is called
-    rotationSpeed:      4000,         // how long (in milliseconds) to stay on each slide before going to the next
+    autoPlay:       true,            // whether or not to automatically begin playing the slides
+    onReady:        function(){},    // gets called when revolver is setup and ready to go
+    onPlay:         function(){},    // gets called when the play() method is called
+    onStop:         function(){},    // gets called when the stop() method is called
+    onPause:        function(){},    // gets called when the pause() method is called
+    onRestart:      function(){},    // gets called when the restart() method is called
+    rotationSpeed:  4000,            // how long (in milliseconds) to stay on each slide before going to the next
     transition: {
       onStart:        function(){},   // gets called when the transition animation begins
       onComplete:     function(){},   // gets called when the animation is done
-      name:           'default'          // default transition
+      name:           'default'       // default transition
     }
   };
 
