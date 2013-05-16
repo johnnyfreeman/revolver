@@ -1,4 +1,4 @@
-window.Revolver = (function() {
+(function() {
   'use strict';
   var Revolver;
 
@@ -39,6 +39,7 @@ window.Revolver = (function() {
     }
     return this;
   };
+
   Revolver.defaults = {
     autoPlay: true,
     onReady: function() {},
@@ -53,7 +54,9 @@ window.Revolver = (function() {
       name: 'default'
     }
   };
+
   Revolver.VERSION = '2.0';
+
   Revolver.prototype.addSlide = function(slide) {
     var currentPlusOne;
 
@@ -63,12 +66,14 @@ window.Revolver = (function() {
     currentPlusOne = this.currentSlide + 1;
     return this.nextSlide = (currentPlusOne > this.lastSlide ? 0 : currentPlusOne);
   };
+
   Revolver.prototype.changeStatus = function(newStatus) {
     _.each(this.status, (function(status) {
       return this.status[status] = status === newStatus;
     }), this);
     return this;
   };
+
   Revolver.prototype.transition = function(options) {
     if (this.disabled === false && this.isAnimating === false) {
       options = _.merge({}, this.options.transition, options);
@@ -82,6 +87,7 @@ window.Revolver = (function() {
     }
     return this;
   };
+
   Revolver.prototype.play = function(options, firstTime) {
     if (this.disabled === false && !this.status.playing) {
       this.changeStatus('playing');
@@ -93,6 +99,7 @@ window.Revolver = (function() {
     }
     return this;
   };
+
   Revolver.prototype._clearInterval = function() {
     if (this.intervalId !== null) {
       clearInterval(this.intervalId);
@@ -100,6 +107,7 @@ window.Revolver = (function() {
     }
     return this;
   };
+
   Revolver.prototype.pause = function() {
     if (this.disabled === false && !this.status.paused) {
       this.changeStatus('paused');
@@ -108,6 +116,7 @@ window.Revolver = (function() {
     }
     return this;
   };
+
   Revolver.prototype.stop = function() {
     if (this.disabled === false && !this.status.stopped) {
       this.changeStatus('stopped');
@@ -117,12 +126,14 @@ window.Revolver = (function() {
     }
     return this;
   };
+
   Revolver.prototype.reset = function() {
     if (this.currentSlide !== 0) {
       this.nextSlide = 0;
     }
     return this;
   };
+
   Revolver.prototype.restart = function(options) {
     if (this.disabled === true) {
       return this;
@@ -131,6 +142,7 @@ window.Revolver = (function() {
     this.stop().play(options);
     return this;
   };
+
   Revolver.prototype.goTo = function(i, options) {
     i = parseInt(i);
     if (this.disabled === true || i === this.currentSlide) {
@@ -143,39 +155,51 @@ window.Revolver = (function() {
       return this.pause().play(options);
     }
   };
+
   Revolver.prototype.first = function(options) {
     return this.goTo(0, options);
   };
+
   Revolver.prototype.previous = function(options) {
     return this.goTo(this.previousSlide, options);
   };
+
   Revolver.prototype.next = function(options) {
     return this.goTo(this.nextSlide, options);
   };
+
   Revolver.prototype.last = function(options) {
     return this.goTo(this.lastSlide, options);
   };
+
   Revolver.prototype.on = function(eventName, callback) {
     return bean.on(this, eventName, _.bind(callback, this));
   };
+
   Revolver.prototype.one = function(eventName, callback) {
     return bean.one(this, eventName, _.bind(callback, this));
   };
+
   Revolver.prototype.off = function(eventName, callback) {
     return bean.off(this, eventName, _.bind(callback, this));
   };
+
   Revolver.prototype.trigger = function(eventName) {
     return bean.fire(this, eventName);
   };
+
   Revolver.transitions = {};
+
   Revolver.transitions['default'] = function(options) {
     this.slides[this.currentSlide].setAttribute('style', 'display: none');
     this.slides[this.nextSlide].setAttribute('style', 'display: block');
     this.trigger('transitionComplete');
     return this;
   };
-  return Revolver;
-})();
+
+  window.Revolver = Revolver;
+
+}).call(this);
 
 /*
 //@ sourceMappingURL=revolver.js.map
