@@ -13,8 +13,7 @@
 
 'use strict'
 
-# CONSTRUCTOR
-
+# constructor
 Revolver = (slides, options) ->
   # setup initial values
   @currentSlide = 0
