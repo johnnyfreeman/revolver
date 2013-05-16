@@ -7,6 +7,18 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
+    coffee: {
+      compileWithMaps: {
+        options: {
+          bare: true,
+          sourceMap: true
+        },
+        files: {
+          'revolver.js': 'src/revolver.coffee'
+        }
+      }
+    },
+
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
@@ -21,6 +33,11 @@ module.exports = function(grunt) {
     // regarde configuration
     regarde: {
 
+      coffee: {
+        files: ['src/revolver.coffee'],
+        tasks: 'coffee'
+      },
+
       uglify: {
         files: ['revolver.js'],
         tasks: 'uglify'
@@ -32,6 +49,7 @@ module.exports = function(grunt) {
 
   // Load tasks
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-regarde');
 
   // Default tasks
