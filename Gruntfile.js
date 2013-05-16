@@ -13,7 +13,7 @@ module.exports = function(grunt) {
           sourceMap: true
         },
         files: {
-          'revolver.js': 'src/revolver.coffee'
+          'js/revolver.js': 'coffee/revolver.coffee'
         }
       }
     },
@@ -21,12 +21,12 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-        sourceMap: 'revolver.min.js.map',
-        sourceMapIn: 'revolver.js.map'
+        sourceMap: 'source-maps/revolver.min.js.map',
+        sourceMapIn: 'source-maps/revolver.js.map'
       },
       build: {
         files: {
-          'revolver.min.js': ['revolver.js']
+          'js/revolver.min.js': ['js/revolver.js']
         }
       }
     },
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
     regarde: {
 
       coffee: {
-        files: ['src/revolver.coffee'],
+        files: ['coffee/revolver.coffee'],
         tasks: 'coffee'
       },
 
