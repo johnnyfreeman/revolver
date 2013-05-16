@@ -64,7 +64,8 @@
     this.numSlides = this.slides.length;
     this.lastSlide = (this.numSlides === 0 ? 0 : this.numSlides - 1);
     currentPlusOne = this.currentSlide + 1;
-    return this.nextSlide = (currentPlusOne > this.lastSlide ? 0 : currentPlusOne);
+    this.nextSlide = (currentPlusOne > this.lastSlide ? 0 : currentPlusOne);
+    return this;
   };
 
   Revolver.prototype.changeStatus = function(newStatus) {

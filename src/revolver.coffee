@@ -91,6 +91,8 @@ Revolver::addSlide = (slide) ->
   # recalculate which is the next slide
   currentPlusOne = @currentSlide + 1
   @nextSlide     = (if currentPlusOne > @lastSlide then 0 else currentPlusOne)
+  # return instance
+  this
 
 
 # changes the status of the slider
