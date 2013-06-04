@@ -75,13 +75,13 @@ mySlider.setOptions({rotationSpeed: 1500});
 
 Revolver emits important events and exposes an event api so that you can hook into the core without actually having to hardcode your changes directly into the core.
 
-* **pause**: Fired every time the pause() method is called.
-* **play**: Fired every time the play() method is called.
-* **ready**: Fired after instantiation as soon as Revolver is completely setup and ready to go.
-* **restart**: Fired every time the restart() method is called.
-* **stop**: Fired every time the stop() method is called.
-* **transitionStart**: Fired every time the transition's animation has started.
-* **transitionComplete**: Fired every time the transition's animation has completed.
+* [**pause**](#): Fired every time the pause() method is called.
+* [**play**](#): Fired every time the play() method is called.
+* [**ready**](#): Fired after instantiation as soon as Revolver is completely setup and ready to go.
+* [**restart**](#): Fired every time the restart() method is called.
+* [**stop**](#): Fired every time the stop() method is called.
+* [**transitionStart**](#): Fired every time the transition's animation has started.
+* [**transitionComplete**](#): Fired every time the transition's animation has completed.
 
 ```javascript
 mySlider.on('pause', function() {
@@ -91,36 +91,36 @@ mySlider.on('pause', function() {
 
 ## Instance Methods
 
-* **first()**: Transition immediately to the first slide.
-* **goTo()**: Transition immediately to any given slide.
-* **last()**: Transition immediately to the last (not previous) slide.
-* **next()**: Transition immediately to the next slide.
-* **pause()**: Stops the slider but remembers it's position.
-* **play()**: Creates a continuous loop where the slider transitions to the next slide at the given interval.
-* **previous()**: Transition immediately to the previous slide.
-* **reset()**: Queues up the first slide to be next without forcing the transition to happen immediately.
-* **restart()**: This is the functional equivalent to calling stop() and then play() consecutively.
-* **on()**: Registers an event listener.
-* **one()**: Alias for `on()` except that the handler will removed after the first execution.
-* **off()**: Removes a previously registered event listener.
-* [**setOptions()**](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md): Merge new options with the existing options object.
-* **stop()**: Stops the slider from transitioning to the next slide, and resets the slider.
-* **trigger()**: Executes all listeners for the given event.
+* [**first()**](#): Transition immediately to the first slide.
+* [**goTo()**](#): Transition immediately to any given slide.
+* [**last()**](#): Transition immediately to the last (not previous) slide.
+* [**next()**](#): Transition immediately to the next slide.
+* [**pause()**](#): Stops the slider but remembers it's position.
+* [**play()**](#): Creates a continuous loop where the slider transitions to the next slide at the given interval.
+* [**previous()**](#): Transition immediately to the previous slide.
+* [**reset()**](#): Queues up the first slide to be next without forcing the transition to happen immediately.
+* [**restart()**](#): This is the functional equivalent to calling stop() and then play() consecutively.
+* [**on()**](#): Registers an event listener.
+* [**one()**](#): Alias for `on()` except that the handler will removed after the first execution.
+* [**off()**](#): Removes a previously registered event listener.
+* [**setOptions()**](#): Merge new options with the existing options object.
+* [**stop()**](#): Stops the slider from transitioning to the next slide, and resets the slider.
+* [**trigger()**](#): Executes all listeners for the given event.
 
 ## Instance Properties
 
-* **currentSlide**: (not documented yet)
-* **disabled**: (not documented yet)
-* **intervalId**: (not documented yet)
-* **isAnimating**: (not documented yet)
-* **iteration**: (not documented yet)
-* **lastSlide**: (not documented yet)
-* **nextSlide**: (not documented yet)
-* **numSlides**: (not documented yet)
-* **options**: (not documented yet)
-* **previousSlide**: (not documented yet)
-* **slides**: (not documented yet)
-* **status**: (not documented yet)
+* [**currentSlide**](#): (not documented yet)
+* [**disabled**](#): (not documented yet)
+* [**intervalId**](#): (not documented yet)
+* [**isAnimating**](#): (not documented yet)
+* [**iteration**](#): (not documented yet)
+* [**lastSlide**](#): (not documented yet)
+* [**nextSlide**](#): (not documented yet)
+* [**numSlides**](#): (not documented yet)
+* [**options**](#): (not documented yet)
+* [**previousSlide**](#): (not documented yet)
+* [**slides**](#): (not documented yet)
+* [**status**](#): (not documented yet)
 
 ## Plugins
 
@@ -128,12 +128,12 @@ Because of Revolver's modular architecture, it does very little out of the box a
 
 * [**revolver-jquery**](https://github.com/revolverjs/revolver-jquery/tree/development): Instantiate Revolver the jQuery way.
 * [**revolver-jquery-fade**](https://github.com/revolverjs/revolver-jquery-fade): Fade transition using jQuery.
-* **revolver-jquery-slide**: Coming soon.
-* **revolver-jquery-reveal**: Coming soon.
+* [**revolver-jquery-slide**](#): Coming soon.
+* [**revolver-jquery-reveal**](#): Coming soon.
 * [**revolver-mootools**](https://github.com/revolverjs/revolver-mootools/tree/development): Instantiate Revolver the Mootools way.
-* **revolver-mootools-fade**: Coming soon.
-* **revolver-mootools-slide**: Coming soon.
-* **revolver-mootools-reveal**: Coming soon.
+* [**revolver-mootools-fade**](#): Coming soon.
+* [**revolver-mootools-slide**](#): Coming soon.
+* [**revolver-mootools-reveal**](#): Coming soon.
 
 If you would like to add your own plugin to the list feel free fork and pull.
 
