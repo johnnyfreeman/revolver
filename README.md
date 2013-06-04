@@ -28,7 +28,13 @@ If you are planning on building your own content slider completely from scratch,
 
 If Revolver has been beneficial to you and you'd like to give back, there are a few ways you can contribute.
 
-* If troubleshooting is your thing, you could help [track down issues](https://github.com/johnnyfreeman/revolver/issues). If you're feeling really generous: [fork the development branch](https://github.com/revolverjs/revolverjs/tree/development), fix, and pull!
+* If troubleshooting is your thing, you could help [track down issues](https://github.com/johnnyfreeman/revolver/issues). If you're feeling really generous: [fork the development branch](https://github.com/revolverjs/revolverjs/tree/development), fix, and pull! (Here's our [build process](https://github.com/revolverjs/revolverjs#build-process))
 * If you're someone who is great with documentation, bless your heart, I could sure use your help! Just fork [revolverjs/revolverjs.github.io](https://github.com/revolverjs/revolverjs.github.io), add your changes, and pull.
 * If you have a great idea to make revolver better or have a bug to report, by all means, [report that mother](https://github.com/johnnyfreeman/revolver/issues)!
 * Revolver.js is free and always will be! But any donations made to the continued development of the project are more helpful than you might think.
+
+## Build Process
+
+Revolver uses [Grunt](http://gruntjs.com/) and a few Grunt packages to automatically compile the CoffeeScript to JS, minify, and create a source map for each JS file.
+
+To install these tools you must have Node.js and NPM already installed. Then run `npm install` to install Grunt and it's packages, and run `grunt` to start the watch server. Leave the terminal window running in the background while you make changes to [/coffee/revolver.coffee](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee)
