@@ -1,10 +1,10 @@
-# Revolver.js Documentation
+# Documentation
 
 For the time being, this is where the docs will be kept for the new version 2.0.
 
 ## Options
 
-Although most plugins add their own set of options, Revolver comes with a few options built in that can be overwritten upon instantiation through the constructor or at any time there-after through the `setOptions()` method.
+Options are defaults that can be overwritten upon instantiation (through the constructor) or at any time there-after (through the `setOptions()` method).
 
 * [**autoPlay**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
 * [**onPause()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/onpause.md): A callback that is executed every time the pause() method is called.

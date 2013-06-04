@@ -10,7 +10,7 @@ If you are planning on building your own content slider completely from scratch,
 
 The recommended way to install Revolver is with [Bower](http://bower.io/).
 
-```
+```shell
 bower install revolverjs
 ```
 
@@ -39,12 +39,6 @@ Once you have your slides array, just pass it to the Revolver constructor.
 var mySlider = new Revolver(mySlides);
 ```
 
-You can optionally pass options.
-
-```javascript
-var mySlider = new Revolver(mySlides, {autoplay: false, rotationSpeed: 2000});
-```
-
 For more information [head over to the documentation](https://github.com/revolverjs/revolverjs/tree/master/docs/README.md).
 
 ## Plugins
@@ -68,13 +62,13 @@ Revolver uses [Grunt](http://gruntjs.com/) and a few [Grunt plugins](http://grun
 
 To install Grunt and plugins, open Terminal (*nix or Mac) or Powershell (Windows) and run:
 
-```
+```shell
 npm install
 ```
 
 To start the Grunt watch server, run:
 
-```
+```shell
 grunt
 ```
 
