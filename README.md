@@ -58,7 +58,7 @@ If you would like to add your own plugin to the list feel free fork and pull.
 
 ## Options
 
-Options are defaults that can be overwritten upon instantiation (through the constructor) or at any time there-after (through the `[setOptions()](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md)` method).
+Options are defaults that can be overwritten upon instantiation (through the constructor) or at any time there-after (through the [setOptions()](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md) method).
 
 * [**autoPlay**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
 * [**onPause()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/onpause.md): A callback that is executed every time the pause() method is called.
