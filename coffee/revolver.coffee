@@ -1,5 +1,5 @@
 # =========================================================================================================
-# 
+#
 # 'Y8888888b.                                     `Y88                                        ::
 #   888   Y88b                                     888
 #   888   dX8P   .d888b. `Y8b      d8P  .d8888b.   888 `Y8b      d8P  .d888b.  `Y88.d88b.    `Y88  .d8888b
@@ -25,7 +25,7 @@ Revolver = (slides, options) ->
   @intervalId = null
   @disabled = false
   # merge options
-  @options = _.merge {}, Revolver.defaults, options 
+  @options = _.merge {}, Revolver.defaults, options
   # add all slides
   _.each slides, @addSlide, this
   # finish setting up init values
@@ -59,7 +59,7 @@ Revolver = (slides, options) ->
 
 
 # namespace for default options
-# (gets merged with user defined 
+# (gets merged with user defined
 # options in the constructor)
 Revolver.defaults =
   autoPlay: true      # whether or not to automatically begin playing the slides
@@ -141,7 +141,7 @@ Revolver::play = (options, firstTime) ->
   # return instance
   this
 
-# internal method used for stopping the 
+# internal method used for stopping the
 # loop that is created by the play method
 Revolver::_clearInterval = ->
   # if the intervalId has been set
@@ -198,7 +198,7 @@ Revolver::restart = (options) ->
   return this if @disabled is true
   # fire all 'restart' event listeners
   @trigger 'restart'
-  # stop and then play the 
+  # stop and then play the
   # slider from the beginning
   @stop().play options
   # return instance
@@ -213,7 +213,7 @@ Revolver::goTo = (i, options) ->
   return this  if @disabled is true or i is @currentSlide
   # queue up i as the next slide
   @nextSlide = i
-  # if slider is playing, pause() and play() 
+  # if slider is playing, pause() and play()
   # (which will transition immediately and restart the loop)
   # if not play, simply transition() straight to it
   (if not @status.playing then @transition(options) else @pause().play(options))

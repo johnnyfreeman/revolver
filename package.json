@@ -5,7 +5,7 @@
     "grunt": "~0.4.1",
     "grunt-regarde": "~0.1.1",
     "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-coffee": "~0.7.0"
+    "grunt-contrib-coffee": "git://github.com/johnnyfreeman/grunt-contrib-coffee"
   },
   "engines": {
     "node": "0.10.0",

@@ -10,7 +10,8 @@ module.exports = function(grunt) {
     coffee: {
       compileWithMaps: {
         options: {
-          sourceMap: true
+          sourceMap: true,
+          sourceMapDir: 'source-maps/'
         },
         files: {
           'js/revolver.js': 'coffee/revolver.coffee'
@@ -40,7 +41,7 @@ module.exports = function(grunt) {
       },
 
       uglify: {
-        files: ['revolver.js'],
+        files: ['js/revolver.js'],
         tasks: 'uglify'
       }
 
