@@ -58,19 +58,6 @@ Options are defaults that can be overwritten upon instantiation (through the con
   * [**onStart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/transition/onstart.md): A callback that is executed every time the transition's animation has started.
   * [**speed**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/transition/speed.md): The number of milliseconds the transition (animation) should last.
 
-```javascript
-// passing options through the constructor
-var mySlider = new Revolver(mySlides, {
-  autoPlay: false,
-  onStop: function() {
-    aleft('The slider has been stopped.');
-  }
-});
-
-// then again, sometime later...
-mySlider.setOptions({rotationSpeed: 1500});
-```
-
 ## Events
 
 Revolver emits important events and exposes an event api so that you can hook into the core without actually having to hardcode your changes directly into the core.
@@ -82,12 +69,6 @@ Revolver emits important events and exposes an event api so that you can hook in
 * [**stop**](#): Fired every time the stop() method is called.
 * [**transitionStart**](#): Fired every time the transition's animation has started.
 * [**transitionComplete**](#): Fired every time the transition's animation has completed.
-
-```javascript
-mySlider.on('pause', function() {
-  // show paused indicator
-});
-```
 
 ## Instance Methods
 
