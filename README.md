@@ -2,8 +2,6 @@
 
 Revolver.js is a modular javascript library for building a content slider from scratch. Think of it as a boilerplate or framework for making your own slider, exactly the way you want it. But don't let that scare you, it's really easy, I promise!
 
-http://revolverjs.com/
-
 ## Dependencies
 
 Revolver has 2 hard dependencies: [Lodash](http://lodash.com/) and [Bean](https://github.com/fat/bean). Lodash is used for merging option objects, looping over arrays, etc. The same stuff other projects use it for. Bean is used to handle events. You need to make sure you load both of them before Revolver.
