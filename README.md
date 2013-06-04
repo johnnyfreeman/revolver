@@ -22,9 +22,9 @@ Of course, you can still take the ol' fashioned approach and [download](https://
 
 Because of Revolver's modular architecture, it does very little out of the box and usually requires a few plugins to hit the sweet spot. Here's a list of current plugins:
 
-* [revolver-jquery-fade](https://github.com/revolverjs/revolver-jquery-revolver) -- Fade transition using jQuery.
-* [revolver-jquery](https://github.com/revolverjs/revolver-jquery) -- Instantiate Revolver the jQuery way.
-* [revolver-mootools](https://github.com/revolverjs/revolver-mootools) -- Instantiate Revolver the Mootools way.
+* [**revolver-jquery-fade**](https://github.com/revolverjs/revolver-jquery-revolver): Fade transition using jQuery.
+* [**revolver-jquery**](https://github.com/revolverjs/revolver-jquery): Instantiate Revolver the jQuery way.
+* [**revolver-mootools**](https://github.com/revolverjs/revolver-mootools): Instantiate Revolver the Mootools way.
 
 ## Contributing
 
