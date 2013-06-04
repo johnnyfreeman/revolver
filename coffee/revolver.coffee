@@ -94,6 +94,14 @@ Revolver::addSlide = (slide) ->
   this
 
 
+# set options
+Revolver::setOptions = (options) ->
+# merge new options with the existing options
+  _.merge @options, options
+  # return instance
+  this
+
+
 # changes the status of the slider
 Revolver::changeStatus = (newStatus) ->
   # loop over all statuses and set all as true or false
