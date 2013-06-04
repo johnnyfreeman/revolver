@@ -75,65 +75,65 @@ mySlider.setOptions({rotationSpeed: 1500});
 
 Revolver emits important events and exposes an event api so that you can hook into the core without actually having to hardcode your changes directly into the core.
 
-* pause
-* play
-* ready
-* restart
-* stop
-* transitionStart
-* transitionComplete
+* **pause**: (not documented yet)
+* **play**: (not documented yet)
+* **ready**: (not documented yet)
+* **restart**: (not documented yet)
+* **stop**: (not documented yet)
+* **transitionStart**: (not documented yet)
+* **transitionComplete**: (not documented yet)
 
 ## Instance Methods
 
-* first()
-* goTo()
-* last()
-* next()
-* pause()
-* play()
-* previous()
-* reset()
-* restart()
-* on()
-* one()
-* off()
+* **first()**: (not documented yet)
+* **goTo()**: (not documented yet)
+* **last()**: (not documented yet)
+* **next()**: (not documented yet)
+* **pause()**: (not documented yet)
+* **play()**: (not documented yet)
+* **previous()**: (not documented yet)
+* **reset()**: (not documented yet)
+* **restart()**: (not documented yet)
+* **on()**: (not documented yet)
+* **one()**: (not documented yet)
+* **off()**: (not documented yet)
 * [**setOptions()**](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md): Merge new options with the existing options object.
-* stop()
-* trigger()
+* **stop()**: (not documented yet)
+* **trigger()**: (not documented yet)
 
 ## Instance Properties
 
-* currentSlide
-* disabled
-* intervalId
-* isAnimating
-* iteration
-* lastSlide
-* nextSlide
-* numSlides
-* options
-* previousSlide
-* slides
-* status
+* **currentSlide**: (not documented yet)
+* **disabled**: (not documented yet)
+* **intervalId**: (not documented yet)
+* **isAnimating**: (not documented yet)
+* **iteration**: (not documented yet)
+* **lastSlide**: (not documented yet)
+* **nextSlide**: (not documented yet)
+* **numSlides**: (not documented yet)
+* **options**: (not documented yet)
+* **previousSlide**: (not documented yet)
+* **slides**: (not documented yet)
+* **status**: (not documented yet)
 
 ## Plugins
 
 Because of Revolver's modular architecture, it does very little out of the box and usually requires a plugin or two to hit the sweet spot. Here's the list:
 
-* [revolver-jquery](https://github.com/revolverjs/revolver-jquery/tree/development): Instantiate Revolver the jQuery way.
-* [revolver-jquery-fade](https://github.com/revolverjs/revolver-jquery-fade): Fade transition using jQuery.
-* revolver-jquery-slide: Coming soon.
-* revolver-jquery-reveal: Coming soon.
-* [revolver-mootools](https://github.com/revolverjs/revolver-mootools/tree/development): Instantiate Revolver the Mootools way.
-* revolver-mootools-fade: Coming soon.
-* revolver-mootools-slide: Coming soon.
-* revolver-mootools-reveal: Coming soon.
+* [**revolver-jquery**](https://github.com/revolverjs/revolver-jquery/tree/development): Instantiate Revolver the jQuery way.
+* [**revolver-jquery-fade**](https://github.com/revolverjs/revolver-jquery-fade): Fade transition using jQuery.
+* **revolver-jquery-slide**: Coming soon.
+* **revolver-jquery-reveal**: Coming soon.
+* [**revolver-mootools**](https://github.com/revolverjs/revolver-mootools/tree/development): Instantiate Revolver the Mootools way.
+* **revolver-mootools-fade**: Coming soon.
+* **revolver-mootools-slide**: Coming soon.
+* **revolver-mootools-reveal**: Coming soon.
 
 If you would like to add your own plugin to the list feel free fork and pull.
 
 ## Contributing
 
-Revolver uses [Grunt](http://gruntjs.com/) and a few [Grunt plugins](http://gruntjs.com/plugins) to automatically compile the CoffeeScript to JS, minify, and create a source map for each JS file. To install these tools you must have [Node.js](http://nodejs.org/) and [NPM](https://npmjs.org/) installed on your machine.
+Revolver uses [Grunt](http://gruntjs.com/) and a few Grunt plugins to automatically compile the CoffeeScript to JS, minify, and create a source map for each JS file. To install these tools you must have [Node](http://nodejs.org/) and [NPM](https://npmjs.org/) installed on your machine.
 
 To install Grunt and plugins, open Terminal (*nix or Mac) or Powershell (Windows) and run:
 
