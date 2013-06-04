@@ -11,7 +11,7 @@ Revolver has 2 hard dependencies: [Lodash](http://lodash.com/) and [Bean](https:
 The recommended way to install Revolver is with [Bower](http://bower.io/).
 
 ```
-$ bower install revolverjs
+bower install revolverjs
 ```
 
 It will resolve all of Revolver's dependencies for you, no need to go and download those separately. If you are unfamiliar with it, I highly recommend you take a look!
