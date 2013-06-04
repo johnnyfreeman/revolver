@@ -35,6 +35,18 @@ If Revolver has been beneficial to you and you'd like to give back, there are a 
 
 ## Build Process
 
-Revolver uses [Grunt](http://gruntjs.com/) and a few Grunt packages to automatically compile the CoffeeScript to JS, minify, and create a source map for each JS file.
+Revolver uses [Grunt](http://gruntjs.com/) and a few Grunt packages to automatically compile the CoffeeScript to JS, minify, and create a source map for each JS file. To install these tools you must have Node.js and NPM installed on your machine.
 
-To install these tools you must have Node.js and NPM already installed. Then run `npm install` to install Grunt and it's packages, and run `grunt` to start the watch server. Leave the terminal window running in the background while you make changes to [/coffee/revolver.coffee](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee)
+To install Grunt and it's packages, run:
+
+```
+npm install
+```
+
+To start the Grunt watch server, run:
+
+```
+grunt
+```
+
+Now leave the terminal window running in the background while you make changes to [/coffee/revolver.coffee](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee)!
