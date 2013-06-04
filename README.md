@@ -90,21 +90,21 @@ mySlider.on('pause', function() {
 
 ## Instance Methods
 
-* **first()**: (not documented yet)
-* **goTo()**: (not documented yet)
-* **last()**: (not documented yet)
-* **next()**: (not documented yet)
-* **pause()**: (not documented yet)
-* **play()**: (not documented yet)
-* **previous()**: (not documented yet)
-* **reset()**: (not documented yet)
-* **restart()**: (not documented yet)
-* **on()**: (not documented yet)
-* **one()**: (not documented yet)
-* **off()**: (not documented yet)
+* **first()**: Transition immediately to the first slide.
+* **goTo()**: Transition immediately to any given slide.
+* **last()**: Transition immediately to the last (not previous) slide.
+* **next()**: Transition immediately to the next slide.
+* **pause()**: Stops the slider but remembers it's position.
+* **play()**: Creates a continuous loop where the slider transitions to the next slide at the given interval.
+* **previous()**: Transition immediately to the previous slide.
+* **reset()**: Queues up the first slide to be next without forcing the transition to happen immediately.
+* **restart()**: This is the functional equivalent to calling stop() and then play() consecutively.
+* **on()**: Registers an event listener.
+* **one()**: Alias for `on()` except that the handler will removed after the first execution.
+* **off()**: Removes a previously registered event listener.
 * [**setOptions()**](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md): Merge new options with the existing options object.
-* **stop()**: (not documented yet)
-* **trigger()**: (not documented yet)
+* **stop()**: Stops the slider from transitioning to the next slide, and resets the slider.
+* **trigger()**: Executes all listeners for the given event.
 
 ## Instance Properties
 
