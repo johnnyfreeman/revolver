@@ -4,36 +4,31 @@ For the time being, this is where the docs will be kept for the new version 2.0.
 
 ## Options
 
-Although most plugins add their own set of options, Revolver comes with a few options built in that can be overwritten upon instantiation [through the constructor](#setting-options-through-the-constructor) or at any time there-after [through the `setOptions()` method](#setting-options-through-the-setoptions-method).
+Although most plugins add their own set of options, Revolver comes with a few options built in that can be overwritten upon instantiation through the constructor or at any time there-after through the `setOptions()` method.
 
-* **autoPlay**: Dictates whethor or not Revolver will begin playing immediately.
-* **onPause()**: A callback that is executed every time the pause() method is called.
-* **onPlay()**: A callback that is executed every time the play() method is called.
-* **onReady()**: A callback that is executed as soon as Revolver is completely setup and ready to go.
-* **onRestart()**: A callback that is executed every time the restart() method is called.
-* **onStop()**: A callback that is executed every time the stop() method is called.
-* **rotationSpeed**: The number of milliseconds to stay on each slide before transitioning to the next.
+* [**autoPlay**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
+* [**onPause()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/onpause.md): A callback that is executed every time the pause() method is called.
+* [**onPlay()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/onplay.md): A callback that is executed every time the play() method is called.
+* [**onReady()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/onready.md): A callback that is executed as soon as Revolver is completely setup and ready to go.
+* [**onRestart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/onrestart.md): A callback that is executed every time the restart() method is called.
+* [**onStop()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/onstop.md): A callback that is executed every time the stop() method is called.
+* [**rotationSpeed**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/rotationspeed.md): The number of milliseconds to stay on each slide before transitioning to the next.
 * **transition**: The transition option is just a namespace for the options that are specific to the transition itself.
-  * **name**: The type of transition to use for all transitions. See here for the full list of available transitions.
-  * **onComplete()**: A callback that is executed every time the transition's animation has completed.
-  * **onStart()**: A callback that is executed every time the transition's animation has started.
-  * **speed**: The number of milliseconds the transition (animation) should last.
-
-#### Setting options through the constructor
+  * [**name**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/transition/name.md): The type of transition to use for all transitions. See here for the full list of available transitions.
+  * [**onComplete()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/transition/oncomplete.md): A callback that is executed every time the transition's animation has completed.
+  * [**onStart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/transition/onstart.md): A callback that is executed every time the transition's animation has started.
+  * [**speed**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/transition/speed.md): The number of milliseconds the transition (animation) should last.
 
 ```
+// passing options through the constructor
 var mySlider = new Revolver(mySlides, {
 	autoPlay: false,
 	onStop: function() {
 		aleft('The slider has been stopped.');	
 	}
 });
-```
 
-#### Setting options through the `setOptions()` method
-
-```
-// sometime after you have the Revolver instance...
+// then again, sometime later...
 mySlider.setOptions({rotationSpeed: 1500});
 ```
 
