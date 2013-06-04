@@ -33,7 +33,7 @@ If Revolver has been beneficial to you and you'd like to give back, there are a 
 * If you have a great idea to make revolver better or have a bug to report, by all means, [report that mother](https://github.com/johnnyfreeman/revolver/issues)!
 * Revolver.js is free and always will be! But any donations made to the continued development of the project are more helpful than you might think.
 
-## Build Process
+### Build Process
 
 Revolver uses [Grunt](http://gruntjs.com/) and a few Grunt packages to automatically compile the CoffeeScript to JS, minify, and create a source map for each JS file. To install these tools you must have Node.js and NPM installed on your machine.
 
@@ -49,4 +49,6 @@ To start the Grunt watch server, run:
 grunt
 ```
 
-Now leave the terminal window running in the background while you make changes to [/coffee/revolver.coffee](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee)!
+Now leave the terminal window running in the background while you make your changes.
+
+**Note**: If you plan to make a pull request of your changes, make sure you only edit the coffee file ([/coffee/revolver.coffee](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee)) and never the js files directly. Grunt will take care of the js files for you.
