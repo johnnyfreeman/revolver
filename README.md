@@ -49,7 +49,7 @@ For more information [head over to the documentation](https://github.com/revolve
 
 ## Plugins
 
-Because of Revolver's modular architecture, it does very little out of the box and usually requires a few plugins to hit the sweet spot. Here's the list:
+Because of Revolver's modular architecture, it does very little out of the box and usually requires a plugin or two to hit the sweet spot. Here's the list:
 
 * [revolver-jquery](https://github.com/revolverjs/revolver-jquery/tree/development): Instantiate Revolver the jQuery way.
 * [revolver-jquery-fade](https://github.com/revolverjs/revolver-jquery-fade): Fade transition using jQuery.
