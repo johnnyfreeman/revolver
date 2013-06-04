@@ -41,21 +41,6 @@ var mySlider = new Revolver(mySlides);
 
 For more information [head over to the documentation](https://github.com/revolverjs/revolverjs/tree/master/docs/README.md).
 
-## Plugins
-
-Because of Revolver's modular architecture, it does very little out of the box and usually requires a plugin or two to hit the sweet spot. Here's the list:
-
-* [revolver-jquery](https://github.com/revolverjs/revolver-jquery/tree/development): Instantiate Revolver the jQuery way.
-* [revolver-jquery-fade](https://github.com/revolverjs/revolver-jquery-fade): Fade transition using jQuery.
-* revolver-jquery-slide: Coming soon.
-* revolver-jquery-reveal: Coming soon.
-* [revolver-mootools](https://github.com/revolverjs/revolver-mootools/tree/development): Instantiate Revolver the Mootools way.
-* revolver-mootools-fade: Coming soon.
-* revolver-mootools-slide: Coming soon.
-* revolver-mootools-reveal: Coming soon.
-
-If you would like to add your own plugin to the list feel free fork and pull.
-
 ## Options
 
 Options are defaults that can be overwritten upon instantiation (through the constructor) or at any time there-after (through the [setOptions()](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md) method).
@@ -130,6 +115,21 @@ Revolver emits important events and exposes an event api so that you can hook in
 * previousSlide
 * slides
 * status
+
+## Plugins
+
+Because of Revolver's modular architecture, it does very little out of the box and usually requires a plugin or two to hit the sweet spot. Here's the list:
+
+* [revolver-jquery](https://github.com/revolverjs/revolver-jquery/tree/development): Instantiate Revolver the jQuery way.
+* [revolver-jquery-fade](https://github.com/revolverjs/revolver-jquery-fade): Fade transition using jQuery.
+* revolver-jquery-slide: Coming soon.
+* revolver-jquery-reveal: Coming soon.
+* [revolver-mootools](https://github.com/revolverjs/revolver-mootools/tree/development): Instantiate Revolver the Mootools way.
+* revolver-mootools-fade: Coming soon.
+* revolver-mootools-slide: Coming soon.
+* revolver-mootools-reveal: Coming soon.
+
+If you would like to add your own plugin to the list feel free fork and pull.
 
 ## Contributing
 
