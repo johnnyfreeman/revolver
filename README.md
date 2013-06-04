@@ -90,18 +90,18 @@ Revolver emits important events and exposes an event api so that you can hook in
 
 ## Instance Properties
 
-* [**currentSlide**](#): (not documented yet)
-* [**disabled**](#): (not documented yet)
-* [**intervalId**](#): (not documented yet)
-* [**isAnimating**](#): (not documented yet)
-* [**iteration**](#): (not documented yet)
-* [**lastSlide**](#): (not documented yet)
-* [**nextSlide**](#): (not documented yet)
-* [**numSlides**](#): (not documented yet)
-* [**options**](#): (not documented yet)
-* [**previousSlide**](#): (not documented yet)
-* [**slides**](#): (not documented yet)
-* [**status**](#): (not documented yet)
+* [**currentSlide**](#): Holds the index number for the current slide.
+* [**disabled**](#): Used internally to disable all functionality within a Revolver instance.
+* [**intervalId**](#): The ID that Revolver uses to when stopping or pausing playback.
+* [**isAnimating**](#): Equal to true if Revolver is currently animating, false if not.
+* [**iteration**](#): A running count of how many times Revolver has transitioned.
+* [**lastSlide**](#): Holds the index key of the last (not previous) slide in the slider.
+* [**nextSlide**](#): Holds the index key of the next slide in the slider.
+* [**numSlides**](#): A count of the total number of slides that Revolver is acting upon.
+* [**options**](#): A congegation of all user-defined options, plugin-defined options, and Revolver's defaults.
+* [**previousSlide**](#): Holds the index key of the slide that was last in transition (before the current one).
+* [**slides**](#): Houses all the individual slides that Revolver is acting upon.
+* [**status**](#): The current status of the Revolver instance, whether it is "stopped", "paused", or "playing".
 
 ## Plugins
 
@@ -109,14 +109,14 @@ Because of Revolver's modular architecture, it does very little out of the box a
 
 * [**revolver-jquery**](https://github.com/revolverjs/revolver-jquery/tree/development): Instantiate Revolver the jQuery way.
 * [**revolver-jquery-fade**](https://github.com/revolverjs/revolver-jquery-fade): Fade transition using jQuery.
-* [**revolver-jquery-slide**](#): Coming soon.
-* [**revolver-jquery-reveal**](#): Coming soon.
+* [**revolver-jquery-slide**](#): Slide transition using jQuery.
+* [**revolver-jquery-reveal**](#): Reveal transition using jQuery.
 * [**revolver-mootools**](https://github.com/revolverjs/revolver-mootools/tree/development): Instantiate Revolver the Mootools way.
-* [**revolver-mootools-fade**](#): Coming soon.
-* [**revolver-mootools-slide**](#): Coming soon.
-* [**revolver-mootools-reveal**](#): Coming soon.
+* [**revolver-mootools-fade**](#): Fade transition using Mootools.
+* [**revolver-mootools-slide**](#): Slide transition using Mootools.
+* [**revolver-mootools-reveal**](#): Reveal transition using Mootools.
 
-If you would like to add your own plugin to the list feel free fork and pull.
+If you would like to add your own plugin to the list feel free to fork and pull.
 
 ## Contributing
 
