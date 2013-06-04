@@ -87,6 +87,7 @@ Revolver emits important events and exposes an event api so that you can hook in
 mySlider.on('pause', function() {
   // show paused indicator
 });
+```
 
 ## Instance Methods
 
