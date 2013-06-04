@@ -19,7 +19,7 @@ Although most plugins add their own set of options, Revolver comes with a few op
   * [**onStart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/transition/onstart.md): A callback that is executed every time the transition's animation has started.
   * [**speed**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/transition/speed.md): The number of milliseconds the transition (animation) should last.
 
-```
+```javascript
 // passing options through the constructor
 var mySlider = new Revolver(mySlides, {
 	autoPlay: false,
