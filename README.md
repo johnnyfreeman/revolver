@@ -75,13 +75,18 @@ mySlider.setOptions({rotationSpeed: 1500});
 
 Revolver emits important events and exposes an event api so that you can hook into the core without actually having to hardcode your changes directly into the core.
 
-* **pause**: (not documented yet)
-* **play**: (not documented yet)
-* **ready**: (not documented yet)
-* **restart**: (not documented yet)
-* **stop**: (not documented yet)
-* **transitionStart**: (not documented yet)
-* **transitionComplete**: (not documented yet)
+* **pause**: Fired every time the pause() method is called.
+* **play**: Fired every time the play() method is called.
+* **ready**: Fired after instantiation as soon as Revolver is completely setup and ready to go.
+* **restart**: Fired every time the restart() method is called.
+* **stop**: Fired every time the stop() method is called.
+* **transitionStart**: Fired every time the transition's animation has started.
+* **transitionComplete**: Fired every time the transition's animation has completed.
+
+```javascript
+mySlider.on('pause', function() {
+  // show paused indicator
+});
 
 ## Instance Methods
 
