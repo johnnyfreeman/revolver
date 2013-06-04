@@ -18,9 +18,38 @@ It will resolve all of Revolver's dependencies for you, no need to go and downlo
 
 Of course, you can still take the ol' fashioned approach and [download](https://github.com/revolverjs/revolverjs/archive/master.zip) and unzip it anywhere in your project. Just make sure you also do the same for Revolver's hard dependencies: [Lodash](http://lodash.com/) and [Bean](https://github.com/fat/bean).
 
+## Usage
+
+The only thing that is required to instantiate Revolver is an array of DOM elements.
+
+```javascript
+// using raw javascript
+var mySlides = document.getElementById('slidesContainer').getElementsByClassName('slide');
+
+// using jQuery
+var mySlides = $('#slidesContainer .slide'); // <-- returns an array-like object
+
+// using Mootools
+var mySlides = $$('#slidesContainer .slide'); // <-- returns an array-like object
+```
+
+Once you have your slides array, just pass it to the Revolver constructor.
+
+```javascript
+var mySlider = new Revolver(mySlides);
+```
+
+You can optionally pass options.
+
+```javascript
+var mySlider = new Revolver(mySlides, {autoplay: false, rotationSpeed: 2000});
+```
+
+For more information [head over to the documentation](https://github.com/revolverjs/revolverjs/tree/master/docs/README.md).
+
 ## Plugins
 
-Because of Revolver's modular architecture, it does very little out of the box and usually requires a few plugins to hit the sweet spot. Here's a list of current plugins:
+Because of Revolver's modular architecture, it does very little out of the box and usually requires a few plugins to hit the sweet spot. Here's the list:
 
 * [revolver-jquery](https://github.com/revolverjs/revolver-jquery/tree/development): Instantiate Revolver the jQuery way.
 * [revolver-jquery-fade](https://github.com/revolverjs/revolver-jquery-fade): Fade transition using jQuery.
@@ -31,7 +60,7 @@ Because of Revolver's modular architecture, it does very little out of the box a
 * revolver-mootools-slide: Coming soon.
 * revolver-mootools-reveal: Coming soon.
 
-If you would like to add your plugin to this list place fork and pull.
+If you would like to add your own plugin to the list feel free fork and pull.
 
 ## Contributing
 
