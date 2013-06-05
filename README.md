@@ -129,7 +129,7 @@ If you would like to add your own plugin to the list feel free to fork and pull.
 
 Revolver uses [Grunt](http://gruntjs.com/) and a few Grunt plugins to automatically compile the CoffeeScript to JS, minify, and create a source map for each JS file. To install these tools you must have [Node](http://nodejs.org/) and [NPM](https://npmjs.org/) installed on your machine.
 
-To install Grunt and plugins, open Terminal (*nix or Mac) or Powershell (Windows) and run:
+To install Grunt and plugins, open Terminal (*nix or Mac) or Powershell (Windows), and run:
 
 ```shell
 npm install
@@ -138,9 +138,9 @@ npm install
 To start the Grunt watch server, run:
 
 ```shell
-grunt
+grunt regarde
 ```
 
 Now leave the terminal window running in the background while you make your changes.
 
-**Note**: If you plan to make a pull request of your changes, make sure you only edit the coffee file ([/coffee/revolver.coffee](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee)) and never the js files directly. Grunt will take care of the js files for you.
+**Note**: If you plan to make a pull request of your changes, make sure you only edit the coffee file (`/coffee/revolver.coffee`) and never the js files directly. Grunt will take care of the js files for you.
