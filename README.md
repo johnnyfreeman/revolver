@@ -135,7 +135,13 @@ To install Grunt and plugins, open Terminal (*nix or Mac) or Powershell (Windows
 npm install
 ```
 
-To start the Grunt watch server, run:
+To run the coffee compilation and minification tasks once, run:
+
+```shell
+grunt
+```
+
+To start the Grunt watch server that runs both of the previous tasks upon every save, run:
 
 ```shell
 grunt regarde
