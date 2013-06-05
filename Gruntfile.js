@@ -23,6 +23,7 @@ module.exports = function(grunt) {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         sourceMap: 'source-maps/revolver.min.js.map',
+        sourceMappingURL: '../source-maps/revolver.min.js.map',
         sourceMapIn: 'source-maps/revolver.js.map'
       },
       build: {
