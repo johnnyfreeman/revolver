@@ -1,10 +1,7 @@
 {
   "name": "revolverjs",
   "version": "2.0.0",
-  "main": [
-    "./revolver.js", 
-    "./revolver.min.js"
-  ],
+  "main": "./revolver.min.js",
   "ignore": [
     "**/.*"
   ],
