@@ -67,6 +67,11 @@
     return this;
   };
 
+  Revolver.prototype.setOptions = function(options) {
+    _.merge(this.options, options);
+    return this;
+  };
+
   Revolver.prototype.changeStatus = function(newStatus) {
     _.each(this.status, (function(status) {
       return this.status[status] = status === newStatus;
@@ -202,5 +207,5 @@
 }).call(this);
 
 /*
-//@ sourceMappingURL=revolver.js.map
+//@ sourceMappingURL=source-maps/revolver.js.map
 */
