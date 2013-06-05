@@ -55,6 +55,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-regarde');
 
   // Default tasks
-  grunt.registerTask('default', ['coffee uglify']);
+  grunt.registerTask('default', ['coffee', 'uglify']);
 
 };
