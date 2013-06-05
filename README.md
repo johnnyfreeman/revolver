@@ -141,7 +141,7 @@ To run the coffee compilation and minification tasks once, run:
 grunt
 ```
 
-To start the Grunt watch server that runs both of the previous tasks upon every save, run:
+Or, to start the Grunt watch server that runs both of the previous tasks upon every save, run:
 
 ```shell
 grunt regarde
