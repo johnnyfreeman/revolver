@@ -74,6 +74,9 @@ Revolver emits important events and exposes an event api so that you can hook in
 
 ## Instance Methods
 
+Once you have instantiated Revolver, as shown [here](#usage), you then have access to all these methods.
+
+* [**addSlide()**](#): Add a new slide to the [slides](#) array.
 * [**first()**](#): Transition immediately to the first slide.
 * [**goTo()**](#): Transition immediately to any given slide.
 * [**last()**](#): Transition immediately to the last (not previous) slide.
@@ -91,6 +94,8 @@ Revolver emits important events and exposes an event api so that you can hook in
 * [**trigger()**](#): Executes all listeners for the given event.
 
 ## Instance Properties
+
+Once you have instantiated Revolver, as shown [here](#usage), you then have access to all these properties.
 
 * [**currentSlide**](#): Holds the index number for the current slide.
 * [**disabled**](#): Used internally to disable all functionality within a Revolver instance.
