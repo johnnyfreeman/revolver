@@ -1,8 +1,6 @@
 # rotationSpeed
 
-**Default**: `4000` 
-
-**Type**: `Number`
+**Type**: `Number`, **Default**: `4000` 
 
 This option is passed through the options object to the constructor. It is the number of milliseconds Revolver will wait before transitioning to the next slide.
 
