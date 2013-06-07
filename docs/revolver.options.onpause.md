@@ -4,7 +4,7 @@
 
 **Type**: `Function`
 
-This is a callback that you can pass through the options object to the constructor. Internally, it will be just be registered to the [pause](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.pause.md) event using the [on](https://github.com/revolverjs/revolverjs/edit/master/docs/revolver.methods.on.md) method.
+This is a callback that you can pass through the options object to the constructor. Internally, it is registered as a listener to the [pause](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.pause.md) event using the [on](https://github.com/revolverjs/revolverjs/edit/master/docs/revolver.methods.on.md) method.
 
 ```javascript
 var slider =  new Revolver($('.slides'), {
