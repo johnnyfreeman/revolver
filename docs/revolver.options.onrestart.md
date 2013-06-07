@@ -4,7 +4,7 @@
 
 **Default**: `function(){}`
 
-**In the source**: [[50](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L50), [70](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L70)]
+**Source Refs**: [[50](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L50), [70](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L70)]
 
 This is a callback that you can pass through the options object to the constructor. Internally, it is registered as a listener to the [restart](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.restart.md) event using the [on](https://github.com/revolverjs/revolverjs/edit/master/docs/revolver.methods.on.md) method.
 
