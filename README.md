@@ -47,7 +47,7 @@ For more information [head over to the documentation](https://github.com/revolve
 
 Options are defaults that can be overwritten upon instantiation (through the constructor) or at any time there-after (through the [setOptions()](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md) method).
 
-* [**autoPlay**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
+* [**autoPlay**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
 * [**onPause()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/onpause.md): A callback that is executed every time the pause() method is called.
 * [**onPlay()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/onplay.md): A callback that is executed every time the play() method is called.
 * [**onReady()**](https://github.com/revolverjs/revolverjs/blob/master/docs/options/onready.md): A callback that is executed as soon as Revolver is completely setup and ready to go.
