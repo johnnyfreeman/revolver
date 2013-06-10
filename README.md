@@ -55,10 +55,10 @@ Options are defaults that can be overwritten upon instantiation (through the con
 * [**onStop()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onstop.md): A callback that is executed every time the stop() method is called.
 * [**rotationSpeed**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.rotationspeed.md): The number of milliseconds to stay on each slide before transitioning to the next.
 * [**transition**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.md): The transition option is just a namespace for the options that are specific to the transition itself.
-  * [**name**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition/name.md): The type of transition to use for all transitions. See here for the full list of available transitions.
-  * [**onComplete()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition/oncomplete.md): A callback that is executed every time the transition's animation has completed.
-  * [**onStart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition/onstart.md): A callback that is executed every time the transition's animation has started.
-  * [**speed**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition/speed.md): The number of milliseconds the transition (animation) should last.
+  * [**name**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.name.md): The type of transition to use for all transitions. See here for the full list of available transitions.
+  * [**onComplete()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.oncomplete.md): A callback that is executed every time the transition's animation has completed.
+  * [**onStart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.onstart.md): A callback that is executed every time the transition's animation has started.
+  * [**speed**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.speed.md): The number of milliseconds the transition (animation) should last.
 
 ## Events
 
