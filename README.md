@@ -41,8 +41,6 @@ Once you have your slides array, just pass it to the Revolver constructor.
 var mySlider = new Revolver(mySlides);
 ```
 
-For more information [head over to the documentation](https://github.com/revolverjs/revolverjs/tree/master/docs/README.md).
-
 ## Options
 
 Options are defaults that can be overwritten upon instantiation (through the constructor) or at any time there-after (through the [setOptions()](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md) method).
