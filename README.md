@@ -33,7 +33,7 @@ var mySlides = $('#slidesContainer .slide');
 var mySlides = $$('#slidesContainer .slide');
 ```
 
-As you _might_ have already guessed. It doesn't have to be of the `Array` type. It can be an Array-like object (like what jQuery produces). Anyways, once you have your slides "array", just pass it to the Revolver constructor.
+As you _might_ have already guessed. It doesn't have to be of the `Array` type. It can be an Array-like object (like what jQuery produces). Anyways, once you have your slides "array", just pass it as the first argument to Revolver.
 
 ```javascript
 var mySlider = new Revolver(mySlides);
