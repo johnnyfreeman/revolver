@@ -1,0 +1,3 @@
+# isAnimating
+
+(documentation coming soon)
