@@ -1,3 +1,9 @@
 # setOptions
 
-(documentation coming soon) :)
+**Type**: `Function`, **Returns**: `Object` (Instance of Revolver)
+
+(documentation coming soon)
+
+```javascript
+
+```
