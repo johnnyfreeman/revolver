@@ -83,9 +83,9 @@ Once you have instantiated Revolver, as shown [here](#usage), you then have acce
 * [**previous()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.previous.md): Transition immediately to the previous slide.
 * [**reset()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.reset.md): Queues up the first slide to be next without forcing the transition to happen immediately.
 * [**restart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.restart.md): This is the functional equivalent to calling stop() and then play() consecutively.
+* [**off()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.off.md): Removes a previously registered event listener.
 * [**on()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.on.md): Registers an event listener.
 * [**one()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.one.md): Alias for `on()` except that the handler will removed after the first execution.
-* [**off()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.off.md): Removes a previously registered event listener.
 * [**setOptions()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.setoptions.md): Merge new options with the existing options object.
 * [**stop()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.stop.md): Stops the slider from transitioning to the next slide, and resets the slider.
 * [**trigger()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.trigger.md): Executes all listeners for the given event.
