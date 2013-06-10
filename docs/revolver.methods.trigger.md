@@ -8,4 +8,4 @@ Executes all listeners for the given event.
 mySlider.trigger('pause');
 ```
 
-For more information on how `on()` works, please see [Bean's documentation on it](https://github.com/fat/bean#fire).
+For more information on how `trigger()` works, please see [Bean's documentation on it](https://github.com/fat/bean#fire).

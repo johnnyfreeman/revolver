@@ -10,4 +10,4 @@ mySlider.one('play', function() {
 });
 ```
 
-For more information on how `on()` works, please see [Bean's documentation on it](https://github.com/fat/bean#one).
+For more information on how `one()` works, please see [Bean's documentation on it](https://github.com/fat/bean#one).

@@ -10,4 +10,4 @@ Remove an event listener.
 mySlider.off('pause', myRegisteredCallback);
 ```
 
-For more information on how `on()` works, please see [Bean's documentation on it](https://github.com/fat/bean#off).
+For more information on how `off()` works, please see [Bean's documentation on it](https://github.com/fat/bean#off).
