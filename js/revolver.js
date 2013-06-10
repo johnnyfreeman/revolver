@@ -178,19 +178,23 @@
   };
 
   Revolver.prototype.on = function(eventName, callback) {
-    return bean.on(this, eventName, _.bind(callback, this));
+    bean.on(this, 'revolver.' + eventName, _.bind(callback, this));
+    return this;
   };
 
   Revolver.prototype.one = function(eventName, callback) {
-    return bean.one(this, eventName, _.bind(callback, this));
+    bean.one(this, 'revolver.' + eventName, _.bind(callback, this));
+    return this;
   };
 
   Revolver.prototype.off = function(eventName, callback) {
-    return bean.off(this, eventName, _.bind(callback, this));
+    bean.off(this, 'revolver.' + eventName, _.bind(callback, this));
+    return this;
   };
 
   Revolver.prototype.trigger = function(eventName) {
-    return bean.fire(this, eventName);
+    bean.fire(this, 'revolver.' + eventName);
+    return this;
   };
 
   Revolver.transitions = {};

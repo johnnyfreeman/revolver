@@ -245,16 +245,28 @@ Revolver::last = (options) -> @goTo @lastSlide, options
 # EVENTS
 
 # attach an event listener
-Revolver::on = (eventName, callback) -> bean.on this, eventName, _.bind(callback, this)
+Revolver::on = (eventName, callback) ->
+  bean.on this, 'revolver.' + eventName, _.bind(callback, this)
+  # return instance
+  this
 
 # alias for on() except that the handler will removed after the first execution
-Revolver::one = (eventName, callback) -> bean.one this, eventName, _.bind(callback, this)
+Revolver::one = (eventName, callback) ->
+  bean.one this, 'revolver.' + eventName, _.bind(callback, this)
+  # return instance
+  this
 
 # remove an event listener using
-Revolver::off = (eventName, callback) -> bean.off this, eventName, _.bind(callback, this)
+Revolver::off = (eventName, callback) ->
+  bean.off this, 'revolver.' + eventName, _.bind(callback, this)
+  # return instance
+  this
 
 # execute all listeners for the given event
-Revolver::trigger = (eventName) -> bean.fire this, eventName
+Revolver::trigger = (eventName) ->
+  bean.fire this, 'revolver.' + eventName
+  # return instance
+  this
 
 
 # TRANSITIONS
