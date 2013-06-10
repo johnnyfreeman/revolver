@@ -105,14 +105,14 @@ Once you have instantiated Revolver, as shown [here](#usage), you then have acce
 * [**slides**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.slides.md): Houses all the individual slides that Revolver is acting upon.
 * [**status**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.status.md): The current status of the Revolver instance, whether it is "stopped", "paused", or "playing".
 
-## Customizing Revolver
+## Customizing
 
 Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization, or even an extension or two to hit the sweet spot. And because of it's modular and event-driven architecture, it is pretty easy to bend it to your will. Here are a few really basic ideas to get you started:
 
-* [**revolver-fade**](https://github.com/revolverjs/revolver-jquery-fade): Slides fade in and out from each other using jQuery.
-* [**revolver-slide**](#): The traditional sliding doors effect using Mootools.
-* [**revolver-reveal**](#): A curtain effect using Query and GreenSock.
-* [**revolver-inception**](#): A slider within a slider! Go as deep as you want.
+* [**revolver-fade**](https://github.com/revolverjs/revolver-fade): Slides fade in and out from each other using jQuery.
+* [**revolver-slide**](https://github.com/revolverjs/revolver-slide): The traditional sliding doors effect using Mootools.
+* [**revolver-reveal**](https://github.com/revolverjs/revolver-reveal): A curtain effect using Query and GreenSock.
+* [**revolver-inception**](https://github.com/revolverjs/revolver-inception): A slider within a slider.
 
 ## Contributing
 
