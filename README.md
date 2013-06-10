@@ -58,7 +58,6 @@ Options are defaults that can be overwritten upon instantiation (through the con
   * [**name**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.name.md): The type of transition to use for all transitions. See here for the full list of available transitions.
   * [**onComplete()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.oncomplete.md): A callback that is executed every time the transition's animation has completed.
   * [**onStart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.onstart.md): A callback that is executed every time the transition's animation has started.
-  * [**speed**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.speed.md): The number of milliseconds the transition (animation) should last.
 
 ## Events
 
