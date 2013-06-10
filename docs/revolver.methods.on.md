@@ -10,4 +10,4 @@ mySlider.on('pause', function() {
 });
 ```
 
-For more information on how `on()` works, please see [Bean's documentation on it](https://github.com/fat/bean#onelement-eventtype-selector-handler-args-).
+For more information on how `on()` works, please see [Bean's documentation on it](https://github.com/fat/bean#on).
