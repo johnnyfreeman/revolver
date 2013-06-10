@@ -1,9 +1,11 @@
-# setOptions
+# setOptions(options)
 
 **Type**: `Function`, **Returns**: `Object` (Instance of Revolver)
 
-(documentation coming soon)
+Merge new options in with the options object.
 
 ```javascript
-
+mySlider.setOptions({
+  rotationSpeed: 3500
+});
 ```

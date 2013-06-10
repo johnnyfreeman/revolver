@@ -1,9 +1,11 @@
-# off
+# off(event, callback)
 
 **Type**: `Function`, **Returns**: `Object` (Instance of Revolver)
 
-(documentation coming soon)
+Remove an event listener.
 
 ```javascript
+// myRegisteredCallback
 
+mySlider.off('pause', myRegisteredCallback);
 ```

@@ -1,10 +1,12 @@
-# on
+# on(event, callback)
 
 **Type**: `Function`, **Returns**: `Object` (Instance of Revolver)
 
-(documentation coming soon)
+Attaches an event listener.
 
 ```javascript
-
+mySlider.on('pause', function() {
+  // do something
+});
 ```
 

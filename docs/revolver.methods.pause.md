@@ -1,9 +1,9 @@
-# pause
+# pause(options)
 
 **Type**: `Function`, **Returns**: `Object` (Instance of Revolver)
 
-(documentation coming soon)
+Stops the slider but remembers it's position.
 
 ```javascript
-
+mySlider.pause();
 ```

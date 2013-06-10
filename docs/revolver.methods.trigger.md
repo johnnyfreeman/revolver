@@ -1,9 +1,9 @@
-# trigger
+# trigger(event)
 
 **Type**: `Function`, **Returns**: `Object` (Instance of Revolver)
 
-(documentation coming soon)
+Executes all listeners for the given event.
 
 ```javascript
-
+mySlider.trigger('pause');
 ```

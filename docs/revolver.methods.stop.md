@@ -1,9 +1,9 @@
-# stop
+# stop()
 
 **Type**: `Function`, **Returns**: `Object` (Instance of Revolver)
 
-(documentation coming soon)
+Stops the slider from transitioning to the next slide, and resets the slider.
 
 ```javascript
-
+mySlider.stop();
 ```
