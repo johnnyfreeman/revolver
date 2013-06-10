@@ -1,10 +1,10 @@
 # Revolver.js
 
-Revolver.js is a modular, unopinionated javascript library to help you build your own content slider from scratch. It has a sensable API that helps you get from mockup to reality with less friction than the other cookie-cutter sliders out there. But don't let any of that scare you, it's pretty easy!
+Revolver.js is a modular, unopinionated javascript library to help you build your own content slider. It has a sensable API that helps you get from mockup to reality with less friction than the other cookie-cutter sliders out there. If fact, Revolver is a much lower component than most of the other content-slider libraries out there. In other words, Revolver could be used to mimick another slider, but most other sliders could some of what Revolver is capable of. But don't let any of that scare you, it's pretty easy to get started!
 
 ## Getting Started
 
-If you are planning on building your own content slider completely from scratch, all you need to do is [install Revolver](https://github.com/revolverjs/revolverjs#installation) and [start extending](http://revolverjs.com/docs.html#extending_revolver). However, if you are new to Revolver, it is highly recommended you keep reading this document.
+If you are planning on building your own content slider completely from scratch, all you need to do is [install](https://github.com/revolverjs/revolverjs#installation) Revolver and [start extending](http://revolverjs.com/docs.html#extending_revolver). However, if you are new to Revolver, it is highly recommended you keep reading this document.
 
 ## Installation
 
@@ -20,20 +20,20 @@ Of course, you can still take the ol' fashioned approach and [download](https://
 
 ## Usage
 
-The only thing that is required to instantiate Revolver is an array of DOM elements.
+The only thing that is required to instantiate Revolver is an array of DOM elements (usually `<li>` elements).
 
 ```javascript
 // using raw javascript
 var mySlides = document.getElementById('slidesContainer').getElementsByClassName('slide');
 
 // using jQuery
-var mySlides = $('#slidesContainer .slide'); // <-- returns an array-like object
+var mySlides = $('#slidesContainer .slide');
 
 // using Mootools
-var mySlides = $$('#slidesContainer .slide'); // <-- returns an array-like object
+var mySlides = $$('#slidesContainer .slide');
 ```
 
-Once you have your slides array, just pass it to the Revolver constructor.
+As you _might_ have already guessed. It doesn't have to be of the `Array` type. It can be an Array-like object (like what jQuery produces). Anyways, once you have your slides "array", just pass it to the Revolver constructor.
 
 ```javascript
 var mySlider = new Revolver(mySlides);
@@ -41,7 +41,7 @@ var mySlider = new Revolver(mySlides);
 
 ## Options
 
-Options are defaults that can be overwritten upon instantiation (through the constructor) or at any time there-after (through the [setOptions()](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md) method).
+Revolver's defaults can be overwritten upon instantiation (as the second argument to the constructor) or at any time there-after (through the [setOptions()](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md) method).
 
 * [**autoPlay**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
 * [**onPause()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onpause.md): A callback that is executed every time the pause() method is called.
@@ -105,20 +105,14 @@ Once you have instantiated Revolver, as shown [here](#usage), you then have acce
 * [**slides**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.slides.md): Houses all the individual slides that Revolver is acting upon.
 * [**status**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.status.md): The current status of the Revolver instance, whether it is "stopped", "paused", or "playing".
 
-## Plugins
+## Customizing Revolver
 
-Because of Revolver's modular architecture, it does very little out of the box and usually requires a plugin or two to hit the sweet spot. Here's the list:
+Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization, or even an extension or two to hit the sweet spot. And because of it's modular and event-driven architecture, it is pretty easy to bend it to your will. Here are a few really basic ideas to get you started:
 
-* [**revolver-jquery**](https://github.com/revolverjs/revolver-jquery/tree/development): Instantiate Revolver the jQuery way.
-* [**revolver-jquery-fade**](https://github.com/revolverjs/revolver-jquery-fade): Fade transition using jQuery.
-* [**revolver-jquery-slide**](#): Slide transition using jQuery.
-* [**revolver-jquery-reveal**](#): Reveal transition using jQuery.
-* [**revolver-mootools**](https://github.com/revolverjs/revolver-mootools/tree/development): Instantiate Revolver the Mootools way.
-* [**revolver-mootools-fade**](#): Fade transition using Mootools.
-* [**revolver-mootools-slide**](#): Slide transition using Mootools.
-* [**revolver-mootools-reveal**](#): Reveal transition using Mootools.
-
-If you would like to add your own plugin to the list feel free to fork and pull.
+* [**revolver-fade**](https://github.com/revolverjs/revolver-jquery-fade): Slides fade in and out from each other using jQuery.
+* [**revolver-slide**](#): The traditional sliding doors effect using Mootools.
+* [**revolver-reveal**](#): A curtain effect using Query and GreenSock.
+* [**revolver-inception**](#): A slider within a slider! Go as deep as you want.
 
 ## Contributing
 
