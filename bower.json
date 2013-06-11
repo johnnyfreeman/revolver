@@ -1,7 +1,11 @@
 {
   "name": "revolverjs",
   "version": "2.0.0",
-  "main": "./revolver.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/revolverjs/revolverjs.git"
+  },
+  "main": "js/revolver.min.js",
   "ignore": [
     "**/.*"
   ],
