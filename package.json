@@ -1,6 +1,6 @@
 {
   "name": "revolverjs",
-  "version": "2.0.0",
+  "version": "2.0",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-regarde": "~0.1.1",
