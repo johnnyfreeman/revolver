@@ -109,10 +109,8 @@ Once you have instantiated Revolver, as shown [here](#usage), you then have acce
 
 Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization, or even an extension or two to hit the sweet spot. And because of it's modular and event-driven architecture, it is pretty easy to bend it to your will. Here are a few really basic ideas to get you started:
 
-* [**revolver-fade**](https://github.com/revolverjs/revolver-fade): Slides fade in and out from each other using jQuery.
-* [**revolver-slide**](https://github.com/revolverjs/revolver-slide): The traditional sliding doors effect using Mootools.
-* [**revolver-reveal**](https://github.com/revolverjs/revolver-reveal): A curtain effect using Query and GreenSock.
-* [**revolver-inception**](https://github.com/revolverjs/revolver-inception): A slider within a slider.
+* [**fade-example**](https://github.com/revolverjs/fade-example): Slides fade in and out from each other using jQuery.
+* More coming very soon...
 
 ## Contributing
 
