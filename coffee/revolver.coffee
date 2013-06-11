@@ -105,7 +105,10 @@ Revolver::setOptions = (options) ->
 # changes the status of the slider
 Revolver::changeStatus = (newStatus) ->
   # loop over all statuses and set all as true or false
-  _.each @status, ((status) -> @status[status] = status is newStatus), this
+  _.each @status, ((val, key) ->
+    @status[key] = key is newStatus
+    true
+  ), this
   # return instance
   this
 

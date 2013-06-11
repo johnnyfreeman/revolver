@@ -73,8 +73,9 @@
   };
 
   Revolver.prototype.changeStatus = function(newStatus) {
-    _.each(this.status, (function(status) {
-      return this.status[status] = status === newStatus;
+    _.each(this.status, (function(val, key) {
+      this.status[key] = key === newStatus;
+      return true;
     }), this);
     return this;
   };
