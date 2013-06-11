@@ -1,6 +1,11 @@
 {
   "name": "revolverjs",
-  "version": "2.0",
+  "version": "2.0.0",
+  "repository" :
+  {
+    "type" : "git",
+    "url" : "https://github.com/revolverjs/revolverjs.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-regarde": "~0.1.1",
