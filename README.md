@@ -71,7 +71,7 @@ Revolver emits important events and exposes an event api so that you can hook in
 
 Once you have instantiated Revolver, as shown [here](#usage), you then have access to all these methods.
 
-* [**addSlide()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.addslide.md): Add a new slide to the [slides](#) array.
+* [**addSlide()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.addslide.md): Add a new slide to the [slides](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.slides.md) array.
 * [**first()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.first.md): Transition immediately to the first slide.
 * [**goTo()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.goto.md): Transition immediately to any given slide.
 * [**last()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.last.md): Transition immediately to the last (not previous) slide.
