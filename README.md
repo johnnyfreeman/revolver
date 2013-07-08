@@ -109,6 +109,7 @@ Once you have instantiated Revolver, as shown [here](#usage), you then have acce
 
 Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization, or even an extension or two to hit the sweet spot. And because of it's modular and event-driven architecture, it is pretty easy to bend it to your will. Here are a few really basic ideas to get you started:
 
+* [**barebones-example**](https://github.com/revolverjs/barebones-example): A totally stripped down Revolver.js example.
 * [**fade-example**](https://github.com/revolverjs/fade-example): Slides fade in and out from each other using jQuery.
 * More coming very soon...
 
