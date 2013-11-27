@@ -15,6 +15,7 @@
 
 # constructor
 Revolver = (options) ->
+
   # setup initial values
   @currentSlide = 0
   @nextSlide = 0
@@ -23,17 +24,19 @@ Revolver = (options) ->
   @iteration = 0
   @intervalId = null
   @disabled = false
+
   # merge options
   @options = {}
   @setOptions Revolver.defaults, options
+
   # set container
-  @container = @options.container
-  delete @options.container
+  @container = @options.container or Revolver.selectorEngine(@options.containerSelector, document)[0] or document
+
   # add all slides
   @slides = []
-  _.each @options.slides, @addSlide, this
+  slidesToAdd = @options.slides or Revolver.selectorEngine @options.slideSelector, @container
+  _.each slidesToAdd, @addSlide, this
 
-  delete @options.slides
   # finish setting up init values
   @previousSlide = @lastSlide
   @status =
@@ -41,14 +44,17 @@ Revolver = (options) ->
     playing: false
     stopped: true
   @isAnimating = false
+
   # Completely disable Revolver
   # if there is only one slide
   if @numSlides <= 1
     @disabled = true
     return
+
   # always disable isAnimating flag
   # after transition is complete
   @on 'transitionComplete', -> @isAnimating = false
+
   # register all event handlers
   @on 'play', @options.onPlay
   @on 'stop', @options.onStop
@@ -56,10 +62,13 @@ Revolver = (options) ->
   @on 'restart', @options.onRestart
   @on 'transitionStart', @options.transition.onStart
   @on 'transitionComplete', @options.transition.onComplete
+
   # fire onReady event handler
   _.bind(@options.onReady, this)()
+
   # begin auto play, if enabled
   @play {}, true  if @options.autoPlay
+
   # return instance
   this
 
@@ -68,19 +77,21 @@ Revolver = (options) ->
 # (gets merged with user defined
 # options in the constructor)
 Revolver.defaults =
-  autoPlay: true      # whether or not to automatically begin playing the slides
-  container: null     # dom element the contains the slides (optional)
-  slides: []          # array of slide dom elements
-  onReady: ->         # gets called when revolver is setup and ready to go
-  onPlay: ->          # gets called when the play() method is called
-  onStop: ->          # gets called when the stop() method is called
-  onPause: ->         # gets called when the pause() method is called
-  onRestart: ->       # gets called when the restart() method is called
-  rotationSpeed: 4000 # how long (in milliseconds) to stay on each slide before going to the next
-  transition:
-    onStart: ->       # gets called when the transition animation begins
-    onComplete: ->    # gets called when the animation is done
-    name: 'default'   # default transition
+  autoPlay: true          # whether or not to automatically begin playing the slides
+  container: null         # dom element the contains the slides (optional)
+  containerSelector: null # selector used to find the container element
+  slides: null            # array of slide dom elements
+  slideSelector: null     # selector used to find all slides for this slider
+  onReady: ->             # gets called when revolver is setup and ready to go
+  onPlay: ->              # gets called when the play() method is called
+  onStop: ->              # gets called when the stop() method is called
+  onPause: ->             # gets called when the pause() method is called
+  onRestart: ->           # gets called when the restart() method is called
+  rotationSpeed: 4000     # how long (in milliseconds) to stay on each slide before going to the next
+  transition:   
+    onStart: ->           # gets called when the transition animation begins
+    onComplete: ->        # gets called when the animation is done
+    name: 'default'       # default transition
 
 
 # current version
@@ -287,10 +298,11 @@ Revolver::trigger = (eventName) ->
 
 # use querySelectorAll out of the box
 Revolver.selectorEngine = (selector, root) ->
+  root = document if root is undefined
   root.querySelectorAll selector
 
 # override the default selector engine 
-# (with Qwery, Sel, Sizzle, NWMatcher)
+# (ex jQuery.find, Qwery, Sel, Sizzle, NWMatcher)
 Revolver.setSelectorEngine = (e) ->
   Revolver.selectorEngine = e
 

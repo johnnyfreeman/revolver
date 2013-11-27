@@ -3,6 +3,7 @@
   var Revolver;
 
   Revolver = function(options) {
+    var slidesToAdd;
     this.currentSlide = 0;
     this.nextSlide = 0;
     this.numSlides = 0;
@@ -12,11 +13,10 @@
     this.disabled = false;
     this.options = {};
     this.setOptions(Revolver.defaults, options);
-    this.container = this.options.container;
-    delete this.options.container;
+    this.container = this.options.container || Revolver.selectorEngine(this.options.containerSelector, document)[0] || document;
     this.slides = [];
-    _.each(this.options.slides, this.addSlide, this);
-    delete this.options.slides;
+    slidesToAdd = this.options.slides || Revolver.selectorEngine(this.options.slideSelector, this.container);
+    _.each(slidesToAdd, this.addSlide, this);
     this.previousSlide = this.lastSlide;
     this.status = {
       paused: false,
@@ -47,7 +47,9 @@
   Revolver.defaults = {
     autoPlay: true,
     container: null,
-    slides: [],
+    containerSelector: null,
+    slides: null,
+    slideSelector: null,
     onReady: function() {},
     onPlay: function() {},
     onStop: function() {},
@@ -208,6 +210,9 @@
   };
 
   Revolver.selectorEngine = function(selector, root) {
+    if (root === void 0) {
+      root = document;
+    }
     return root.querySelectorAll(selector);
   };
 
