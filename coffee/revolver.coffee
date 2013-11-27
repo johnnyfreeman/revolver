@@ -24,12 +24,13 @@ Revolver = (options) ->
   @intervalId = null
   @disabled = false
   # merge options
+  @options = {}
   @setOptions Revolver.defaults, options
   # set container
   @container = @options.container
   delete @options.container
   # add all slides
-  @slides = _([])
+  @slides = []
   _.each @options.slides, @addSlide, this
   delete @options.slides
   # finish setting up init values
@@ -67,6 +68,8 @@ Revolver = (options) ->
 # options in the constructor)
 Revolver.defaults =
   autoPlay: true      # whether or not to automatically begin playing the slides
+  container: null     # dom element the contains the slides (optional)
+  slides: []          # array of slide dom elements
   onReady: ->         # gets called when revolver is setup and ready to go
   onPlay: ->          # gets called when the play() method is called
   onStop: ->          # gets called when the stop() method is called
@@ -101,9 +104,10 @@ Revolver::addSlide = (slide) ->
 # set options
 Revolver::setOptions = () ->
   # add existing options to beginning of arguments array
-  arguments.unshift @options
+  args = Array.prototype.slice.call(arguments,0);
+  args.unshift @options
   # merge new options with the existing options
-  _.merge.apply arguments
+  _.merge.apply null, args
   # return instance
   this
 

@@ -10,10 +10,11 @@
     this.iteration = 0;
     this.intervalId = null;
     this.disabled = false;
+    this.options = {};
     this.setOptions(Revolver.defaults, options);
     this.container = this.options.container;
     delete this.options.container;
-    this.slides = _([]);
+    this.slides = [];
     _.each(this.options.slides, this.addSlide, this);
     delete this.options.slides;
     this.previousSlide = this.lastSlide;
@@ -45,6 +46,8 @@
 
   Revolver.defaults = {
     autoPlay: true,
+    container: null,
+    slides: [],
     onReady: function() {},
     onPlay: function() {},
     onStop: function() {},
@@ -71,8 +74,10 @@
   };
 
   Revolver.prototype.setOptions = function() {
-    arguments.unshift(this.options);
-    _.merge.apply(arguments);
+    var args;
+    args = Array.prototype.slice.call(arguments, 0);
+    args.unshift(this.options);
+    _.merge.apply(null, args);
     return this;
   };
 
