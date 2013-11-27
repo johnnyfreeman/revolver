@@ -20,14 +20,18 @@ Revolver = (options) ->
   @nextSlide = 0
   @numSlides = 0
   @lastSlide = 0
-  @slides = _([])
   @iteration = 0
   @intervalId = null
   @disabled = false
   # merge options
   @setOptions Revolver.defaults, options
+  # set container
+  @container = @options.container
+  delete @options.container
   # add all slides
+  @slides = _([])
   _.each @options.slides, @addSlide, this
+  delete @options.slides
   # finish setting up init values
   @previousSlide = @lastSlide
   @status =

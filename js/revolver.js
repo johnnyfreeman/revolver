@@ -7,12 +7,15 @@
     this.nextSlide = 0;
     this.numSlides = 0;
     this.lastSlide = 0;
-    this.slides = _([]);
     this.iteration = 0;
     this.intervalId = null;
     this.disabled = false;
     this.setOptions(Revolver.defaults, options);
+    this.container = this.options.container;
+    delete this.options.container;
+    this.slides = _([]);
     _.each(this.options.slides, this.addSlide, this);
+    delete this.options.slides;
     this.previousSlide = this.lastSlide;
     this.status = {
       paused: false,
