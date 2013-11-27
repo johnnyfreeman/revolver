@@ -14,20 +14,20 @@
 'use strict'
 
 # constructor
-Revolver = (slides, options) ->
+Revolver = (options) ->
   # setup initial values
   @currentSlide = 0
   @nextSlide = 0
   @numSlides = 0
   @lastSlide = 0
-  @slides = []
+  @slides = _([])
   @iteration = 0
   @intervalId = null
   @disabled = false
   # merge options
   @setOptions Revolver.defaults, options
   # add all slides
-  _.each slides, @addSlide, this
+  _.each @options.slides, @addSlide, this
   # finish setting up init values
   @previousSlide = @lastSlide
   @status =

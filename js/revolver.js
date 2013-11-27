@@ -2,17 +2,17 @@
   'use strict';
   var Revolver;
 
-  Revolver = function(slides, options) {
+  Revolver = function(options) {
     this.currentSlide = 0;
     this.nextSlide = 0;
     this.numSlides = 0;
     this.lastSlide = 0;
-    this.slides = [];
+    this.slides = _([]);
     this.iteration = 0;
     this.intervalId = null;
     this.disabled = false;
     this.setOptions(Revolver.defaults, options);
-    _.each(slides, this.addSlide, this);
+    _.each(this.options.slides, this.addSlide, this);
     this.previousSlide = this.lastSlide;
     this.status = {
       paused: false,
