@@ -207,6 +207,14 @@
     return this;
   };
 
+  Revolver.selectorEngine = function(selector, root) {
+    return root.querySelectorAll(selector);
+  };
+
+  Revolver.setSelectorEngine = function(e) {
+    return Revolver.selectorEngine = e;
+  };
+
   Revolver.transitions = {};
 
   Revolver.transitions['default'] = function(options) {

@@ -32,6 +32,7 @@ Revolver = (options) ->
   # add all slides
   @slides = []
   _.each @options.slides, @addSlide, this
+
   delete @options.slides
   # finish setting up init values
   @previousSlide = @lastSlide
@@ -280,6 +281,18 @@ Revolver::trigger = (eventName) ->
   bean.fire this, 'revolver.' + eventName
   # return instance
   this
+
+
+# SELECTOR ENGINE
+
+# use querySelectorAll out of the box
+Revolver.selectorEngine = (selector, root) ->
+  root.querySelectorAll selector
+
+# override the default selector engine 
+# (with Qwery, Sel, Sizzle, NWMatcher)
+Revolver.setSelectorEngine = (e) ->
+  Revolver.selectorEngine = e
 
 
 # TRANSITIONS
