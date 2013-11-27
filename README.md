@@ -4,7 +4,7 @@ Revolver.js is a modular javascript library to help you build your own content s
 
 ## Getting Started
 
-If you are planning on building your own content slider completely from scratch, all you need to do is [install](https://github.com/revolverjs/revolverjs#installation) Revolver and start [customizing](#customizing-revolver). However, if you are new to Revolver, it is highly recommended you keep reading.
+If you are planning on building your own content slider completely from scratch, all you need to do is [install](#installation) Revolver and start [customizing](#customizing). However, if you are new to Revolver, it is highly recommended you keep reading.
 
 ## Installation
 
@@ -114,7 +114,9 @@ Certiain methods do not need access to a specific instance of Revolver and can b
 
 ## Customizing
 
-Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization, or even an extension or two to hit the sweet spot. And because of it's modular and event-driven architecture, it is pretty easy to bend it to your will. Here are a few really basic ideas to get you started:
+Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization, or even an extension or two to hit the sweet spot. And because of it's modular and event-driven architecture, it is pretty easy to bend it to your will. Here are [a few really basic ideas to get you started](#examples).
+
+## Examples
 
 * [**barebones-example**](https://github.com/revolverjs/barebones-example): A totally stripped down Revolver.js example.
 * [**fade-example**](https://github.com/revolverjs/fade-example): Slides fade in and out from each other using jQuery.
