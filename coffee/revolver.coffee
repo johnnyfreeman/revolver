@@ -25,7 +25,7 @@ Revolver = (slides, options) ->
   @intervalId = null
   @disabled = false
   # merge options
-  @options = _.merge {}, Revolver.defaults, options
+  @setOptions Revolver.defaults, options
   # add all slides
   _.each slides, @addSlide, this
   # finish setting up init values
@@ -95,9 +95,11 @@ Revolver::addSlide = (slide) ->
 
 
 # set options
-Revolver::setOptions = (options) ->
-# merge new options with the existing options
-  _.merge @options, options
+Revolver::setOptions = () ->
+  # add existing options to beginning of arguments array
+  arguments.unshift @options
+  # merge new options with the existing options
+  _.merge.apply arguments
   # return instance
   this
 

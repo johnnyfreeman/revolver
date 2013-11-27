@@ -11,7 +11,7 @@
     this.iteration = 0;
     this.intervalId = null;
     this.disabled = false;
-    this.options = _.merge({}, Revolver.defaults, options);
+    this.setOptions(Revolver.defaults, options);
     _.each(slides, this.addSlide, this);
     this.previousSlide = this.lastSlide;
     this.status = {
@@ -67,8 +67,9 @@
     return this;
   };
 
-  Revolver.prototype.setOptions = function(options) {
-    _.merge(this.options, options);
+  Revolver.prototype.setOptions = function() {
+    arguments.unshift(this.options);
+    _.merge.apply(arguments);
     return this;
   };
 
