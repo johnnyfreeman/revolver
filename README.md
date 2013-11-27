@@ -105,6 +105,13 @@ Once you have instantiated Revolver, as shown [here](#usage), you then have acce
 * [**slides**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.slides.md): Houses all the individual slides that Revolver is acting upon.
 * [**status**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.status.md): The current status of the Revolver instance, whether it is "stopped", "paused", or "playing".
 
+## Static Methods
+
+Certiain methods do not need access to a specific instance of Revolver and can be called on the `Revolver` object itself.
+
+* [**setSelectorEngine()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.setselectorengine.md): Revolver uses `querySelectorAll` be default, which should work great on all modern browsers. If you need support for old browsers you can make Revolver us a third-party selector engine such as Qwery, Sel, Sizzle, NWMatcher, etc.
+* [**registerTransition()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.registertransition.md): Register a custom transition with Revolver.
+
 ## Customizing
 
 Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization, or even an extension or two to hit the sweet spot. And because of it's modular and event-driven architecture, it is pretty easy to bend it to your will. Here are a few really basic ideas to get you started:
