@@ -95,7 +95,7 @@ Revolver.defaults =
 
 
 # current version
-Revolver.VERSION = '2.0'
+Revolver.VERSION = '2.1.0'
 
 
 # add a new slide

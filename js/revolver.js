@@ -63,7 +63,7 @@
     }
   };
 
-  Revolver.VERSION = '2.0';
+  Revolver.VERSION = '2.1.0';
 
   Revolver.prototype.addSlide = function(slide) {
     var currentPlusOne;
