@@ -141,7 +141,7 @@ grunt
 Or, if you would rather run both tasks upon every save (usually preferred), run:
 
 ```shell
-grunt regarde
+grunt server
 ```
 
 Now leave the terminal window running in the background while you make your changes.

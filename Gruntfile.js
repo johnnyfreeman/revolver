@@ -57,5 +57,6 @@ module.exports = function(grunt) {
 
   // Default tasks
   grunt.registerTask('default', ['coffee', 'uglify']);
+  grunt.registerTask('server', ['regarde']);
 
 };
