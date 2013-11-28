@@ -1,6 +1,6 @@
 # ready
 
-This event is triggered as soon as Revolver is completely setup and ready to go. It is somewhat unique from the other events as you can only register a callback for this event one way; by passing it to the constructor as the [transition.onReady](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.onready.md) option.
+This event is triggered as soon as Revolver is completely setup and ready to go. It is somewhat unique from the other events as you can only register a callback for this event one way; by passing it to the constructor as the [onReady](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onready.md) option.
 
 ```javascript
 var mySlider = new Revolver(mySlides, {
