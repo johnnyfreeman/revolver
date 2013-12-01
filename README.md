@@ -120,6 +120,8 @@ Because of Revolver's unopinionated philosophy, it does very little out of the b
 
 * [**barebones-example**](https://github.com/revolverjs/barebones-example): A totally stripped down Revolver.js example.
 * [**fade-example**](https://github.com/revolverjs/fade-example): Slides fade in and out from each other using jQuery.
+* [**reveal-example**](https://github.com/revolverjs/reveal-example): A Curtain transition using Qwery and Greensock.
+* [**inception-example**](https://github.com/revolverjs/inception-example): A slider within a slider using Mootools.
 * More coming very soon...
 
 ## Contributing
