@@ -325,6 +325,10 @@ Revolver.transitions['default'] = (options) ->
   # return instance
   this
 
+Revolver.registerTransition = (name, fn) ->
+  Revolver.transitions[name] = fn
+  this
+
 
 # return the Revolver object globally available
 window.Revolver = Revolver

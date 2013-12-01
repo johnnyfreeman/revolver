@@ -231,6 +231,11 @@
     return this;
   };
 
+  Revolver.registerTransition = function(name, fn) {
+    Revolver.transitions[name] = fn;
+    return this;
+  };
+
   window.Revolver = Revolver;
 
 }).call(this);
