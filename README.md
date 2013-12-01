@@ -20,23 +20,18 @@ Of course, you can still take the ol' fashioned approach and [download](https://
 
 ## Usage
 
-The only thing that is required to instantiate Revolver is an array of DOM elements (usually `<li>` elements).
+There are only two things that are required to instantiate Revolver: The css selectors to the container and slides.
 
 ```javascript
-// using raw javascript
-var mySlides = document.getElementById('slidesContainer').getElementsByClassName('slide');
-
-// using jQuery
-var mySlides = $('#slidesContainer .slide');
-
-// using Mootools
-var mySlides = $$('#slidesContainer .slide');
+var mySlider = new Revolver({containerSelector: '#slidesContainer', slideSelector: '.slide'});
 ```
 
-As you _might_ have already guessed. It doesn't have to be of the `Array` type. It can be an Array-like object (like what jQuery produces). Anyways, once you have your slides "array", just pass it as the first argument to Revolver.
+Or, the actual container and slides themselves.
 
 ```javascript
-var mySlider = new Revolver(mySlides);
+var mySlideContainer = document.getElementById('slidesContainer');
+var mySlides = mySlideContainer.getElementsByClassName('slide');
+var mySlider = new Revolver({container: mySlideContainer, slides: mySlides});
 ```
 
 ## Options
