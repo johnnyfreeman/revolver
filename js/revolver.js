@@ -217,7 +217,9 @@
   };
 
   Revolver.setSelectorEngine = function(e) {
-    return Revolver.selectorEngine = e;
+    bean.setSelectorEngine(e);
+    Revolver.selectorEngine = e;
+    return this;
   };
 
   Revolver.transitions = {};

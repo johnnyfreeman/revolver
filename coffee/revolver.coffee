@@ -304,7 +304,9 @@ Revolver.selectorEngine = (selector, root) ->
 # override the default selector engine 
 # (ex jQuery.find, Qwery, Sel, Sizzle, NWMatcher)
 Revolver.setSelectorEngine = (e) ->
+  bean.setSelectorEngine e
   Revolver.selectorEngine = e
+  this
 
 
 # TRANSITIONS
