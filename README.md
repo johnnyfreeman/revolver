@@ -39,6 +39,10 @@ var mySlider = new Revolver({container: mySlideContainer, slides: mySlides});
 Revolver's defaults can be overwritten upon instantiation (as the second argument to the constructor) or at any time there-after (through the [setOptions()](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md) method).
 
 * [**autoPlay**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
+* [**container**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.container.md): Dom element that wraps all slide elements.
+* [**containerSelector**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.containerSelector.md): String selector used to find the container element.
+* [**slides**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.slides.md): Array of dom elements (slides).
+* [**slidesSelector**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.slidesSelector.md): String selector used to find slides dom elements.
 * [**onPause()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onpause.md): A callback that is executed every time the pause() method is called.
 * [**onPlay()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onplay.md): A callback that is executed every time the play() method is called.
 * [**onReady()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onready.md): A callback that is executed as soon as Revolver is completely setup and ready to go.
