@@ -36,7 +36,7 @@ var mySlider = new Revolver({container: mySlideContainer, slides: mySlides});
 
 ## Options
 
-Revolver's defaults can be overwritten upon instantiation (as the second argument to the constructor) or at any time there-after (through the [setOptions()](docs/instance-methods/setoptions.md) method).
+Revolver's defaults can be overwritten upon instantiation (as the second argument to the constructor) or at any time there-after (through the [setOptions()](docs/revolver.methods.setOptions.md) method).
 
 * [**autoPlay**](docs/revolver.options.autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
 * [**container**](docs/revolver.options.container.md): Dom element that wraps all slide elements.
