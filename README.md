@@ -1,6 +1,6 @@
 # Revolver.js [![Build Status](https://travis-ci.org/johnnyfreeman/revolverjs.png?branch=master)](https://travis-ci.org/revolverjs/revolverjs)
 
-Revolver.js is a javascript library to help you build your own content slider. It has a sensable API that helps you get from mockup to reality with less friction than the other cookie-cutter sliders out there. 
+Revolver is a javascript library to help you build your own content slider. It has a sensable API that helps you get from mockup to reality with less friction than the other cookie-cutter sliders out there. 
 
 In fact, Revolver is a much lower component than most of the other content slider plugins out there. It's really more of a framework than it is a complete solution. So, naturally, hand-writing a little javascript comes with the terratory. But don't let any of that scare you, it's pretty easy to get started!
 
@@ -119,7 +119,7 @@ Because of Revolver's unopinionated philosophy, it does very little out of the b
 
 ## Examples
 
-* [**barebones-example**](https://github.com/johnnyfreeman/revolverjs-barebones-example): A totally stripped down Revolver.js example.
+* [**barebones-example**](https://github.com/johnnyfreeman/revolverjs-barebones-example): An out-of-the-box example.
 * [**fade-example**](https://github.com/johnnyfreeman/revolverjs-fade-example): Slides fade in and out from each other using jQuery.
 * [**reveal-example**](https://github.com/johnnyfreeman/revolverjs-reveal-example): A Curtain transition using Qwery and Greensock.
 * [**inception-example**](https://github.com/johnnyfreeman/revolverjs-inception-example): A slider within a slider using Mootools.
