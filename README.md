@@ -16,7 +16,7 @@ bower install revolverjs
 
 It will resolve all of Revolver's dependencies for you, no need to go and download those separately. If you are unfamiliar with it, I highly recommend you take a look!
 
-Of course, you can still take the ol' fashioned approach and [download](https://github.com/revolverjs/revolverjs/archive/master.zip) and unzip it anywhere in your project. Just make sure you also do the same for Revolver's hard dependencies: [Lodash](http://lodash.com/) and [Bean](https://github.com/fat/bean).
+Of course, you can still take the ol' fashioned approach and [download](archive/master.zip) and unzip it anywhere in your project. Just make sure you also do the same for Revolver's hard dependencies: [Lodash](http://lodash.com/) and [Bean](https://github.com/fat/bean).
 
 ## Usage
 
@@ -36,80 +36,80 @@ var mySlider = new Revolver({container: mySlideContainer, slides: mySlides});
 
 ## Options
 
-Revolver's defaults can be overwritten upon instantiation (as the second argument to the constructor) or at any time there-after (through the [setOptions()](https://github.com/revolverjs/revolverjs/blob/master/docs/instance-methods/setoptions.md) method).
+Revolver's defaults can be overwritten upon instantiation (as the second argument to the constructor) or at any time there-after (through the [setOptions()](docs/instance-methods/setoptions.md) method).
 
-* [**autoPlay**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
-* [**container**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.container.md): Dom element that wraps all slide elements.
-* [**containerSelector**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.containerSelector.md): String selector used to find the container element.
-* [**slides**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.slides.md): Array of dom elements (slides).
-* [**slidesSelector**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.slidesSelector.md): String selector used to find slides dom elements.
-* [**onPause()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onpause.md): A callback that is executed every time the pause() method is called.
-* [**onPlay()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onplay.md): A callback that is executed every time the play() method is called.
-* [**onReady()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onready.md): A callback that is executed as soon as Revolver is completely setup and ready to go.
-* [**onRestart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onrestart.md): A callback that is executed every time the restart() method is called.
-* [**onStop()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onstop.md): A callback that is executed every time the stop() method is called.
-* [**rotationSpeed**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.rotationspeed.md): The number of milliseconds to stay on each slide before transitioning to the next.
-* [**transition**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.md): The transition option is just a namespace for the options that are specific to the transition itself.
-  * [**name**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.name.md): The type of transition to use for all transitions. See here for the full list of available transitions.
-  * [**onComplete()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.oncomplete.md): A callback that is executed every time the transition's animation has completed.
-  * [**onStart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.transition.onstart.md): A callback that is executed every time the transition's animation has started.
+* [**autoPlay**](docs/revolver.options.autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
+* [**container**](docs/revolver.options.container.md): Dom element that wraps all slide elements.
+* [**containerSelector**](docs/revolver.options.containerSelector.md): String selector used to find the container element.
+* [**slides**](docs/revolver.options.slides.md): Array of dom elements (slides).
+* [**slidesSelector**](docs/revolver.options.slidesSelector.md): String selector used to find slides dom elements.
+* [**onPause()**](docs/revolver.options.onpause.md): A callback that is executed every time the pause() method is called.
+* [**onPlay()**](docs/revolver.options.onplay.md): A callback that is executed every time the play() method is called.
+* [**onReady()**](docs/revolver.options.onready.md): A callback that is executed as soon as Revolver is completely setup and ready to go.
+* [**onRestart()**](docs/revolver.options.onrestart.md): A callback that is executed every time the restart() method is called.
+* [**onStop()**](docs/revolver.options.onstop.md): A callback that is executed every time the stop() method is called.
+* [**rotationSpeed**](docs/revolver.options.rotationspeed.md): The number of milliseconds to stay on each slide before transitioning to the next.
+* [**transition**](docs/revolver.options.transition.md): The transition option is just a namespace for the options that are specific to the transition itself.
+  * [**name**](docs/revolver.options.transition.name.md): The type of transition to use for all transitions. See here for the full list of available transitions.
+  * [**onComplete()**](docs/revolver.options.transition.oncomplete.md): A callback that is executed every time the transition's animation has completed.
+  * [**onStart()**](docs/revolver.options.transition.onstart.md): A callback that is executed every time the transition's animation has started.
 
 ## Events
 
 Revolver emits important events and exposes an event api so that you can hook into the core without actually having to hardcode your changes directly into the core.
 
-* [**pause**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.pause.md): Fired every time the pause() method is called.
-* [**play**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.play.md): Fired every time the play() method is called.
-* [**ready**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.ready.md): Fired after instantiation as soon as Revolver is completely setup and ready to go.
-* [**restart**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.restart.md): Fired every time the restart() method is called.
-* [**stop**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.stop.md): Fired every time the stop() method is called.
-* [**transitionStart**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.transitionstart.md): Fired every time the transition's animation has started.
-* [**transitionComplete**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.transitioncomplete.md): Fired every time the transition's animation has completed.
+* [**pause**](docs/revolver.events.pause.md): Fired every time the pause() method is called.
+* [**play**](docs/revolver.events.play.md): Fired every time the play() method is called.
+* [**ready**](docs/revolver.events.ready.md): Fired after instantiation as soon as Revolver is completely setup and ready to go.
+* [**restart**](docs/revolver.events.restart.md): Fired every time the restart() method is called.
+* [**stop**](docs/revolver.events.stop.md): Fired every time the stop() method is called.
+* [**transitionStart**](docs/revolver.events.transitionstart.md): Fired every time the transition's animation has started.
+* [**transitionComplete**](docs/revolver.events.transitioncomplete.md): Fired every time the transition's animation has completed.
 
 ## Instance Methods
 
 Once you have instantiated Revolver, as shown [here](#usage), you then have access to all these methods.
 
-* [**addSlide()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.addslide.md): Add a new slide to the [slides](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.slides.md) array.
-* [**first()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.first.md): Transition immediately to the first slide.
-* [**goTo()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.goto.md): Transition immediately to any given slide.
-* [**last()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.last.md): Transition immediately to the last (not previous) slide.
-* [**next()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.next.md): Transition immediately to the next slide.
-* [**pause()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.pause.md): Stops the slider but remembers it's position.
-* [**play()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.play.md): Creates a continuous loop where the slider transitions to the next slide at the given interval.
-* [**previous()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.previous.md): Transition immediately to the previous slide.
-* [**reset()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.reset.md): Queues up the first slide to be next without forcing the transition to happen immediately.
-* [**restart()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.restart.md): This is the functional equivalent to calling stop() and then play() consecutively.
-* [**off()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.off.md): Removes a previously registered event listener.
-* [**on()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.on.md): Registers an event listener.
-* [**one()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.one.md): Alias for `on()` except that the handler will removed after the first execution.
-* [**setOptions()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.setoptions.md): Merge new options with the existing options object.
-* [**stop()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.stop.md): Stops the slider from transitioning to the next slide, and resets the slider.
-* [**trigger()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.trigger.md): Executes all listeners for the given event.
+* [**addSlide()**](docs/revolver.methods.addslide.md): Add a new slide to the [slides](docs/revolver.props.slides.md) array.
+* [**first()**](docs/revolver.methods.first.md): Transition immediately to the first slide.
+* [**goTo()**](docs/revolver.methods.goto.md): Transition immediately to any given slide.
+* [**last()**](docs/revolver.methods.last.md): Transition immediately to the last (not previous) slide.
+* [**next()**](docs/revolver.methods.next.md): Transition immediately to the next slide.
+* [**pause()**](docs/revolver.methods.pause.md): Stops the slider but remembers it's position.
+* [**play()**](docs/revolver.methods.play.md): Creates a continuous loop where the slider transitions to the next slide at the given interval.
+* [**previous()**](docs/revolver.methods.previous.md): Transition immediately to the previous slide.
+* [**reset()**](docs/revolver.methods.reset.md): Queues up the first slide to be next without forcing the transition to happen immediately.
+* [**restart()**](docs/revolver.methods.restart.md): This is the functional equivalent to calling stop() and then play() consecutively.
+* [**off()**](docs/revolver.methods.off.md): Removes a previously registered event listener.
+* [**on()**](docs/revolver.methods.on.md): Registers an event listener.
+* [**one()**](docs/revolver.methods.one.md): Alias for `on()` except that the handler will removed after the first execution.
+* [**setOptions()**](docs/revolver.methods.setoptions.md): Merge new options with the existing options object.
+* [**stop()**](docs/revolver.methods.stop.md): Stops the slider from transitioning to the next slide, and resets the slider.
+* [**trigger()**](docs/revolver.methods.trigger.md): Executes all listeners for the given event.
 
 ## Instance Properties
 
 Once you have instantiated Revolver, as shown [here](#usage), you then have access to all these properties.
 
-* [**currentSlide**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.currentslide.md): Holds the index number for the current slide.
-* [**disabled**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.disabled.md): Used internally to disable all functionality within a Revolver instance.
-* [**intervalId**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.intervalid.md): The ID that Revolver uses to when stopping or pausing playback.
-* [**isAnimating**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.isanimating.md): Equal to true if Revolver is currently animating, false if not.
-* [**iteration**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.iteration.md): A running count of how many times Revolver has transitioned.
-* [**lastSlide**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.lastslide.md): Holds the index key of the last (not previous) slide in the slider.
-* [**nextSlide**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.nextslide.md): Holds the index key of the next slide in the slider.
-* [**numSlides**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.numslides.md): A count of the total number of slides that Revolver is acting upon.
-* [**options**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.options.md): A congegation of all user-defined options, plugin-defined options, and Revolver's defaults.
-* [**previousSlide**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.previousslide.md): Holds the index key of the slide that was last in transition (before the current one).
-* [**slides**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.slides.md): Houses all the individual slides that Revolver is acting upon.
-* [**status**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.props.status.md): The current status of the Revolver instance, whether it is "stopped", "paused", or "playing".
+* [**currentSlide**](docs/revolver.props.currentslide.md): Holds the index number for the current slide.
+* [**disabled**](docs/revolver.props.disabled.md): Used internally to disable all functionality within a Revolver instance.
+* [**intervalId**](docs/revolver.props.intervalid.md): The ID that Revolver uses to when stopping or pausing playback.
+* [**isAnimating**](docs/revolver.props.isanimating.md): Equal to true if Revolver is currently animating, false if not.
+* [**iteration**](docs/revolver.props.iteration.md): A running count of how many times Revolver has transitioned.
+* [**lastSlide**](docs/revolver.props.lastslide.md): Holds the index key of the last (not previous) slide in the slider.
+* [**nextSlide**](docs/revolver.props.nextslide.md): Holds the index key of the next slide in the slider.
+* [**numSlides**](docs/revolver.props.numslides.md): A count of the total number of slides that Revolver is acting upon.
+* [**options**](docs/revolver.props.options.md): A congegation of all user-defined options, plugin-defined options, and Revolver's defaults.
+* [**previousSlide**](docs/revolver.props.previousslide.md): Holds the index key of the slide that was last in transition (before the current one).
+* [**slides**](docs/revolver.props.slides.md): Houses all the individual slides that Revolver is acting upon.
+* [**status**](docs/revolver.props.status.md): The current status of the Revolver instance, whether it is "stopped", "paused", or "playing".
 
 ## Static Methods
 
 Certiain methods do not need access to a specific instance of Revolver and can be called on the `Revolver` object itself.
 
-* [**setSelectorEngine()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.setselectorengine.md): Revolver uses `querySelectorAll` be default, which should work great on all modern browsers. If you need support for old browsers you can make Revolver us a third-party selector engine such as Qwery, Sel, Sizzle, NWMatcher, etc.
-* [**registerTransition()**](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.registertransition.md): Register a custom transition with Revolver.
+* [**setSelectorEngine()**](docs/revolver.methods.setselectorengine.md): Revolver uses `querySelectorAll` be default, which should work great on all modern browsers. If you need support for old browsers you can make Revolver us a third-party selector engine such as Qwery, Sel, Sizzle, NWMatcher, etc.
+* [**registerTransition()**](docs/revolver.methods.registertransition.md): Register a custom transition with Revolver.
 
 ## Customizing
 

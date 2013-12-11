@@ -2,7 +2,7 @@
 
 **Type**: `Function`, **Default**: `function(){}`
 
-This is a callback that you can pass through the options object to the constructor. Internally, it is registered as a listener to the [play](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.events.play.md) event using the [on](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.on.md) method. The `this` variable inside the callback is equal to the Revolver instance.
+This is a callback that you can pass through the options object to the constructor. Internally, it is registered as a listener to the [play](docs/revolver.events.play.md) event using the [on](docs/revolver.methods.on.md) method. The `this` variable inside the callback is equal to the Revolver instance.
 
 ```javascript
 var slider =  new Revolver($('.slides'), {
@@ -12,4 +12,4 @@ var slider =  new Revolver($('.slides'), {
 });
 ```
 
-**Source Refs**: [[47](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L47), [67](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L67)]
+**Source Refs**: [[47](coffee/revolver.coffee#L47), [67](coffee/revolver.coffee#L67)]

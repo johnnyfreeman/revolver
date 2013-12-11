@@ -1,6 +1,6 @@
 # pause
 
-This event is triggered when [pause()](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.pause.md) is executed. You can register a callback for this event by passing it to the constructor as the [onPause](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onpause.md) option, or by passing it to the [on()](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.on.md) method after instantiation.
+This event is triggered when [pause()](docs/revolver.methods.pause.md) is executed. You can register a callback for this event by passing it to the constructor as the [onPause](docs/revolver.options.onpause.md) option, or by passing it to the [on()](docs/revolver.methods.on.md) method after instantiation.
 
 ```javascript
 var mySlider = new Revolver(mySlides, {
@@ -14,4 +14,4 @@ mySlider.on('pause', function() {
 });
 ```
 
-**Source Refs**: [[49](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L49), [69](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L69), [172](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L172)]
+**Source Refs**: [[49](coffee/revolver.coffee#L49), [69](coffee/revolver.coffee#L69), [172](coffee/revolver.coffee#L172)]

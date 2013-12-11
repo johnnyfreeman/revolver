@@ -1,6 +1,6 @@
 # restart
 
-This event is triggered when [restart()](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.restart.md) is executed. You can register a callback for this event by passing it to the constructor as the [onRestart](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.options.onrestart.md) option, or by passing it to the [on()](https://github.com/revolverjs/revolverjs/blob/master/docs/revolver.methods.on.md) method after instantiation.
+This event is triggered when [restart()](docs/revolver.methods.restart.md) is executed. You can register a callback for this event by passing it to the constructor as the [onRestart](docs/revolver.options.onrestart.md) option, or by passing it to the [on()](docs/revolver.methods.on.md) method after instantiation.
 
 ```javascript
 var mySlider = new Revolver(mySlides, {
@@ -14,4 +14,4 @@ mySlider.on('restart', function() {
 });
 ```
 
-**Source Refs**: [[50](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L50), [70](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L70), [208](https://github.com/revolverjs/revolverjs/blob/master/coffee/revolver.coffee#L208)]
+**Source Refs**: [[50](coffee/revolver.coffee#L50), [70](coffee/revolver.coffee#L70), [208](coffee/revolver.coffee#L208)]
