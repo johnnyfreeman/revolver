@@ -4,4 +4,4 @@
 
 This is a namespace for all transition related options. Everything in it can be changed per transition by passing this object to any method that accepts it.
 
-**Source Refs**: [[72](coffee/revolver.coffee#L72)]
+**Source Refs**: [[72](../coffee/revolver.coffee#L72)]

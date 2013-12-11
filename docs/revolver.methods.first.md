@@ -8,7 +8,7 @@ Transition immediately to the first slide.
 mySlider.first();
 ```
 
-You may also temporarily overide [transition options](docs/revolver.options.transition.md) by passing them as the first argument.
+You may also temporarily overide [transition options](revolver.options.transition.md) by passing them as the first argument.
 
 ```javascript
 mySlider.first({

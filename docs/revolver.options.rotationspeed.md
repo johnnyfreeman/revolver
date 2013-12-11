@@ -8,4 +8,4 @@ This option is passed through the options object to the constructor. It is the n
 var slider = new Revolver(slides, { rotationSpeed: 2000 }); // slider will go to next slide every 2 seconds
 ```
 
-**Source Refs**: [[71](coffee/revolver.coffee#L71), [148](coffee/revolver.coffee#L148)]
+**Source Refs**: [[71](../coffee/revolver.coffee#L71), [148](../coffee/revolver.coffee#L148)]

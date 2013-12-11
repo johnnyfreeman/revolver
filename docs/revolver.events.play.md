@@ -1,6 +1,6 @@
 # play
 
-This event is triggered when [play()](docs/revolver.methods.play.md) is executed. You can register a callback for this event by passing it to the constructor as the [onPlay](docs/revolver.options.onplay.md) option, or by passing it to the [on()](docs/revolver.methods.on.md) method after instantiation.
+This event is triggered when [play()](revolver.methods.play.md) is executed. You can register a callback for this event by passing it to the constructor as the [onPlay](revolver.options.onplay.md) option, or by passing it to the [on()](revolver.methods.on.md) method after instantiation.
 
 ```javascript
 var mySlider = new Revolver(mySlides, {
@@ -14,4 +14,4 @@ mySlider.on('play', function() {
 });
 ```
 
-**Source Refs**: [[47](coffee/revolver.coffee#L47), [144](coffee/revolver.coffee#L144)]
+**Source Refs**: [[47](../coffee/revolver.coffee#L47), [144](../coffee/revolver.coffee#L144)]

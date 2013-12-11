@@ -1,6 +1,6 @@
 # ready
 
-This event is triggered as soon as Revolver is completely setup and ready to go. It is somewhat unique from the other events as you can only register a callback for this event one way; by passing it to the constructor as the [onReady](docs/revolver.options.onready.md) option.
+This event is triggered as soon as Revolver is completely setup and ready to go. It is somewhat unique from the other events as you can only register a callback for this event one way; by passing it to the constructor as the [onReady](revolver.options.onready.md) option.
 
 ```javascript
 var mySlider = new Revolver(mySlides, {
@@ -10,4 +10,4 @@ var mySlider = new Revolver(mySlides, {
 });
 ```
 
-**Source Refs**: [[54](coffee/revolver.coffee#L54), [66](coffee/revolver.coffee#L66)]
+**Source Refs**: [[54](../coffee/revolver.coffee#L54), [66](../coffee/revolver.coffee#L66)]

@@ -1,6 +1,6 @@
 # transitionComplete
 
-This event is triggered when the transition animation has finished. You can register a callback for this event by passing it to the constructor as the [transition.onComplete](docs/revolver.options.transition.oncomplete.md) option, or by passing it to the [on()](docs/revolver.methods.on.md) method after instantiation.
+This event is triggered when the transition animation has finished. You can register a callback for this event by passing it to the constructor as the [transition.onComplete](revolver.options.transition.oncomplete.md) option, or by passing it to the [on()](revolver.methods.on.md) method after instantiation.
 
 ```javascript
 var mySlider = new Revolver(mySlides, {
@@ -16,4 +16,4 @@ mySlider.on('transitionComplete', function() {
 });
 ```
 
-**Source Refs**: [[45](coffee/revolver.coffee#L45), [52](coffee/revolver.coffee#L52), [272](coffee/revolver.coffee#L272)]
+**Source Refs**: [[45](../coffee/revolver.coffee#L45), [52](../coffee/revolver.coffee#L52), [272](../coffee/revolver.coffee#L272)]

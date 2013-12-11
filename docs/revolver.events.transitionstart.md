@@ -1,6 +1,6 @@
 # transitionStart
 
-This event is triggered when the transition animation has begun. You can register a callback for this event by passing it to the constructor as the [transition.onStart](docs/revolver.options.transition.onstart.md) option, or by passing it to the [on()](docs/revolver.methods.on.md) method after instantiation.
+This event is triggered when the transition animation has begun. You can register a callback for this event by passing it to the constructor as the [transition.onStart](revolver.options.transition.onstart.md) option, or by passing it to the [on()](revolver.methods.on.md) method after instantiation.
 
 ```javascript
 var mySlider = new Revolver(mySlides, {
@@ -16,4 +16,4 @@ mySlider.on('transitionStart', function() {
 });
 ```
 
-**Source Refs**: [[51](coffee/revolver.coffee#L51), [132](coffee/revolver.coffee#L132)]
+**Source Refs**: [[51](../coffee/revolver.coffee#L51), [132](../coffee/revolver.coffee#L132)]
