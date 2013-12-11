@@ -125,9 +125,9 @@ Because of Revolver's unopinionated philosophy, it does very little out of the b
 
 ## Contributing
 
-Revolver uses [Grunt](http://gruntjs.com/) and a few Grunt plugins to automatically compile the CoffeeScript to JS, minify, and create a source map for each JS file. To install these tools you must have [Node](http://nodejs.org/) and [NPM](https://npmjs.org/) installed on your machine.
+Revolver uses [Grunt](http://gruntjs.com/) and a few Grunt plugins to automatically compile the CoffeeScript to JS, minify, and create a source map for each JS file. To install these tools you must have [Node](http://nodejs.org/), [NPM](https://npmjs.org/), and [Grunt-CLI](http://gruntjs.com/getting-started#installing-the-cli) installed on your machine.
 
-To install Grunt and plugins, open Terminal (*nix or Mac) or Powershell (Windows), and run:
+To install local Grunt and it's plugins, open Terminal (*nix or Mac) or Powershell (Windows), and run:
 
 ```shell
 npm install
