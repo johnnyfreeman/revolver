@@ -40,9 +40,9 @@ Revolver's defaults can be overwritten upon instantiation (as the second argumen
 
 * [**autoPlay**](docs/revolver.options.autoplay.md): Dictates whethor or not Revolver will begin playing immediately.
 * [**container**](docs/revolver.options.container.md): Dom element that wraps all slide elements.
-* [**containerSelector**](docs/revolver.options.containerSelector.md): String selector used to find the container element.
+* [**containerSelector**](docs/revolver.options.containerselector.md): String selector used to find the container element.
 * [**slides**](docs/revolver.options.slides.md): Array of dom elements (slides).
-* [**slidesSelector**](docs/revolver.options.slidesSelector.md): String selector used to find slides dom elements.
+* [**slidesSelector**](docs/revolver.options.slidesselector.md): String selector used to find slides dom elements.
 * [**onPause()**](docs/revolver.options.onpause.md): A callback that is executed every time the pause() method is called.
 * [**onPlay()**](docs/revolver.options.onplay.md): A callback that is executed every time the play() method is called.
 * [**onReady()**](docs/revolver.options.onready.md): A callback that is executed as soon as Revolver is completely setup and ready to go.
