@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     intern: {
-      revolver: {
+      revolverjs: {
         options: {
           runType: 'runner', // defaults to 'client'
           sauceUsername: 'revolverjs',
