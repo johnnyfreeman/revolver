@@ -9,3 +9,8 @@ env:
     # please get your own free key if you want to test yourself
     - SAUCE_USERNAME: prsjohnny
     - SAUCE_ACCESS_KEY: 4866e686-a304-4562-8496-7c44a29a0a00
+# This extra install section is only necessary if your project has already installed AMD dependencies like Dojo using
+# npm, since AMD path resolution does not follow Node.js path resolution rules but npm does not know this
+install:
+  - npm install
+script: grunt test
