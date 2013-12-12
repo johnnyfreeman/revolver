@@ -4,6 +4,8 @@ Revolver is a javascript library to help you build your own content slider. It h
 
 In fact, Revolver is a much lower component than most of the other content slider plugins out there. It's really more of a framework than it is a complete solution. So, naturally, hand-writing a little javascript comes with the terratory. But don't let any of that scare you, it's pretty easy to get started!
 
+[![Selenium Test Status](https://saucelabs.com/browser-matrix/revolverjs.svg)](https://saucelabs.com/u/revolverjs)
+
 ## Getting Started
 
 For Revolver veterans, all you need to do is [install](#installation) Revolver and start [customizing](#customizing). However, if you are new to Revolver, it is highly recommended you study the documentation and start by modifying one of the examples.
