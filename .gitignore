@@ -1,3 +1,5 @@
 bower_components
 node_modules
 npm-debug.log
+lcov.info
+sauce_connect.log
