@@ -11,8 +11,8 @@ module.exports = function(grunt) {
       someReleaseTarget: {
         options: {
           runType: 'runner', // defaults to 'client'
-          sauceUsername: 'prsjohnny',
-          sauceAccessKey: '4866e686-a304-4562-8496-7c44a29a0a00',
+          sauceUsername: 'revolverjs',
+          sauceAccessKey: 'c0408be0-b8ea-4245-b2de-29ccb698c7d8',
           config: 'tests/intern',
           reporters: [ 'console', 'lcov' ],
           suites: [ 'tests/revolver' ]
