@@ -1,10 +1,8 @@
-# Revolver.js [![Build Status](https://travis-ci.org/johnnyfreeman/revolverjs.png?branch=master)](https://travis-ci.org/revolverjs/revolverjs)
+# Revolver.js [![Build Status](https://travis-ci.org/johnnyfreeman/revolverjs.png?branch=master)](https://travis-ci.org/revolverjs/revolverjs) [![Selenium Test Status](https://saucelabs.com/buildstatus/prsjohnny)](https://saucelabs.com/u/prsjohnny)
 
 Revolver is a javascript library to help you build your own content slider. It has a sensable API that helps you get from mockup to reality with less friction than the other cookie-cutter sliders out there. 
 
 In fact, Revolver is a much lower component than most of the other content slider plugins out there. It's really more of a framework than it is a complete solution. So, naturally, hand-writing a little javascript comes with the terratory. But don't let any of that scare you, it's pretty easy to get started!
-
-[![Selenium Test Status](https://saucelabs.com/browser-matrix/revolverjs.svg)](https://saucelabs.com/u/revolverjs)
 
 ## Getting Started
 
