@@ -42,7 +42,9 @@ define({
 	// publishing this configuration file somewhere
 	webdriver: {
 		host: 'localhost',
-		port: 4444
+		port: 4444,
+    SAUCE_USERNAME: 'revolverjs',
+    SAUCE_ACCESS_KEY: 'c0408be0-b8ea-4245-b2de-29ccb698c7d8'
 	},
 
 	// The desired AMD loader to use when running unit tests (client.html/client.js). Omit to use the default Dojo
