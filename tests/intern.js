@@ -56,7 +56,11 @@ define({
 	// can be used here
 	loader: {
 		// Packages that should be registered with the loader in each testing environment
-		packages: [ { name: 'Revolver', location: '.' } ]
+		packages: [ 
+			{ name: 'bean', location: 'bower_components/bean' },
+			{ name: 'lodash', location: 'bower_components/lodash' },
+			{ name: 'revolver', location: 'js' }
+		]
 	},
 
 	// Non-functional test suite(s) to run in each browser
