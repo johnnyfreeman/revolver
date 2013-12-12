@@ -332,3 +332,7 @@ Revolver.registerTransition = (name, fn) ->
 
 # return the Revolver object globally available
 window.Revolver = Revolver
+
+# support AMD
+if typeof window.define is "function" && window.define.amd
+    window.define "revolver", [], -> window.Revolver

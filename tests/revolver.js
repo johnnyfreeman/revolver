@@ -2,10 +2,14 @@ define([
     'intern!object',
     'intern/chai!assert',
     'revolver/revolver'
-], function (registerSuite, assert) {
+], function (registerSuite, assert, Revolver) {
 
   registerSuite({
     name: 'revolver.js',
+
+    setup: function () {
+
+    },
 
     registerTransition: function () {
       var handler = function () {};

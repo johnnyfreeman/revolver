@@ -238,6 +238,12 @@
 
   window.Revolver = Revolver;
 
+  if (typeof window.define === "function" && window.define.amd) {
+    window.define("revolver", [], function() {
+      return window.Revolver;
+    });
+  }
+
 }).call(this);
 
 /*
