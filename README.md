@@ -8,7 +8,7 @@ In fact, Revolver is a much lower component than most others. It's more of a fra
 
 ## Getting Started
 
-For veterans, all you need to do is [install](#installation) Revolver and start [customizing](#customizing). However, if you are new to Revolver, it is highly recommended you study the documentation and check out a few of the [examples](#examples).
+For veterans, all you need to do is [install](#installation) Revolver and start customizing. However, if you are new to Revolver, it is highly recommended you study the documentation and check out a few of the [examples](#examples).
 
 ## Installation
 
@@ -115,17 +115,14 @@ Certiain methods do not need access to a specific instance of Revolver and can b
 * [**setSelectorEngine()**](docs/revolver.methods.setselectorengine.md): Revolver uses `querySelectorAll` be default, which should work great on all modern browsers. If you need support for old browsers you can make Revolver us a third-party selector engine such as Qwery, Sel, Sizzle, NWMatcher, etc.
 * [**registerTransition()**](docs/revolver.methods.registertransition.md): Register a custom transition with Revolver.
 
-## Customizing
-
-Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization, or even an extension or two to hit the sweet spot. And because of it's modular and event-driven architecture, it is pretty easy to bend it to your will. Here are [a few really basic ideas to get you started](#examples).
-
 ## Examples
+
+Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization to hit the sweet spot. And because of it's modular and event-driven architecture, it is pretty easy to bend it to your will. Here are a few really basic ideas to get you started:
 
 * [**barebones-example**](https://github.com/johnnyfreeman/revolverjs-barebones-example): An out-of-the-box example.
 * [**fade-example**](https://github.com/johnnyfreeman/revolverjs-fade-example): Slides fade in and out from each other using jQuery.
 * [**reveal-example**](https://github.com/johnnyfreeman/revolverjs-reveal-example): A Curtain transition using Qwery and Greensock.
 * [**inception-example**](https://github.com/johnnyfreeman/revolverjs-inception-example): A slider within a slider using Mootools.
-* More coming very soon...
 
 ## Contributing
 
