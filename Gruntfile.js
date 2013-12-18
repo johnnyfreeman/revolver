@@ -8,14 +8,14 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     intern: {
-      revolverjs: {
+      client: {
         options: {
-          runType: 'runner', // defaults to 'client'
-          sauceUsername: 'revolverjs',
-          sauceAccessKey: 'c0408be0-b8ea-4245-b2de-29ccb698c7d8',
+//          runType: 'runner', // defaults to 'client' (node.js)
+          // sauceUsername: 'revolverjs', // don't want to use sauce labs with grunt
+          // sauceAccessKey: 'c0408be0-b8ea-4245-b2de-29ccb698c7d8',
           config: 'tests/intern',
-          reporters: [ 'console', 'lcov' ],
-          suites: [ 'tests/revolver' ]
+          // reporters: [ 'console', 'lcov' ], // defaults to console
+          // suites: [ 'tests/revolver' ] // this is specified in tests/intern
         }
       }
     },

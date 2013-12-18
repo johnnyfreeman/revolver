@@ -10,7 +10,9 @@
     "grunt-regarde": "~0.1.1",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-coffee": "git://github.com/johnnyfreeman/grunt-contrib-coffee",
-    "intern": "~1.3.2"
+    "intern": "~1.3.2",
+    "mocha": "~1.15.1",
+    "grunt-mocha": "~0.4.7"
   },
   "main": "js/revolver.min.js",
   "engines": {

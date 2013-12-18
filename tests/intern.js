@@ -60,13 +60,13 @@ define({
 		// Packages that should be registered with the loader in each testing environment
 		packages: [ 
 			{ name: 'bean', location: 'bower_components/bean' },
-			{ name: 'lodash', location: 'bower_components/lodash' },
+			{ name: 'lodash', location: 'bower_components/lodash/dist' },
 			{ name: 'revolver', location: 'js' }
 		]
 	},
 
 	// Non-functional test suite(s) to run in each browser
-	suites: ['tests/revolver'],
+	suites: ['tests/all'],
 
 	// Functional test suite(s) to run in each browser once non-functional tests are completed
 	functionalSuites: [ /* 'myPackage/tests/functional' */ ],

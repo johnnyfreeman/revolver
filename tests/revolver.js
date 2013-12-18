@@ -1,33 +1,33 @@
 define([
     'intern!object',
     'intern/chai!assert',
-    'revolver/revolver',
-    'lodash/dist/lodash'
+    'intern/order!revolver/revolver',
+    'intern/order!lodash/lodash'
 ], function (registerSuite, assert, Revolver, _) {
 
   registerSuite({
-    name: 'revolver.js',
+    name: 'revolver',
 
     setup: function () {
-      // container
-      var container = document.createElement("div");
-      container.id  = 'myslider';
+      // // container
+      // var container = document.createElement("div");
+      // container.id  = 'myslider';
 
-      // 3 slides
-      var s1 = document.createElement("div");
-      s1.className = 'slide';
-      container.appendChild(s1);
+      // // 3 slides
+      // var s1 = document.createElement("div");
+      // s1.className = 'slide';
+      // container.appendChild(s1);
 
-      var s2 = document.createElement("div");
-      s2.className = 'slide';
-      container.appendChild(s2);
+      // var s2 = document.createElement("div");
+      // s2.className = 'slide';
+      // container.appendChild(s2);
 
-      var s3 = document.createElement("div");
-      s3.className = 'slide';
-      container.appendChild(s3);
+      // var s3 = document.createElement("div");
+      // s3.className = 'slide';
+      // container.appendChild(s3);
 
-      // attach to document
-      document.body.appendChild(container);
+      // // attach to document
+      // document.body.appendChild(container);
     },
 
     play: function () {
@@ -49,7 +49,7 @@ define([
     registerTransition: function () {
       var handler = function () {};
       var result = Revolver.registerTransition('test', handler);
-      assert.strictEqual(Revolver.transitions['test'], handler, 'Revolver.registerTransition should save the handler in the Revolver.transitions namespace.');
+      assert.strictEqual(Revolver.transitions.test, handler, 'Revolver.registerTransition should save the handler in the Revolver.transitions namespace.');
       assert.strictEqual(result, Revolver, 'Revolver.registerTransition should return the Revolver global object.');
     }
   });
