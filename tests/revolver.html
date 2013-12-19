@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Revolver.js Tests</title>
-  <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+  <link rel="stylesheet" href="../node_modules/grunt-mocha/node_modules/mocha/mocha.css" />
 </head>
 <body>
   <div id="myslider">
@@ -15,14 +15,12 @@
   
   <!--  Mocha  -->
   <div id="mocha"></div>
-  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/grunt-mocha/node_modules/mocha/mocha.js"></script>
   <script>mocha.setup('tdd');</script>
   
   <!--  Chai  -->
   <script src="../node_modules/chai/chai.js"></script>
   <script>var assert = chai.assert;</script>
-  
-<!--  <script src="../node_modules/grunt-mocha/phantomjs/bridge.js"></script>-->
   
   <!--  Revolver  -->
   <script src="../bower_components/bean/bean.js"></script>
@@ -31,14 +29,6 @@
   
   <!--  tests  -->
   <script src="revolver.js"></script>
-  
-  
-<!--
-  <script>
-    mocha.checkLeaks();
-    mocha.globals(['Revolver', 'chai', 'bean', '_']);
-  </script>
--->
   
   <script type="text/javascript" charset="utf-8">
     // If tests run in a real browser
