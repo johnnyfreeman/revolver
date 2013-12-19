@@ -1,7 +1,5 @@
 language: node_js
 node_js:
   - "0.10"
-install:
- - npm install
- - grunt install-deps
-script: grunt mocha
+before_script:
+  - grunt install-deps

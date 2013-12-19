@@ -20,5 +20,6 @@
   "engines": {
     "node": "0.10.0",
     "npm": "1.2.12"
-  }
+  },
+  "test": "./node_modules/.bin/grunt mocha"
 }
