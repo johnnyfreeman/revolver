@@ -72,7 +72,8 @@ module.exports = function(grunt) {
     // clean directories
     clean: {
       build: ['js', 'source-maps'],
-      deps: ['bower_components']
+      deps: ['bower_components'],
+      npm: ['node_modules']
     },
 
   });
