@@ -45,6 +45,11 @@ module.exports = function(grunt) {
     
     // watch server
     regarde: {
+      cleanBuild: {
+        files: ['coffee/revolver.coffee'],
+        tasks: 'clean-build'
+      },
+      
       coffee: {
         files: ['coffee/revolver.coffee'],
         tasks: 'coffee'
@@ -59,7 +64,13 @@ module.exports = function(grunt) {
         files: ['js/revolver.js', 'js/revolver.min.js'],
         tasks: 'mocha'
       }
-    }
+    },
+    
+    // clean directories
+    clean: {
+      build: ['js', 'source-maps'],
+      deps: ['bower_components']
+    },
 
   });
 
@@ -69,9 +80,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Custom tasks
   grunt.registerTask('default', 'build');
-  grunt.registerTask('server', 'regarde');
-  grunt.registerTask('build', ['coffee', 'uglify', 'mocha']);
+  grunt.registerTask('build', ['clean:build', 'coffee', 'uglify', 'mocha']);
+  grunt.registerTask('build-server', 'regarde');
+  grunt.registerTask('install-deps', ['clean:deps', 'bower']);
 };

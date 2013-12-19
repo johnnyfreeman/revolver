@@ -12,7 +12,8 @@
     "grunt-contrib-coffee": "git://github.com/johnnyfreeman/grunt-contrib-coffee",
     "chai": "~1.8.1",
     "grunt-mocha": "~0.4.7",
-    "grunt-bower-task": "~0.3.4"
+    "grunt-bower-task": "~0.3.4",
+    "grunt-contrib-clean": "~0.5.0"
   },
   "main": "js/revolver.min.js",
   "engines": {
