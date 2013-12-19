@@ -5,6 +5,9 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
     
+    // bower install
+    bower: {install: {options: {copy: false}}},
+    
     // mocha testing
     mocha: {
       test: {
@@ -54,7 +57,7 @@ module.exports = function(grunt) {
       
       test: {
         files: ['js/revolver.js', 'js/revolver.min.js'],
-        tasks: 'test'
+        tasks: 'mocha'
       }
     }
 
@@ -65,6 +68,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-bower-task');
 
   // Custom tasks
   grunt.registerTask('default', 'build');
