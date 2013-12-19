@@ -1,9 +1,19 @@
 {
   "name": "revolverjs",
+  "description": "A javascript library for building your own content slider.",
   "version": "2.1.0",
+  "homepage": "https://github.com/johnnyfreeman/revolverjs",
+  "author": {
+    "name": "Johnny Freeman",
+    "email": "prsjohnny@gmail.com",
+    "url": "http://github.com/johnnyfreeman"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/johnnyfreeman/revolverjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/johnnyfreeman/revolverjs/issues"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
