@@ -10,8 +10,11 @@ module.exports = function(grunt) {
     
     // mocha testing
     mocha: {
-      test: {
+      all: {
         src: ['tests/**/*.html'],
+        options: {
+          run: true
+        }
       },
     },
     

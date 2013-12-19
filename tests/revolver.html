@@ -12,19 +12,38 @@
     <div class="slide">slide3</div>
     <div class="slide">slide4</div>
   </div>
+  
+  <!--  Mocha  -->
   <div id="mocha"></div>
-  <script src="../node_modules/chai/chai.js"></script>
   <script src="../node_modules/mocha/mocha.js"></script>
   <script>mocha.setup('tdd');</script>
-  <script src="../node_modules/grunt-mocha/phantomjs/bridge.js"></script>
+  
+  <!--  Chai  -->
+  <script src="../node_modules/chai/chai.js"></script>
+  <script>var assert = chai.assert;</script>
+  
+<!--  <script src="../node_modules/grunt-mocha/phantomjs/bridge.js"></script>-->
+  
+  <!--  Revolver  -->
   <script src="../bower_components/bean/bean.js"></script>
   <script src="../bower_components/lodash/dist/lodash.js"></script>
   <script src="../js/revolver.min.js"></script>
+  
+  <!--  tests  -->
   <script src="revolver.js"></script>
+  
+  
+<!--
   <script>
     mocha.checkLeaks();
     mocha.globals(['Revolver', 'chai', 'bean', '_']);
-    mocha.run();
   </script>
+-->
+  
+  <script type="text/javascript" charset="utf-8">
+    // If tests run in a real browser
+    // Can alternatively do a check on window.PHANTOMJS
+    if (navigator.userAgent.indexOf('PhantomJS') < 0) mocha.run();
+    </script>
 </body>
 </html>
