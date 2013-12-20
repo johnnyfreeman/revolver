@@ -15,7 +15,7 @@
     this.setOptions(Revolver.defaults, options);
     this.container = this.options.container || Revolver.selectorEngine(this.options.containerSelector, document)[0] || document;
     this.slides = [];
-    slidesToAdd = this.options.slides || Revolver.selectorEngine(this.options.slideSelector, this.container);
+    slidesToAdd = this.options.slides || Revolver.selectorEngine(this.options.slidesSelector, this.container);
     _.each(slidesToAdd, this.addSlide, this);
     this.previousSlide = this.lastSlide;
     this.status = {
@@ -49,7 +49,7 @@
     container: null,
     containerSelector: null,
     slides: null,
-    slideSelector: null,
+    slidesSelector: null,
     onReady: function() {},
     onPlay: function() {},
     onStop: function() {},
@@ -247,5 +247,5 @@
 }).call(this);
 
 /*
-//@ sourceMappingURL=../source-maps/revolver.js.map
+//# sourceMappingURL=../source-maps/revolver.js.map
 */

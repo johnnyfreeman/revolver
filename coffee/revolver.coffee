@@ -34,7 +34,7 @@ Revolver = (options) ->
 
   # add all slides
   @slides = []
-  slidesToAdd = @options.slides or Revolver.selectorEngine @options.slideSelector, @container
+  slidesToAdd = @options.slides or Revolver.selectorEngine @options.slidesSelector, @container
   _.each slidesToAdd, @addSlide, this
 
   # finish setting up init values
@@ -81,7 +81,7 @@ Revolver.defaults =
   container: null         # dom element the contains the slides (optional)
   containerSelector: null # selector used to find the container element
   slides: null            # array of slide dom elements
-  slideSelector: null     # selector used to find all slides for this slider
+  slidesSelector: null    # selector used to find all slides for this slider
   onReady: ->             # gets called when revolver is setup and ready to go
   onPlay: ->              # gets called when the play() method is called
   onStop: ->              # gets called when the stop() method is called
