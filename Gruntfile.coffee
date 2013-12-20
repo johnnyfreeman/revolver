@@ -14,8 +14,9 @@ module.exports = (grunt) ->
     # mocha testing
     mocha:
       all:
-        src: ['tests/**/*.html']
+        src: ['test/**/*.html']
         options:
+          reporter: 'Spec'
           run: true
 
 
@@ -45,21 +46,19 @@ module.exports = (grunt) ->
 
     # watch server
     watch:
-      cleanBuild:
-        files: ['coffee/revolver.coffee']
-        tasks: 'clean:build'
-
       coffee:
         files: ['coffee/revolver.coffee']
-        tasks: 'coffee'
+        tasks: ['clean:build', 'coffee']
 
       uglify:
         files: ['js/revolver.js']
         tasks: 'uglify'
 
       test:
-        files: ['js/revolver.js', 'js/revolver.min.js']
-        tasks: 'mocha'
+        files: ['js/revolver.js', 'js/revolver.min.js', 'test/revolver.js', 'test/revolver.html']
+        tasks: 'mocha',
+        options:
+          livereload: true
 
 
     # clean directories
@@ -80,5 +79,4 @@ module.exports = (grunt) ->
   # Custom tasks
   grunt.registerTask 'default', 'build'
   grunt.registerTask 'build', ['clean:build', 'coffee', 'uglify', 'mocha']
-  grunt.registerTask 'build-server', 'watch'
   grunt.registerTask 'install-deps', ['clean:deps', 'bower']
