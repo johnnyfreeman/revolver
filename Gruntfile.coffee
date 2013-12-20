@@ -44,10 +44,10 @@ module.exports = (grunt) ->
 
 
     # watch server
-    regarde:
+    watch:
       cleanBuild:
         files: ['coffee/revolver.coffee']
-        tasks: 'clean-build'
+        tasks: 'clean:build'
 
       coffee:
         files: ['coffee/revolver.coffee']
@@ -72,13 +72,13 @@ module.exports = (grunt) ->
   # Load tasks
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
-  grunt.loadNpmTasks 'grunt-regarde'
   grunt.loadNpmTasks 'grunt-mocha'
   grunt.loadNpmTasks 'grunt-bower-task'
   grunt.loadNpmTasks 'grunt-contrib-clean'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
 
   # Custom tasks
   grunt.registerTask 'default', 'build'
   grunt.registerTask 'build', ['clean:build', 'coffee', 'uglify', 'mocha']
-  grunt.registerTask 'build-server', 'regarde'
+  grunt.registerTask 'build-server', 'watch'
   grunt.registerTask 'install-deps', ['clean:deps', 'bower']
