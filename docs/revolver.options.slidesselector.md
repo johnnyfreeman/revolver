@@ -1,1 +1,0 @@
-revolver.options.slidesSelector.md

@@ -34,4 +34,4 @@ Revolver.registerTransition('fade', function() {
 });
 ```
 
-To use your new transition, just pass the `name` along as the [transition.name](revolver.options.transition.name.md) option.
+To use your new transition, just pass the `name` along as the [transition.name](../options/transition.name.md) option.
