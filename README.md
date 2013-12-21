@@ -16,8 +16,14 @@ Because of Revolver's unopinionated philosophy, it does very little out of the b
 
 * [**barebones-example**](https://github.com/johnnyfreeman/revolverjs-barebones-example): An out-of-the-box example.
 * [**fade-example**](https://github.com/johnnyfreeman/revolverjs-fade-example): Slides fade in and out from each other using jQuery.
-* [**reveal-example**](https://github.com/johnnyfreeman/revolverjs-reveal-example): A Curtain transition using Qwery and Greensock.
+* [**reveal-example**](https://github.com/johnnyfreeman/revolverjs-reveal-example): A curtain-like transition using Qwery, Bonzo, and CSS3 animations.
 * [**inception-example**](https://github.com/johnnyfreeman/revolverjs-inception-example): A slider within a slider using Mootools.
+
+## Extensions
+
+* [**jquery-plugin**](https://github.com/johnnyfreeman/revolverjs-jquery-plugin): A jQuery plugin.
+* [**mootools-plugin**](https://github.com/johnnyfreeman/revolverjs-mootools-plugin): A MooTools plugin.
+* [**jquery-slide-transition**](https://github.com/johnnyfreeman/revolverjs-jquery-slide-transition): A slide-like transition handler using jQuery.
 
 ## Contributing
 
