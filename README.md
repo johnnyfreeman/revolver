@@ -22,6 +22,7 @@ Because of Revolver's unopinionated philosophy, it does very little out of the b
 * [**jquery-plugin**](https://github.com/johnnyfreeman/revolverjs-jquery-plugin): A jQuery plugin.
 * [**mootools-plugin**](https://github.com/johnnyfreeman/revolverjs-mootools-plugin): A MooTools plugin.
 * [**bonzo-plugin**](https://github.com/johnnyfreeman/revolverjs-bonzo-plugin): A Bonzo plugin.
+* [**jquery-fade-transition**](https://github.com/johnnyfreeman/revolverjs-jquery-fade-transition): A fading transition handler using jQuery.
 * [**jquery-slide-transition**](https://github.com/johnnyfreeman/revolverjs-jquery-slide-transition): A slide-like transition handler using jQuery.
 
 ## Contributing
