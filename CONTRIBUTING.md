@@ -4,7 +4,7 @@ _IF YOU PLAN TO MAKE A PULL REQUEST OF YOUR CHANGES, MAKE SURE YOU ONLY EDIT THE
 
 Revolver uses [Grunt](http://gruntjs.com/) and a few Grunt plugins to help make development as easy as possible. To install these tools you must have [Node](http://nodejs.org/), [NPM](https://npmjs.org/), and [Grunt-CLI](http://gruntjs.com/getting-started#installing-the-cli) installed on your machine. Install those before continuing.
 
-### Installing Dev Dependencies
+### Installing Dependencies
 
 To install all dependencies, open Terminal (*nix or Mac) or Powershell (Windows), and run:
 
@@ -13,7 +13,7 @@ npm install
 grunt install-deps
 ```
 
-### Build
+### Building
 
 This will compile, minify, generate source maps, and run all tests:
 

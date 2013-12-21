@@ -21,4 +21,4 @@ Because of Revolver's unopinionated philosophy, it does very little out of the b
 
 ## Contributing
 
-Please review the [guidelines for contributing](CONTRIBUTING.md) before opening a pull request. Includes docs for [building](CONTRIBUTING.md#build), [testing](CONTRIBUTING.md#testing), and handling [dependencies](CONTRIBUTING.md#installing-dev-dependencies).
+Please review the [guidelines for contributing](CONTRIBUTING.md) before opening a pull request. Includes docs for [building](CONTRIBUTING.md#building), [testing](CONTRIBUTING.md#testing), and handling [dependencies](CONTRIBUTING.md#installing-dev-dependencies).
