@@ -68,10 +68,10 @@ module.exports = (grunt) ->
       npm: ['node_modules']
       hooks: ['.git/hooks/pre-commit']
     
-    # copy git hooks
-    shell:
-      hooks:
-        command: 'cp git-hooks/pre-commit .git/hooks/'
+    # git hooks
+    githooks:
+      all:
+        'pre-commit': 'test'
 
 
   # Load tasks
@@ -81,7 +81,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-bower-task'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-shell'
+  grunt.loadNpmTasks 'grunt-githooks'
 
   # Custom tasks
   grunt.registerTask 'default', 'build'
