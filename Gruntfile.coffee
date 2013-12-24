@@ -61,7 +61,7 @@ module.exports = (grunt) ->
         files: ['dist/revolver.js']
         tasks: 'uglify'
 
-      testgr:
+      test:
         files: ['dist/revolver.js', 'dist/revolver.min.js', 'test/tests.js', 'test/revolver.html']
         tasks: 'mocha',
         options:
