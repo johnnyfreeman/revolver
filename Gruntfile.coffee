@@ -84,8 +84,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-shell'
 
   # Custom tasks
-  grunt.registerTask 'default', 'build'
+  grunt.registerTask 'default', ['build', 'test']
   grunt.registerTask 'build', ['clean:build', 'coffee', 'uglify']
   grunt.registerTask 'install-deps', ['clean:deps', 'bower']
   grunt.registerTask 'install-hooks', ['clean:hooks', 'shell:hooks']
-  grunt.registerTask 'test', ['build', 'install-deps', 'mocha']
+  grunt.registerTask 'test', ['install-deps', 'mocha']
