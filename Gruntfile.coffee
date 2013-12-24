@@ -34,7 +34,7 @@ module.exports = (grunt) ->
     # minification
     uglify:
       options:
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today(\'yyyy-mm-dd\') %> */\n'
+        banner: '/*! <%= pkg.name %> <%= pkg.version %>  */\n'
         sourceMap: 'source-maps/revolver.min.js.map'
         sourceMappingURL: '../source-maps/revolver.min.js.map'
         sourceMapIn: 'source-maps/revolver.js.map'
