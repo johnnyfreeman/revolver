@@ -78,5 +78,6 @@ module.exports = (grunt) ->
 
   # Custom tasks
   grunt.registerTask 'default', 'build'
-  grunt.registerTask 'build', ['clean:build', 'coffee', 'uglify', 'mocha']
+  grunt.registerTask 'build', ['install-deps', 'clean:build', 'coffee', 'uglify']
   grunt.registerTask 'install-deps', ['clean:deps', 'bower']
+  grunt.registerTask 'test', ['build', 'mocha']

@@ -32,6 +32,6 @@
     "npm": "1.2.12"
   },
   "scripts": {
-    "test": "./node_modules/.bin/grunt mocha"
+    "test": "./node_modules/.bin/grunt test"
   }
 }
