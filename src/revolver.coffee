@@ -88,7 +88,7 @@ Revolver.defaults =
   onPause: ->             # gets called when the pause() method is called
   onRestart: ->           # gets called when the restart() method is called
   rotationSpeed: 4000     # how long (in milliseconds) to stay on each slide before going to the next
-  transition:   
+  transition:
     onStart: ->           # gets called when the transition animation begins
     onComplete: ->        # gets called when the animation is done
     name: 'default'       # default transition
@@ -116,7 +116,7 @@ Revolver::addSlide = (slide) ->
 # set options
 Revolver::setOptions = () ->
   # add existing options to beginning of arguments array
-  args = Array.prototype.slice.call(arguments,0);
+  args = Array.prototype.slice.call arguments, 0
   args.unshift @options
   # merge new options with the existing options
   _.merge.apply null, args
@@ -301,7 +301,7 @@ Revolver.selectorEngine = (selector, root) ->
   root = document if root is undefined
   root.querySelectorAll selector
 
-# override the default selector engine 
+# override the default selector engine
 # (ex jQuery.find, Qwery, Sel, Sizzle, NWMatcher)
 Revolver.setSelectorEngine = (e) ->
   bean.setSelectorEngine e
@@ -335,4 +335,4 @@ window.Revolver = Revolver
 
 # support AMD
 if typeof window.define is "function" && window.define.amd
-    window.define "revolver", [], -> window.Revolver
+  window.define "revolver", [], -> window.Revolver

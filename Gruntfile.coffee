@@ -79,8 +79,13 @@ module.exports = (grunt) ->
         
     # linting
     coffeelint:
+      grunt: 'Gruntfile.coffee'
       revolver: 'src/revolver.coffee'
       tests: 'src/tests.coffee'
+      options:
+        max_line_length:
+          value: 120,
+          limitComments: false
 
 
   # Load tasks
