@@ -66,6 +66,15 @@ module.exports = (grunt) ->
       build: ['js', 'source-maps']
       deps: ['bower_components']
       npm: ['node_modules']
+      hooks: ['.git/hooks/pre-commit']
+    
+    # copy git hooks
+    copy:
+      hooks:
+        expand: true
+        cwd: 'git-hooks'
+        src: 'pre-commit'
+        dest: '.git/hooks'
 
 
   # Load tasks
@@ -75,9 +84,11 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-bower-task'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-contrib-copy'
 
   # Custom tasks
   grunt.registerTask 'default', 'build'
   grunt.registerTask 'build', ['install-deps', 'clean:build', 'coffee', 'uglify']
   grunt.registerTask 'install-deps', ['clean:deps', 'bower']
+  grunt.registerTask 'install-hooks', ['clean:hooks', 'copy:hooks']
   grunt.registerTask 'test', ['build', 'mocha']
