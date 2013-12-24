@@ -49,6 +49,10 @@ module.exports = (grunt) ->
 
     # watch server
     watch:
+      lint:
+        files: ['Gruntfile.coffee', 'src/*.coffee']
+        tasks: ['coffeelint']
+
       coffee:
         files: ['src/*.coffee']
         tasks: ['clean:build', 'coffee']
