@@ -1,6 +1,6 @@
 # Contributing
 
-_IF YOU PLAN TO MAKE A PULL REQUEST OF YOUR CHANGES, MAKE SURE YOU ONLY EDIT THE [COFFEE FILE](coffee/revolver.coffee) AND NEVER THE JS FILES DIRECTLY. GRUNT WILL TAKE CARE OF THE JS FILES FOR YOU._
+_IF YOU PLAN TO MAKE A PULL REQUEST OF YOUR CHANGES, MAKE SURE YOU ONLY EDIT THE [SOURCE FILES](src/). GRUNT WILL TAKE CARE OF THE JS FILES FOR YOU._
 
 Revolver uses [Grunt](http://gruntjs.com/) and a few Grunt plugins to help make development as easy as possible. To install these tools you must have [Node](http://nodejs.org/), [NPM](https://npmjs.org/), and [Grunt-CLI](http://gruntjs.com/getting-started#installing-the-cli) installed on your machine. Install those before continuing.
 
@@ -10,18 +10,17 @@ To install all dependencies, open Terminal (*nix or Mac) or Powershell (Windows)
 
 ```shell
 npm install
-grunt install-deps
 ```
 
-### Building
+### Grunt
 
-This will compile, minify, generate source maps, and run all tests:
+Grunt will lint, compile, minify, source map, and test everything for you:
 
 ```shell
-grunt build
+grunt
 ```
 
-To run a watch server that will rebuild upon every save, run:
+To do all that upon every save, grunt can start a watch server for you:
 
 ```shell
 grunt watch
@@ -29,24 +28,4 @@ grunt watch
 
 ### Testing
 
-Revolver uses [Mocha](http://visionmedia.github.io/mocha/) to test itself.
-
-###### In the console
-
-To run tests from the console:
-
-```shell
-grunt test
-```
-
-###### In the browser
-
-To run tests in the browser, navigate to [test/revolver.html](test/revolver.html).
-
-###### Watch server
-
-To run a watch server (with livereload enabled) for retesting upon every save, run:
-
-```shell
-grunt watch:test
-```
+Revolver uses [Mocha](http://visionmedia.github.io/mocha/) for testing. To run tests in the browser, navigate to [test/revolver.html](test/revolver.html). To run tests in the terminal, run `grunt test` or `grunt watch:test`.
