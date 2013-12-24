@@ -69,12 +69,9 @@ module.exports = (grunt) ->
       hooks: ['.git/hooks/pre-commit']
     
     # copy git hooks
-    copy:
+    shell:
       hooks:
-        expand: true
-        cwd: 'git-hooks'
-        src: 'pre-commit'
-        dest: '.git/hooks'
+        command: 'cp git-hooks/pre-commit .git/hooks/'
 
 
   # Load tasks
@@ -84,11 +81,11 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-bower-task'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks 'grunt-shell'
 
   # Custom tasks
   grunt.registerTask 'default', 'build'
   grunt.registerTask 'build', ['install-deps', 'clean:build', 'coffee', 'uglify']
   grunt.registerTask 'install-deps', ['clean:deps', 'bower']
-  grunt.registerTask 'install-hooks', ['clean:hooks', 'copy:hooks']
+  grunt.registerTask 'install-hooks', ['clean:hooks', 'shell:hooks']
   grunt.registerTask 'test', ['build', 'mocha']
