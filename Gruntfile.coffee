@@ -22,40 +22,43 @@ module.exports = (grunt) ->
 
     # coffeescript compilation
     coffee:
-      compileWithMaps:
+      revolver:
         options:
           sourceMap: true
-          sourceMapDir: 'source-maps/'
 
         files:
-          'js/revolver.js': 'coffee/revolver.coffee'
+          'dist/revolver.js': 'src/revolver.coffee'
+      
+      tests:
+        files:
+          'test/tests.js': 'src/tests.coffee'
 
 
     # minification
     uglify:
       options:
         banner: '/*! <%= pkg.name %> <%= pkg.version %>  */\n'
-        sourceMap: 'source-maps/revolver.min.js.map'
-        sourceMappingURL: '../source-maps/revolver.min.js.map'
-        sourceMapIn: 'source-maps/revolver.js.map'
+        sourceMap: 'dist/revolver.min.js.map'
+        sourceMappingURL: 'revolver.min.js.map'
+        sourceMapIn: 'dist/revolver.js.map'
 
       build:
         files:
-          'js/revolver.min.js': ['js/revolver.js']
+          'dist/revolver.min.js': ['dist/revolver.js']
 
 
     # watch server
     watch:
       coffee:
-        files: ['coffee/revolver.coffee']
+        files: ['src/*.coffee']
         tasks: ['clean:build', 'coffee']
 
       uglify:
-        files: ['js/revolver.js']
+        files: ['dist/revolver.js']
         tasks: 'uglify'
 
-      test:
-        files: ['js/revolver.js', 'js/revolver.min.js', 'test/revolver.js', 'test/revolver.html']
+      testgr:
+        files: ['dist/revolver.js', 'dist/revolver.min.js', 'test/tests.js', 'test/revolver.html']
         tasks: 'mocha',
         options:
           livereload: true
@@ -63,15 +66,21 @@ module.exports = (grunt) ->
 
     # clean directories
     clean:
-      build: ['js', 'source-maps']
-      deps: ['bower_components']
-      npm: ['node_modules']
+      dist: ['dist']
+      bower: ['bower_components']
       hooks: ['.git/hooks/pre-commit']
+      npm: ['node_modules']
+      tests: ['test/tests.js']
     
     # copy git hooks
     shell:
       hooks:
         command: 'cp git-hooks/pre-commit .git/hooks/'
+        
+    # linting
+    coffeelint:
+      revolver: 'src/revolver.coffee'
+      tests: 'src/tests.coffee'
 
 
   # Load tasks
@@ -82,10 +91,11 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-shell'
+  grunt.loadNpmTasks 'grunt-coffeelint'
 
   # Custom tasks
-  grunt.registerTask 'default', ['build', 'test']
-  grunt.registerTask 'build', ['clean:build', 'coffee', 'uglify']
-  grunt.registerTask 'install-deps', ['clean:deps', 'bower']
+  grunt.registerTask 'default', ['coffeelint', 'build', 'test']
+  grunt.registerTask 'build', ['clean:dist', 'clean:tests', 'coffee', 'uglify']
+  grunt.registerTask 'install-deps', ['clean:bower', 'bower']
   grunt.registerTask 'install-hooks', ['clean:hooks', 'shell:hooks']
   grunt.registerTask 'test', ['install-deps', 'mocha']

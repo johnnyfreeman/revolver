@@ -1,7 +1,7 @@
 {
   "version": 3,
   "file": "revolver.js",
-  "sourceRoot": "../coffee/",
+  "sourceRoot": "../src/",
   "sources": [
     "revolver.coffee"
   ],

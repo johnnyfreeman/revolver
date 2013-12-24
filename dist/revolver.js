@@ -247,5 +247,5 @@
 }).call(this);
 
 /*
-//# sourceMappingURL=../source-maps/revolver.js.map
+//# sourceMappingURL=../dist/revolver.js.map
 */
