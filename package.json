@@ -28,7 +28,7 @@
     "grunt-shell": "~0.6.1",
     "grunt-coffeelint": "0.0.8"
   },
-  "main": "js/revolver.min.js",
+  "main": "dist/revolver.min.js",
   "engines": {
     "node": "0.10.0",
     "npm": "1.2.12"

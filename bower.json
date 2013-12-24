@@ -5,7 +5,7 @@
     "type": "git",
     "url": "git://github.com/johnnyfreeman/revolverjs.git"
   },
-  "main": "js/revolver.min.js",
+  "main": "dist/revolver.min.js",
   "ignore": [
     "**/.*"
   ],
