@@ -47,6 +47,7 @@ Revolver = (slides, options) ->
   @on 'play', @options.onPlay
   @on 'stop', @options.onStop
   @on 'pause', @options.onPause
+  @on 'resume', @options.onResume
   @on 'restart', @options.onRestart
   @on 'transitionStart', @options.transition.onStart
   @on 'transitionComplete', @options.transition.onComplete
@@ -67,6 +68,7 @@ Revolver.defaults =
   onPlay: ->          # gets called when the play() method is called
   onStop: ->          # gets called when the stop() method is called
   onPause: ->         # gets called when the pause() method is called
+  onResume: ->        # gets called when the resume() method is called
   onRestart: ->       # gets called when the restart() method is called
   rotationSpeed: 4000 # how long (in milliseconds) to stay on each slide before going to the next
   transition:
@@ -178,7 +180,20 @@ Revolver::pause = ->
   # return instance
   this
 
-
+# Resume the slider
+Revolver::resume = ->
+  # if slider isn't disabled and the status is paused
+  if @disabled is false and @status.paused
+    # change status back to playing
+    @changeStatus 'playing'
+    # trigger all registered 'play' and 'resume' event listeners
+    @trigger 'play'
+    @trigger 'resume'
+    # start the loop
+    @intervalId = setInterval _.bind(@transition, this), parseFloat(@options.rotationSpeed)
+  # return instance
+  this
+  
 # stop the slider
 Revolver::stop = ->
   # if slider isn't disabled and not currently stopped
