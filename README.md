@@ -6,7 +6,7 @@ In fact, Revolver is a much lower component than most others. It's more of a fra
 
 ## Getting Started
 
-For veterans, all you need to do is [install](#installation) Revolver and start customizing. However, if you are new to Revolver, it is highly recommended you study the [documentation](docs/README.md) and check out a few of the [examples](#examples).
+For veterans, all you need to do is [install](docs/README.md#installation) Revolver and start customizing. However, if you are new to Revolver, it is highly recommended you study the [documentation](docs/README.md) and check out a few of the [examples](#examples).
 
 ## Examples
 
