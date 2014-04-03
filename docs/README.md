@@ -14,21 +14,27 @@ Of course, you can still take the ol' fashioned approach and [download](https://
 
 ## Usage
 
-There are only two things that are required to instantiate Revolver: The css selectors to the container and slides.
+There are only two things that are required to instantiate Revolver: 
+
+1. **Container**: via [container](docs/options/container.md) or [containerSelector](docs/options/containerselector.md) options.
+2. **Slides**: via [slides](docs/options/slides.md) or [slidesSelector](docs/options/slidesselector.md) options.
+
+#### Using DOM Nodes
+
+```javascript
+var mySlideContainer = document.getElementById('slidesContainer');
+var mySlides = mySlideContainer.getElementsByClassName('slide');
+
+var mySlider = new Revolver({container: mySlideContainer, slides: mySlides});
+```
+
+#### Using Selectors
 
 ```javascript
 var mySlider = new Revolver({containerSelector: '#slidesContainer', slideSelector: '.slide'});
 ```
 
-Or, the actual container and slides themselves.
-
-```javascript
-var mySlideContainer = document.getElementById('slidesContainer');
-var mySlides = mySlideContainer.getElementsByClassName('slide');
-var mySlider = new Revolver({container: mySlideContainer, slides: mySlides});
-```
-
-Or any combination of the two.
+You may also impliment any combination of the two methods.
 
 ## Options
 
