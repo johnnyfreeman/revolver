@@ -16,8 +16,8 @@ Of course, you can still take the ol' fashioned approach and [download](https://
 
 There are only two things that are required to instantiate Revolver: 
 
-1. **Container**: via [container](docs/options/container.md) or [containerSelector](docs/options/containerselector.md) options.
-2. **Slides**: via [slides](docs/options/slides.md) or [slidesSelector](docs/options/slidesselector.md) options.
+1. **Container**: via [container](options/container.md) or [containerSelector](options/containerselector.md) options.
+2. **Slides**: via [slides](options/slides.md) or [slidesSelector](options/slidesselector.md) options.
 
 #### Using DOM Nodes
 
