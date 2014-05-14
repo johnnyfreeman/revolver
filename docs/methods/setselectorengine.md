@@ -2,7 +2,9 @@
 
 **Type**: `Function`, **Returns**: `Object` (Revolver global)
 
-Revolver uses `querySelectorAll` to traverse the dom, but you may delegate that work to a selector engine. The selector engine simply needs to be a function that takes two arguments: a selector string and a root element, it should return an array of matched DOM elements. [Qwery](https://github.com/ded/qwery), [Sel](https://github.com/amccollum/sel), [Sizzle](http://sizzlejs.com/), [NWMatcher](https://github.com/dperini/nwmatcher/) and other selector engines should all be compatible with Revolver.
+If you would like Revolver to use a selector engine, or if you are concerned about cross-browser compatability, you may want Revolver to delegate all DOM traversal to a selector engine of your choice. 
+
+The selector engine simply needs to be a function that takes two arguments: a selector string and a root element, it should return an array of matched DOM elements. [Qwery](https://github.com/ded/qwery), [Sel](https://github.com/amccollum/sel), [Sizzle](http://sizzlejs.com/), [NWMatcher](https://github.com/dperini/nwmatcher/) and other selector engines should all be compatible.
 
 ##### Using jQuery
 
@@ -14,4 +16,4 @@ Revolver.setSelectorEngine(jQuery.find);
 
 ```javascript
 Revolver.setSelectorEngine(Qwery);
-```
+``
