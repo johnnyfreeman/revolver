@@ -1,12 +1,44 @@
 # Revolver [![Build Status](https://travis-ci.org/johnnyfreeman/revolverjs.png?branch=master)](https://travis-ci.org/johnnyfreeman/revolverjs) [![Code Climate](https://codeclimate.com/github/johnnyfreeman/revolverjs.png)](https://codeclimate.com/github/johnnyfreeman/revolverjs)
 
-Revolver is a javascript library to help you build your own content slider. It has a sensable API that helps you get from mockup to reality with less friction than the other "cookie-cutter" sliders out there. 
+Revolver is a javascript library to help you build your own content slider. It has a sensable [API](api/README.md) that helps you get from mockup to reality with less friction than the other "cookie-cutter" sliders out there. 
 
-In fact, Revolver is a much lower component than most others. It's more of a framework than it is a complete solution. So, naturally, hand-writing a little javascript comes with the terratory. But don't let any of that scare you, it's pretty easy to get started!
+In fact, Revolver is a much lower component than most others. It's more of a framework than it is a complete solution. So, naturally, hand-writing a little javascript comes with the terratory. Let's get started!
 
-## Getting Started
+## Installation
 
-For veterans, all you need to do is [install](docs/README.md#installation) Revolver and start customizing. However, if you are new to Revolver, it is highly recommended you study the [documentation](docs/README.md) and check out a few of the [examples](#examples).
+The recommended way to install Revolver is with [Bower](http://bower.io/).
+
+```shell
+bower install revolverjs
+```
+
+It will resolve all of Revolver's dependencies for you, no need to go and download those separately. If you are unfamiliar with it, I highly recommend you take a look!
+
+Of course, you can still take the ol' fashioned approach and [download](https://github.com/johnnyfreeman/revolverjs/archive/master.zip)/unzip anywhere in your project. Just make sure you also do the same for Revolver's hard dependencies: [Lodash](http://lodash.com/) and [Bean](https://github.com/fat/bean).
+
+## Usage
+
+There are only two things that are required to instantiate Revolver: 
+
+1. **Container**: via [container](api/options/container.md) or [containerSelector](api/options/containerselector.md) options.
+2. **Slides**: via [slides](api/options/slides.md) or [slidesSelector](api/options/slidesselector.md) options.
+
+#### Using DOM Nodes
+
+```javascript
+var mySlideContainer = document.getElementById('slidesContainer');
+var mySlides = mySlideContainer.getElementsByClassName('slide');
+
+var mySlider = new Revolver({container: mySlideContainer, slides: mySlides});
+```
+
+#### Using Selectors
+
+```javascript
+var mySlider = new Revolver({containerSelector: '#slidesContainer', slideSelector: '.slide'});
+```
+
+You may also impliment any combination of the two methods.
 
 ## Examples
 

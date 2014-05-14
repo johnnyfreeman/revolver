@@ -1,40 +1,4 @@
-# Documentation
-
-## Installation
-
-The recommended way to install Revolver is with [Bower](http://bower.io/).
-
-```shell
-bower install revolverjs
-```
-
-It will resolve all of Revolver's dependencies for you, no need to go and download those separately. If you are unfamiliar with it, I highly recommend you take a look!
-
-Of course, you can still take the ol' fashioned approach and [download](https://github.com/johnnyfreeman/revolverjs/archive/master.zip) and unzip it anywhere in your project. Just make sure you also do the same for Revolver's hard dependencies: [Lodash](http://lodash.com/) and [Bean](https://github.com/fat/bean).
-
-## Usage
-
-There are only two things that are required to instantiate Revolver: 
-
-1. **Container**: via [container](options/container.md) or [containerSelector](options/containerselector.md) options.
-2. **Slides**: via [slides](options/slides.md) or [slidesSelector](options/slidesselector.md) options.
-
-#### Using DOM Nodes
-
-```javascript
-var mySlideContainer = document.getElementById('slidesContainer');
-var mySlides = mySlideContainer.getElementsByClassName('slide');
-
-var mySlider = new Revolver({container: mySlideContainer, slides: mySlides});
-```
-
-#### Using Selectors
-
-```javascript
-var mySlider = new Revolver({containerSelector: '#slidesContainer', slideSelector: '.slide'});
-```
-
-You may also impliment any combination of the two methods.
+# API
 
 ## Options
 
@@ -108,7 +72,7 @@ Once you have instantiated Revolver, as shown [here](#usage), you then have acce
 
 ## Static Methods
 
-Certiain methods do not need access to a specific instance of Revolver and can be called on the `Revolver` object itself.
+Certain methods do not need access to a specific instance of Revolver and can be called on the `Revolver` object itself.
 
 * [**$()**](methods/$.md): Internally used for DOM traversal.
 * [**setSelectorEngine()**](methods/setselectorengine.md): Make Revolver use a third-party selector engine.
