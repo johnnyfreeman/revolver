@@ -13,9 +13,16 @@
     this.disabled = false;
     this.options = {};
     this.setOptions(Revolver.defaults, options);
-    this.container = this.options.container || Revolver.selectorEngine(this.options.containerSelector, document)[0] || document;
+    if (this.options.container) {
+      this.container = this.options.container;
+    } else if (this.options.containerSelector) {
+      console.log(Revolver.$(this.options.containerSelector, document));
+      this.container = Revolver.$(this.options.containerSelector, document)[0];
+    } else {
+      this.container = document;
+    }
     this.slides = [];
-    slidesToAdd = this.options.slides || Revolver.selectorEngine(this.options.slidesSelector, this.container);
+    slidesToAdd = this.options.slides || Revolver.$(this.options.slidesSelector, this.container);
     _.each(slidesToAdd, this.addSlide, this);
     this.previousSlide = this.lastSlide;
     this.status = {
@@ -209,7 +216,7 @@
     return this;
   };
 
-  Revolver.selectorEngine = function(selector, root) {
+  Revolver.$ = function(selector, root) {
     if (root === void 0) {
       root = document;
     }
@@ -218,7 +225,7 @@
 
   Revolver.setSelectorEngine = function(e) {
     bean.setSelectorEngine(e);
-    Revolver.selectorEngine = e;
+    Revolver.$ = e;
     return this;
   };
 

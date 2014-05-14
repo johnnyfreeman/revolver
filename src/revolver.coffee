@@ -30,11 +30,17 @@ Revolver = (options) ->
   @setOptions Revolver.defaults, options
 
   # set container
-  @container = @options.container or Revolver.selectorEngine(@options.containerSelector, document)[0] or document
+  if @options.container
+    @container = @options.container
+  else if @options.containerSelector
+    console.log Revolver.$(@options.containerSelector, document)
+    @container = Revolver.$(@options.containerSelector, document)[0]
+  else
+    @container = document
 
   # add all slides
   @slides = []
-  slidesToAdd = @options.slides or Revolver.selectorEngine @options.slidesSelector, @container
+  slidesToAdd = @options.slides or Revolver.$(@options.slidesSelector, @container)
   _.each slidesToAdd, @addSlide, this
 
   # finish setting up init values
@@ -297,7 +303,7 @@ Revolver::trigger = (eventName) ->
 # SELECTOR ENGINE
 
 # use querySelectorAll out of the box
-Revolver.selectorEngine = (selector, root) ->
+Revolver.$ = (selector, root) ->
   root = document if root is undefined
   root.querySelectorAll selector
 
@@ -305,7 +311,7 @@ Revolver.selectorEngine = (selector, root) ->
 # (ex jQuery.find, Qwery, Sel, Sizzle, NWMatcher)
 Revolver.setSelectorEngine = (e) ->
   bean.setSelectorEngine e
-  Revolver.selectorEngine = e
+  Revolver.$ = e
   this
 
 
