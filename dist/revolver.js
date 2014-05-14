@@ -253,6 +253,4 @@
 
 }).call(this);
 
-/*
 //# sourceMappingURL=../dist/revolver.js.map
-*/
