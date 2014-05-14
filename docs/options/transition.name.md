@@ -7,10 +7,11 @@ This option dictates what method will handle the transition from one slide to th
 It can be passed to the constructor (under the [transition](transition.md) namespace).
 
 ```javascript
-var slider = new Revolver(slides, { 
+var slider = new Revolver({ 
   transition: {
     name: 'myCustomTransition'
   }
+  // ...
 });
 ```
 
