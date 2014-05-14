@@ -16,4 +16,4 @@ Revolver.setSelectorEngine(jQuery.find);
 
 ```javascript
 Revolver.setSelectorEngine(Qwery);
-``
+```
