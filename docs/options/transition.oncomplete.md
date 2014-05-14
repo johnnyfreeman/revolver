@@ -13,5 +13,3 @@ var slider =  new Revolver($('.slides'), {
   }
 });
 ```
-
-**Source Refs**: [[45](../../coffee/revolver.coffee#L45), [52](../../coffee/revolver.coffee#L52), [74](../../coffee/revolver.coffee#L74), [272](../../coffee/revolver.coffee#L272)]

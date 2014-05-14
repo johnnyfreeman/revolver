@@ -15,5 +15,3 @@ mySlider.on('transitionComplete', function() {
   // do something else too
 });
 ```
-
-**Source Refs**: [[45](../../coffee/revolver.coffee#L45), [52](../../coffee/revolver.coffee#L52), [272](../../coffee/revolver.coffee#L272)]

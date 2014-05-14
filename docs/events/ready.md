@@ -9,5 +9,3 @@ var mySlider = new Revolver(mySlides, {
   }
 });
 ```
-
-**Source Refs**: [[54](../../coffee/revolver.coffee#L54), [66](../../coffee/revolver.coffee#L66)]

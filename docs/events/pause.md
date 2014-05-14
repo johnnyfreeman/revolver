@@ -13,5 +13,3 @@ mySlider.on('pause', function() {
   // do something else too
 });
 ```
-
-**Source Refs**: [[49](../../../coffee/revolver.coffee#L49), [69](../../../coffee/revolver.coffee#L69), [172](../../../coffee/revolver.coffee#L172)]

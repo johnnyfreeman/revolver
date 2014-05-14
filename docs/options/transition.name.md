@@ -19,5 +19,3 @@ It can also be passed to a few instance methods ([play](../methods/play.md), [re
 ```javascript
 slider.next({ name: 'someOtherTransition' });
 ```
-
-**Source Refs**: [[75](../../coffee/revolver.coffee#L75), [122](../../coffee/revolver.coffee#L122)]

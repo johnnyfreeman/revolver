@@ -7,5 +7,3 @@ This option it passed through the options object to the constructor. If `true`, 
 ```javascript
 var slider = new Revolver(slides, { autoPlay: false });
 ```
-
-**Source Refs**: [[56](../../coffee/revolver.coffee#L56), [65](../../coffee/revolver.coffee#L65)]

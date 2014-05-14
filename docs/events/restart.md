@@ -13,5 +13,3 @@ mySlider.on('restart', function() {
   // do something else too
 });
 ```
-
-**Source Refs**: [[50](../../coffee/revolver.coffee#L50), [70](../../coffee/revolver.coffee#L70), [208](../../coffee/revolver.coffee#L208)]
