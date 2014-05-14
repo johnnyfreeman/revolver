@@ -110,5 +110,6 @@ Once you have instantiated Revolver, as shown [here](#usage), you then have acce
 
 Certiain methods do not need access to a specific instance of Revolver and can be called on the `Revolver` object itself.
 
-* [**setSelectorEngine()**](methods/setselectorengine.md): Revolver uses `querySelectorAll` be default, which should work great on all modern browsers. If you need support for old browsers you can make Revolver us a third-party selector engine such as Qwery, Sel, Sizzle, NWMatcher, etc.
+* [**$()**](methods/$.md): Internally used for DOM traversal.
+* [**setSelectorEngine()**](methods/setselectorengine.md): Make Revolver use a third-party selector engine.
 * [**registerTransition()**](methods/registertransition.md): Register a custom transition with Revolver.
