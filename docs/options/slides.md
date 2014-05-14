@@ -2,7 +2,7 @@
 
 **Type**: `Object` ([NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)), **Default**: `null`
 
-Use this option if you already have a reference to your slide elements. Use [slidesSelector](slidesSelector.md) otherwise.
+Use this option if you already have a reference to your slide elements. Use [slidesSelector](slidesselector.md) otherwise.
 
 ```javascript
 var containerEl = document.querySelector('#myslider');

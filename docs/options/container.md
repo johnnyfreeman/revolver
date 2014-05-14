@@ -2,7 +2,7 @@
 
 **Type**: `Object` ([Element](https://developer.mozilla.org/en-US/docs/Web/API/element)), **Default**: `document`
 
-Use this option if you already have a reference to your slider container element. Use [containerSelector](containerSelector.md) otherwise.
+Use this option if you already have a reference to your slider container element. Use [containerSelector](containerselector.md) otherwise.
 
 ```javascript
 var containerEl = document.querySelector('#myslider');
