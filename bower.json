@@ -3,7 +3,7 @@
   "version": "2.1.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/johnnyfreeman/revolverjs.git"
+    "url": "git://github.com/johnnyfreeman/revolver.git"
   },
   "main": "dist/revolver.min.js",
   "ignore": [
