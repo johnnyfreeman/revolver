@@ -55,14 +55,14 @@ module.exports = (grunt) ->
 
       coffee:
         files: ['src/*.coffee']
-        tasks: ['clean:build', 'coffee']
+        tasks: ['clean:dist', 'clean:tests', 'coffee']
 
       uglify:
         files: ['dist/revolver.js']
         tasks: 'uglify'
 
       test:
-        files: ['dist/revolver.js', 'dist/revolver.min.js', 'test/tests.js', 'test/revolver.html']
+        files: ['dist/revolver.min.js', 'test/tests.js', 'test/revolver.html']
         tasks: 'mocha',
         options:
           livereload: true
