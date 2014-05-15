@@ -16,7 +16,6 @@
     if (this.options.container) {
       this.container = this.options.container;
     } else if (this.options.containerSelector) {
-      console.log(Revolver.$(this.options.containerSelector, document));
       this.container = Revolver.$(this.options.containerSelector, document)[0];
     } else {
       this.container = document;

@@ -33,7 +33,6 @@ Revolver = (options) ->
   if @options.container
     @container = @options.container
   else if @options.containerSelector
-    console.log Revolver.$(@options.containerSelector, document)
     @container = Revolver.$(@options.containerSelector, document)[0]
   else
     @container = document
