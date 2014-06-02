@@ -45,17 +45,15 @@ You may also implement any combination of the two methods.
 Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization to hit the sweet spot.  Here are a few ideas to get you started:
 
 * [**barebones-example**](https://github.com/johnnyfreeman/revolver-barebones-example): An out-of-the-box example.
-* [**fade-example**](https://github.com/johnnyfreeman/revolver-fade-example): Slides fade in and out from each other using jQuery.
-* [**reveal-example**](https://github.com/johnnyfreeman/revolver-reveal-example): A curtain-like transition using Qwery, Bonzo, and CSS3 animations.
-* [**inception-example**](https://github.com/johnnyfreeman/revolver-inception-example): A slider within a slider using Mootools.
+* [**fade-example**](https://github.com/johnnyfreeman/revolver-fade-example): Slides fade in and out from each other.
+* [**reveal-example**](https://github.com/johnnyfreeman/revolver-reveal-example): A curtain-like transition.
+* [**inception-example**](https://github.com/johnnyfreeman/revolver-inception-example): A slider within a slider.
 
 ## Extensions
 
 * [**jquery-plugin**](https://github.com/johnnyfreeman/revolver-jquery-plugin): A jQuery plugin.
 * [**mootools-plugin**](https://github.com/johnnyfreeman/revolver-mootools-plugin): A MooTools plugin.
 * [**bonzo-plugin**](https://github.com/johnnyfreeman/revolver-bonzo-plugin): A Bonzo plugin.
-* [**jquery-fade-transition**](https://github.com/johnnyfreeman/revolver-jquery-fade-transition): A fading transition handler using jQuery.
-* [**jquery-slide-transition**](https://github.com/johnnyfreeman/revolver-jquery-slide-transition): A slide-like transition handler using jQuery.
 
 ## Contributing
 
