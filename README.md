@@ -1,8 +1,8 @@
 # Revolver [![Build Status](https://travis-ci.org/johnnyfreeman/revolver.png?branch=master)](https://travis-ci.org/johnnyfreeman/revolver) [![Code Climate](https://codeclimate.com/github/johnnyfreeman/revolver.png)](https://codeclimate.com/github/johnnyfreeman/revolver)
 
-Revolver is a javascript library to help you build your own content slider. It has a sensable [API](api/README.md) (seriously, go check it out) that helps you get from mockup to reality with less friction than most of the other "cookie-cutter" sliders out there. 
+Revolver is a javascript library to help you build your own content slider. It has a sensible [API](api/README.md) (seriously, go check it out) that helps you get from mockup to reality with less friction than most of the other "cookie-cutter" sliders out there.
 
-One important difference is, Revolver is a much lower component than most others. It's more of a framework than it is a complete solution. So, naturally, hand-writing a little javascript comes with the terratory. Let's get started!
+One important difference is, Revolver is a much lower component than most others. It's more of a framework than it is a complete solution. So, naturally, hand-writing a little javascript comes with the territory. Let's get started!
 
 ## Installation
 
@@ -18,7 +18,7 @@ Of course, you can still take the ol' fashioned approach and [download](https://
 
 ## Usage
 
-There are only two things that are required to instantiate Revolver: 
+There are only two things that are required to instantiate Revolver:
 
 1. **Container**: via [container](api/options/container.md) or [containerSelector](api/options/containerselector.md) options.
 2. **Slides**: via [slides](api/options/slides.md) or [slidesSelector](api/options/slidesselector.md) options.
@@ -38,7 +38,7 @@ var mySlider = new Revolver({container: mySlideContainer, slides: mySlides});
 var mySlider = new Revolver({containerSelector: '#slidesContainer', slideSelector: '.slide'});
 ```
 
-You may also impliment any combination of the two methods.
+You may also implement any combination of the two methods.
 
 ## Examples
 
