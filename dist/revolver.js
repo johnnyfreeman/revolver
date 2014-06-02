@@ -69,7 +69,7 @@
     }
   };
 
-  Revolver.VERSION = '2.1.0';
+  Revolver.VERSION = '2.1.1';
 
   Revolver.prototype.addSlide = function(slide) {
     var currentPlusOne;
@@ -98,10 +98,13 @@
   };
 
   Revolver.prototype.transition = function(options) {
+    var done, transition;
     if (this.disabled === false && this.isAnimating === false) {
       options = _.merge({}, this.options.transition, options);
       this.isAnimating = true;
-      _.bind(Revolver.transitions[options.name], this)(options);
+      transition = _.bind(Revolver.transitions[options.name], this);
+      done = _.bind(this.trigger, this, 'transitionComplete');
+      transition(options, done);
       this.currentSlide = this.nextSlide;
       this.previousSlide = (this.currentSlide === 0 ? this.lastSlide : this.currentSlide - 1);
       this.nextSlide = (this.currentSlide === this.lastSlide ? 0 : this.currentSlide + 1);

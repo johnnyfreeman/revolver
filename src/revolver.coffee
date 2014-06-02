@@ -100,7 +100,7 @@ Revolver.defaults =
 
 
 # current version
-Revolver.VERSION = '2.1.0'
+Revolver.VERSION = '2.1.1'
 
 
 # add a new slide
@@ -144,21 +144,18 @@ Revolver::changeStatus = (newStatus) ->
 Revolver::transition = (options) ->
   # if slider isn't disabled and it isn't current in transition already
   if @disabled is false and @isAnimating is false
-    # merge temporary options with instance options
     options = _.merge({}, @options.transition, options)
-    # flag as currently animating
     @isAnimating = true
-    # call declared transition
-    _.bind(Revolver.transitions[options.name], this)(options)
-    # update current slide
+    # start transition
+    transition = _.bind Revolver.transitions[options.name], this
+    done = _.bind @trigger, this, 'transitionComplete'
+    transition options, done
+    # update current, previous, next, and iteration
     @currentSlide = @nextSlide
-    # update previous slide
     @previousSlide = (if @currentSlide is 0 then @lastSlide else @currentSlide - 1)
-    # update next slide
     @nextSlide = (if @currentSlide is @lastSlide then 0 else @currentSlide + 1)
-    # increase running count of transitions
     @iteration++
-    # fire onTransition event listeners
+    # execute transitionStart event handlers
     @trigger 'transitionStart'
   # return instance
   this
