@@ -2,7 +2,7 @@
 Revolver.setSelectorEngine($.find);
 
 // Start it up
-var mySlider = new Revolver({containerSelector: '.slider', slidesSelector: '.slide'});
+var mySlider = new Revolver({containerSelector: '.slider', slidesSelector: '.slide', transition: {name: 'fade'}});
 
 /*************************************
  * Slider Controls
