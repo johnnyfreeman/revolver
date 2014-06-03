@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Controls Example</title>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/yue.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="index.css">
+  </head>
+
+  <body>
+    <a href="https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/controls"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <div class="yue" id="wrapper">
+      <h1>Controls Example</h1>
+      <div class="slider">
+        <img class="slide" src="http://placehold.it/960x300/1abc9c/ffffff&text=Slide+1" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/3498db/ffffff&text=Slide+2" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/e74c3c/ffffff&text=Slide+3" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/34495e/ffffff&text=Slide+4" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/2ecc71/ffffff&text=Slide+5" alt="" />
+      </div>
+
+      <ul class="controls float-right">
+        <li><a class="first control" data-method="first" href="#" title="mySlider.first()"></a></li>
+        <li><a class="previous control" data-method="previous" href="#" title="mySlider.previous()"></a></li>
+        <li><a class="play control" data-method="play" href="#" title="mySlider.play()"></a></li>
+        <li><a class="pause control" data-method="pause" href="#" title="mySlider.pause()"></a></li>
+        <li><a class="restart control" data-method="restart" href="#" title="mySlider.restart()"></a></li>
+        <li><a class="stop control" data-method="stop" href="#" title="mySlider.stop()"></a></li>
+        <li><a class="next control" data-method="next" href="#" title="mySlider.next()"></a></li>
+        <li><a class="last control" data-method="last" href="#" title="mySlider.last()"></a></li>
+      </ul>
+
+      <ul class="controls">
+        <li><a class="active bullet control" data-method="goTo" data-argument="0" href="#" title="mySlider.goTo(0)"></a></li>
+        <li><a class="bullet control" data-method="goTo" data-argument="1" href="#" title="mySlider.goTo(1)"></a></li>
+        <li><a class="bullet control" data-method="goTo" data-argument="2" href="#" title="mySlider.goTo(2)"></a></li>
+        <li><a class="bullet control" data-method="goTo" data-argument="3" href="#" title="mySlider.goTo(3)"></a></li>
+        <li><a class="bullet control" data-method="goTo" data-argument="4" href="#" title="mySlider.goTo(4)"></a></li>
+      </ul>
+
+      <h2>Code</h2>
+      <p>Hover over controls to view the code for each.</p>
+      <pre><code>var mySlider = new Revolver({...});</code></pre>
+    </div>
+
+    <!-- Revolver -->
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/bean/bean.js"></script>
+    <script src="bower_components/revolver/dist/revolver.js"></script>
+
+    <!-- velocity -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script src="index.js"></script>
+  </body>
+</html>

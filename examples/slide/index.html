@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Slide Example</title>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/yue.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style media="screen">
+      .slider {
+        height: 300px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/slide"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <div class="yue" id="wrapper">
+      <h1>Slide Example</h1>
+      <div class="slider">
+        <img class="slide" src="http://placehold.it/960x300/1abc9c/ffffff&text=Slide+1" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/3498db/ffffff&text=Slide+2" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/e74c3c/ffffff&text=Slide+3" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/34495e/ffffff&text=Slide+4" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/2ecc71/ffffff&text=Slide+5" alt="" />
+      </div>
+
+      <h2>Code</h2>
+      <pre><code>Revolver.registerTransition('slide', function(options, done) {
+  var $nextSlide    = $(this.slides[this.nextSlide]);
+  var $currentSlide = $(this.slides[this.currentSlide]);
+
+  // move current slide above the next slide
+  // so that when the current is faded out
+  // the next slide beneath it will be revealed
+  $currentSlide.css('z-index', this.numSlides);
+  $nextSlide.css('z-index', this.nextSlide);
+
+  // gonna need this
+  var complete = this.trigger.bind(this, 'transitionComplete');
+
+  // all slides except the current are hidden
+  // so we must unhide the next slide before
+  // we can begin the transition
+  $nextSlide.css({left: 0}).show(0, function(){
+    var pos = parseInt($currentSlide.width()) * -1;
+    $currentSlide.velocity({left: pos}, {
+      duration: 400,
+      easing: "swing",
+      complete: done
+    });
+  });
+
+});</code></pre>
+      <pre><code>var mySlider = new Revolver({
+  containerSelector: '.slider',
+  slidesSelector: '.slide',
+  transition: {
+    name: 'slide' // <-- use custom transition
+  }
+});</code></pre>
+    </div>
+
+    <!-- Revolver -->
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/bean/bean.js"></script>
+    <script src="bower_components/revolver/dist/revolver.js"></script>
+
+    <!-- velocity -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/velocity/jquery.velocity.js"></script>
+
+    <!-- Fade Transition -->
+    <script src="slide.js"></script>
+
+    <!-- Revolver -->
+    <script charset="utf-8">
+      // use Sizzle for greater browser compatability
+      Revolver.setSelectorEngine($.find);
+
+      // Start it up
+      var mySlider = new Revolver({containerSelector: '.slider', slidesSelector: '.slide', transition: {name: 'slide' }});
+    </script>
+  </body>
+</html>

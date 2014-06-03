@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Revolver Fade Example</title>
+    <title>Fade Example</title>
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/yue.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
+    <style media="screen">
+      .slider {
+        height: 300px;
+      }
+    </style>
   </head>
 
   <body>
@@ -50,27 +55,6 @@
     name: 'fade' // <-- use custom transition
   }
 });</code></pre>
-
-      <h2>API</h2>
-      <p>Click on the <a href="https://github.com/johnnyfreeman/revolver/blob/master/api/README.md#instance-methods">instance methods</a> below to run them. Or open up the console and run them yourself.</p>
-      <ul class="api">
-        <li><a class="call" data-method="first" href="#">mySlider.first()</a></li>
-        <li><a class="call" data-method="previous" href="#">mySlider.previous()</a></li>
-        <li><a class="call" data-method="play" href="#">mySlider.play()</a></li>
-        <li><a class="call" data-method="pause" href="#">mySlider.pause()</a></li>
-        <li><a class="call" data-method="stop" href="#">mySlider.stop()</a></li>
-        <li><a class="call" data-method="next" href="#">mySlider.next()</a></li>
-        <li><a class="call" data-method="last" href="#">mySlider.last()</a></li>
-        <li><a class="call" data-method="goTo" data-argument="0" href="#">mySlider.goTo(0)</a></li>
-        <li><a class="call" data-method="goTo" data-argument="1" href="#">mySlider.goTo(1)</a></li>
-        <li><a class="call" data-method="goTo" data-argument="2" href="#">mySlider.goTo(2)</a></li>
-        <li><a class="call" data-method="goTo" data-argument="3" href="#">mySlider.goTo(3)</a></li>
-        <li><a class="call" data-method="goTo" data-argument="4" href="#">mySlider.goTo(4)</a></li>
-      </ul>
-
-      <h2>Event log</h2>
-      <p>You can pause the event log at any time by calling <a class="call" data-method="stop" href="#">stop()</a> or <a class="call" data-method="pause" href="#">pause()</a>.</p>
-      <ul class="events"></ul>
     </div>
 
     <!-- Revolver -->
@@ -92,24 +76,6 @@
 
       // Start it up
       var mySlider = new Revolver({containerSelector: '.slider', slidesSelector: '.slide', transition: {name: 'fade' }});
-
-      // API call helper
-      $('.call').on('click', function (e) {
-        e.preventDefault();
-        var $el = $(this);
-        var method = $el.data('method');
-        var argument = $el.data('argument');
-        mySlider[method](argument);
-      });
-
-      // Event log
-      var $events = $('.events');
-      var events = _(['pause', 'play', 'start', 'stop', 'ready', 'restart', 'transitionStart', 'transitionComplete']);
-      events.each(function (eventName) {
-        mySlider.on(eventName, function () {
-          $events.prepend('<li class="event"><span class="datetime">'+new Date()+':</span> <a href="https://github.com/johnnyfreeman/revolver/blob/master/api/events/'+eventName.toLowerCase()+'.md">'+eventName+'</a> fired</li>');
-        });
-      });
     </script>
   </body>
 </html>

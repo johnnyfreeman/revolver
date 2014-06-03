@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Revolver Tests</title>
+  <link rel="stylesheet" href="../node_modules/grunt-mocha/node_modules/mocha/mocha.css" />
+</head>
+<body>
+  <div id="myslider">
+    <div class="slide">slide1</div>
+    <div class="slide">slide2</div>
+    <div class="slide">slide3</div>
+    <div class="slide">slide4</div>
+  </div>
+  
+  <!--  Mocha  -->
+  <div id="mocha"></div>
+  <script src="../node_modules/grunt-mocha/node_modules/mocha/mocha.js"></script>
+  <script>mocha.setup('tdd');</script>
+  
+  <!--  Chai  -->
+  <script src="../node_modules/chai/chai.js"></script>
+  <script>var assert = chai.assert;</script>
+  
+  <!--  Revolver  -->
+  <script src="../bower_components/bean/bean.js"></script>
+  <script src="../bower_components/lodash/dist/lodash.js"></script>
+  <script src="../dist/revolver.min.js"></script>
+  
+  <!--  tests  -->
+  <script src="tests.js"></script>
+  
+  <script type="text/javascript" charset="utf-8">
+    // If tests run in a real browser
+    // Can alternatively do a check on window.PHANTOMJS
+    if (navigator.userAgent.indexOf('PhantomJS') < 0) mocha.run();
+    </script>
+</body>
+</html>

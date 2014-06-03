@@ -12,7 +12,6 @@ body {
 }
 
 .slider {
-  height: 300px;
   overflow: hidden;
   position: relative;
 }
@@ -26,13 +25,4 @@ body {
 
 .slider .slide.hidden {
   display: none;
-}
-
-.events {
-  height: 300px;
-  overflow: auto;
-}
-
-.event .datetime {
-  color: #bbb;
 }

@@ -1,0 +1,52 @@
+.slider {
+  height: 300px;
+}
+
+ul.controls {
+  margin-left: 0;
+  margin-top: 10px;
+  padding-left: 0;
+}
+
+.controls li {
+  display: inline;
+}
+
+.controls .control {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-decoration: none;
+  color: #333;
+  padding: 3px;
+}
+
+/* slider controls */
+.bullet.control:before { content: "\f10c"; }
+.active.bullet.control:before { content: "\f111"; }
+.first.control:before { content: "\f049"; }
+.last.control:before { content: "\f050"; }
+.pause.control:before { content: "\f04c"; }
+.play.control:before { content: "\f04b"; }
+.restart.control:before { content: "\f021"; }
+.stop.control:before { content: "\f04d"; }
+.next.control:before { content: "\f051"; }
+.previous.control:before { content: "\f048"; }
+
+
+.float-right {
+  float: right;
+}
+
+ul.api {
+  display: inline;
+  list-style: none;
+}
+
+.api li {
+  display: inline;
+}

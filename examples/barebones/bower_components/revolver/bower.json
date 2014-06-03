@@ -1,0 +1,16 @@
+{
+  "name": "revolverjs",
+  "version": "2.1.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/johnnyfreeman/revolver.git"
+  },
+  "main": "dist/revolver.min.js",
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "lodash": "~2.4.0",
+    "bean": "~1.0.4"
+  }
+}

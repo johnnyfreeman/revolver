@@ -1,0 +1,40 @@
+{
+  "name": "revolverjs",
+  "description": "A javascript library for building your own content slider.",
+  "version": "2.1.1",
+  "homepage": "https://github.com/johnnyfreeman/revolverjs",
+  "author": {
+    "name": "Johnny Freeman",
+    "email": "prsjohnny@gmail.com",
+    "url": "http://github.com/johnnyfreeman"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/johnnyfreeman/revolverjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/johnnyfreeman/revolverjs/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-coffee": "~0.8.0",
+    "chai": "~1.8.1",
+    "grunt-mocha": "~0.4.7",
+    "grunt-bower-task": "~0.3.4",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-cli": "~0.1.11",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-shell": "~0.6.1",
+    "grunt-coffeelint": "0.0.8"
+  },
+  "main": "dist/revolver.min.js",
+  "engines": {
+    "node": "0.10.0",
+    "npm": "1.2.12"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/.bin/grunt install-hooks",
+    "test": "./node_modules/.bin/grunt test"
+  }
+}
