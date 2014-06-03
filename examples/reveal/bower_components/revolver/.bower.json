@@ -1,0 +1,26 @@
+{
+  "name": "revolverjs",
+  "version": "2.1.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/johnnyfreeman/revolver.git"
+  },
+  "main": "dist/revolver.min.js",
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "lodash": "~2.4.0",
+    "bean": "~1.0.4"
+  },
+  "homepage": "https://github.com/johnnyfreeman/revolver",
+  "_release": "2.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.1.1",
+    "commit": "0d82031f59b3e5b47bbbe069315e18556dd5aede"
+  },
+  "_source": "git://github.com/johnnyfreeman/revolver.git",
+  "_target": "~2.1.0",
+  "_originalSource": "revolver"
+}
