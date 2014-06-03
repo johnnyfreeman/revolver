@@ -60,6 +60,7 @@ Because of Revolver's unopinionated philosophy, it does very little out of the b
 * [**slide-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/slide): A sliding in and out transition.
 * [**controls-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/controls): How to build slider controls.
 * [**events-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/events): Listening and handling events.
+* [**progress-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/progress): Progress bar example.
 
 ## Extensions
 
