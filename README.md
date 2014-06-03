@@ -40,6 +40,16 @@ var mySlider = new Revolver({containerSelector: '#slidesContainer', slideSelecto
 
 You may also implement any combination of the two methods.
 
+## Making a Custom Transition
+
+When composing your own custom slide transitions, it is recommended that you use a good [animation library versus using CSS3 animation](http://davidwalsh.name/css-js-animation). But not all animation libraries are created equal. We recommend using one of the following:
+
+* [**Velocity**](http://julian.com/research/velocity/)
+* [**GreenSock**](http://www.greensock.com/gsap-js/)
+* [**Famous**](http://famo.us/)
+
+Or, if not one of these, choose one that uses [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame).
+
 ## Examples
 
 Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization to hit the sweet spot.  Here are a few ideas to get you started:
