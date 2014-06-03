@@ -57,7 +57,9 @@ Because of Revolver's unopinionated philosophy, it does very little out of the b
 * [**barebones-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/barebones): An out-of-the-box example.
 * [**fade-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/fade): Slides fade in and out from each other.
 * [**reveal-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/reveal): A curtain-like transition.
-* [**inception-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/inception): A slider within a slider.
+* [**slide-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/slide): A sliding in and out transition.
+* [**controls-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/controls): How to build slider controls.
+* [**events-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/events): Listening and handling events.
 
 ## Extensions
 
