@@ -54,10 +54,10 @@ Or, if not one of these, choose one that uses [requestAnimationFrame](https://de
 
 Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization to hit the sweet spot.  Here are a few ideas to get you started:
 
-* [**barebones-example**](https://github.com/johnnyfreeman/revolver-barebones-example): An out-of-the-box example.
-* [**fade-example**](https://github.com/johnnyfreeman/revolver-fade-example): Slides fade in and out from each other.
-* [**reveal-example**](https://github.com/johnnyfreeman/revolver-reveal-example): A curtain-like transition.
-* [**inception-example**](https://github.com/johnnyfreeman/revolver-inception-example): A slider within a slider.
+* [**barebones-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/barebones): An out-of-the-box example.
+* [**fade-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/fade): Slides fade in and out from each other.
+* [**reveal-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/reveal): A curtain-like transition.
+* [**inception-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/inception): A slider within a slider.
 
 ## Extensions
 
