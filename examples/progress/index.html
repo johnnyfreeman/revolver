@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Progress Example</title>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/yue.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style media="screen">
+      .slider {
+        height: 300px;
+      }
+      .yue img {
+        margin: 0;
+      }
+      .progress {
+        background-color: rgba(255,255,255,0.3);
+        height: 5px;
+        width: 100%;
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/progress"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <div class="yue" id="wrapper">
+      <h1>Progress Example</h1>
+      <div class="slider">
+        <div class="progress"></div>
+        <img class="slide" src="http://placehold.it/960x300/1abc9c/ffffff&text=Slide+1" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/3498db/ffffff&text=Slide+2" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/e74c3c/ffffff&text=Slide+3" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/34495e/ffffff&text=Slide+4" alt="" />
+        <img class="slide hidden" src="http://placehold.it/960x300/2ecc71/ffffff&text=Slide+5" alt="" />
+      </div>
+
+      <h2>Code</h2>
+      <pre><code>var $progressEl = $('.progress');
+var startProgressBar = function () {
+  // start progress at zero
+  $progressEl.css('width', 0)
+
+  var duration = this.options.rotationSpeed;
+  $progressEl.velocity({width: '100%'}, {
+    duration: duration-100,
+    easing: 'none'
+  });
+};
+
+// Start it up
+var mySlider = new Revolver({
+  containerSelector: '.slider',
+  slidesSelector: '.slide',
+  onReady: function () {
+    if (!this.options.autoPlay) return;
+    _.bind(startProgressBar, this)();
+  }
+});
+
+
+var $progressEl = $('.progress');
+mySlider.on('transitionStart', _.bind(startProgressBar, mySlider));</code></pre>
+    </div>
+
+    <!-- Revolver -->
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/bean/bean.js"></script>
+    <script src="bower_components/revolver/dist/revolver.js"></script>
+
+    <!-- velocity -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/velocity/jquery.velocity.js"></script>
+
+    <!-- Fade Transition -->
+    <script src="../fade/fade.js"></script>
+
+    <!-- Revolver -->
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+./node_modules/.bin/grunt build
+npm test
