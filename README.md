@@ -54,13 +54,13 @@ Or, if not one of these, choose one that uses [requestAnimationFrame](https://de
 
 Because of Revolver's unopinionated philosophy, it does very little out of the box and usually requires some small amount of customization to hit the sweet spot.  Here are a few ideas to get you started:
 
-* [**barebones-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/barebones): An out-of-the-box example.
-* [**fade-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/fade): Slides fade in and out from each other.
-* [**reveal-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/reveal): A curtain-like transition.
-* [**slide-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/slide): A sliding in and out transition.
-* [**controls-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/controls): How to build slider controls.
-* [**events-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/events): Listening and handling events.
-* [**progress-example**](https://github.com/johnnyfreeman/revolver/tree/gh-pages/examples/progress): Progress bar example.
+* [**barebones-example**](http://johnnyfreeman.github.io/revolver/examples/barebones): An out-of-the-box example.
+* [**fade-example**](http://johnnyfreeman.github.io/revolver/examples/barebones/fade): Slides fade in and out from each other.
+* [**reveal-example**](http://johnnyfreeman.github.io/revolver/examples/barebones/reveal): A curtain-like transition.
+* [**slide-example**](http://johnnyfreeman.github.io/revolver/examples/barebones/slide): A sliding in and out transition.
+* [**controls-example**](http://johnnyfreeman.github.io/revolver/examples/barebones/controls): How to build slider controls.
+* [**events-example**](http://johnnyfreeman.github.io/revolver/examples/barebones/events): Listening and handling events.
+* [**progress-example**](http://johnnyfreeman.github.io/revolver/examples/barebones/progress): Progress bar example.
 
 ## Extensions
 
