@@ -1,4 +1,4 @@
-# Revolver [![Build Status](https://travis-ci.org/johnnyfreeman/revolver.png?branch=master)](https://travis-ci.org/johnnyfreeman/revolver) [![Code Climate](https://codeclimate.com/github/johnnyfreeman/revolver.png)](https://codeclimate.com/github/johnnyfreeman/revolver)
+# Revolver [![Build Status](http://img.shields.io/travis/johnnyfreeman/revolver.svg?style=flat-square)](https://travis-ci.org/johnnyfreeman/revolver) [![Code Climate](http://img.shields.io/codeclimate/github/johnnyfreeman/revolver.svg?style=flat-square)](https://codeclimate.com/github/johnnyfreeman/revolver)
 
 Revolver is a javascript library to help you build your own content slider. It has a sensible [API](api/README.md) (seriously, go check it out) that helps you get from mockup to reality with less friction than most of the other "cookie-cutter" sliders out there.
 
