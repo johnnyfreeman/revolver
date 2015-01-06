@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var Revolver;
+  var Revolver, addNamespaces;
 
   Revolver = function(options) {
     var slidesToAdd;
@@ -198,23 +198,41 @@
     return this.goTo(this.lastSlide, options);
   };
 
-  Revolver.prototype.on = function(eventName, callback) {
-    bean.on(this, 'revolver.' + eventName, _.bind(callback, this));
+  addNamespaces = function(eventString) {
+    var eventStringDelimiter, events, namespace;
+    namespace = 'revolver';
+    eventStringDelimiter = ' ';
+    events = eventString.split(eventStringDelimiter);
+    _.each(events, function(eventName, i) {
+      return events[i] = namespace.concat('.', events[i]);
+    });
+    return events.join(eventStringDelimiter);
+  };
+
+  Revolver.prototype.on = function(eventString, callback) {
+    callback = _.bind(callback, this);
+    eventString = addNamespaces(eventString);
+    bean.on(this, eventString, callback);
     return this;
   };
 
-  Revolver.prototype.one = function(eventName, callback) {
-    bean.one(this, 'revolver.' + eventName, _.bind(callback, this));
+  Revolver.prototype.one = function(eventString, callback) {
+    callback = _.bind(callback, this);
+    eventString = addNamespaces(eventString);
+    bean.one(this, eventString, callback);
     return this;
   };
 
-  Revolver.prototype.off = function(eventName, callback) {
-    bean.off(this, 'revolver.' + eventName, _.bind(callback, this));
+  Revolver.prototype.off = function(eventString, callback) {
+    callback = _.bind(callback, this);
+    eventString = addNamespaces(eventString);
+    bean.off(this, eventString, callback);
     return this;
   };
 
-  Revolver.prototype.trigger = function(eventName) {
-    bean.fire(this, 'revolver.' + eventName);
+  Revolver.prototype.trigger = function(eventString) {
+    eventString = addNamespaces(eventString);
+    bean.fire(this, eventString);
     return this;
   };
 
