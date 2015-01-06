@@ -1,6 +1,6 @@
 {
   "name": "revolverjs",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/johnnyfreeman/revolver.git"
@@ -14,11 +14,11 @@
     "bean": "~1.0.4"
   },
   "homepage": "https://github.com/johnnyfreeman/revolver",
-  "_release": "2.1.1",
+  "_release": "2.1.2",
   "_resolution": {
     "type": "version",
-    "tag": "2.1.1",
-    "commit": "0d82031f59b3e5b47bbbe069315e18556dd5aede"
+    "tag": "2.1.2",
+    "commit": "bdfd7af89772afe26d05c808195e211b133da7f3"
   },
   "_source": "git://github.com/johnnyfreeman/revolver.git",
   "_target": "~2.1.0",

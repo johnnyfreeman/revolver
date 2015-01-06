@@ -42,23 +42,28 @@
       <pre><code>// use Sizzle for greater browser compatability
 Revolver.setSelectorEngine($.find);
 
-// Start it up
+
 var mySlider = new Revolver({
+
+  // selectors
   containerSelector: '.slider',
-  slidesSelector: '.slide'
-});
+  slidesSelector: '.slide',
 
-// upon "play" and "transitionStart" events, do animation
-var $progressEl = $('.progress');
-mySlider.on('play transitionStart', function () {
-  // start progress at zero
-  $progressEl.css('width', 0)
+  onReady: function () {
+    var $progressEl = $('.progress');
 
-  var duration = this.options.rotationSpeed;
-  $progressEl.velocity({width: '100%'}, {
-    duration: duration-100,
-    easing: 'none'
-  });
+    // do animation upon the play and transition start event
+    this.on('play transitionStart', function () {
+      // start progress at zero
+      $progressEl.css('width', 0)
+
+      var duration = this.options.rotationSpeed;
+      $progressEl.velocity({width: '100%'}, {
+        duration: duration-100,
+        easing: 'none'
+      });
+    });
+  }
 });</code></pre>
     </div>
 

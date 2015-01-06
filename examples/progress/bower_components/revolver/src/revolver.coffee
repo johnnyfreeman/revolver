@@ -100,7 +100,7 @@ Revolver.defaults =
 
 
 # current version
-Revolver.VERSION = '2.1.1'
+Revolver.VERSION = '2.1.2'
 
 
 # add a new slide
@@ -271,27 +271,53 @@ Revolver::last = (options) -> @goTo @lastSlide, options
 
 # EVENTS
 
+addNamespaces = (eventString) ->
+  namespace = 'revolver'
+  eventStringDelimiter = ' '
+  events = eventString.split eventStringDelimiter
+  _.each events, (eventName, i) ->
+    events[i] = namespace.concat '.', events[i]
+  events.join eventStringDelimiter
+
 # attach an event listener
-Revolver::on = (eventName, callback) ->
-  bean.on this, 'revolver.' + eventName, _.bind(callback, this)
+Revolver::on = (eventString, callback) ->
+  # bind revolver instance to callback
+  callback = _.bind callback, this
+  # add revolver namespace to event(s)
+  eventString = addNamespaces eventString
+  # call bean.on
+  bean.on this, eventString, callback
   # return instance
   this
 
 # alias for on() except that the handler will removed after the first execution
-Revolver::one = (eventName, callback) ->
-  bean.one this, 'revolver.' + eventName, _.bind(callback, this)
+Revolver::one = (eventString, callback) ->
+  # bind revolver instance to callback
+  callback = _.bind callback, this
+  # add revolver namespace to event(s)
+  eventString = addNamespaces eventString
+  # call bean.on
+  bean.one this, eventString, callback
   # return instance
   this
 
 # remove an event listener using
-Revolver::off = (eventName, callback) ->
-  bean.off this, 'revolver.' + eventName, _.bind(callback, this)
+Revolver::off = (eventString, callback) ->
+  # bind revolver instance to callback
+  callback = _.bind callback, this
+  # add revolver namespace to event(s)
+  eventString = addNamespaces eventString
+  # call bean.on
+  bean.off this, eventString, callback
   # return instance
   this
 
 # execute all listeners for the given event
-Revolver::trigger = (eventName) ->
-  bean.fire this, 'revolver.' + eventName
+Revolver::trigger = (eventString) ->
+  # add revolver namespace to event(s)
+  eventString = addNamespaces eventString
+  # call bean.on
+  bean.fire this, eventString
   # return instance
   this
 
